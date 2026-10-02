@@ -4,17 +4,17 @@
 
 This outline implements the vision in the [README](../README.md): a topic, question, or paper becomes a focused HTML learning tool through sourced research, prerequisite mapping, learning design, interface design, and construction.
 
-Status: research, knowledge, learning, and cross-cutting workflow guidance authored, October 2, 2026. Fourteen skills and their resources exist under these four groups. upskill, design/engineering groups, manifests, and support files below remain planned; host discovery has not been tested.
+Status: nineteen skills and their resources are authored under six groups, October 2, 2026. upskill, both host packages, maintainer guidance, license, and the usage guide are present. Host discovery, invocation routing, and installed resource resolution were checked; [installation evidence](installation.md) records versions and model-execution limits. The [complete genomics example](../examples/genomics-file-formats/README.md) follows the core path, with independent answer review and offline/HTTP browser evidence.
 
 ## Organization and compatibility
 
 Keep one canonical skill library, grouped by function. Each leaf skill retains the standard `<skill-name>/SKILL.md` layout. Principles are small skills placed beside the workflow they inform.
 
-Register each functional group explicitly in both plugin manifests. Codex's compatibility manifest accepts a skill directory or an array of directories; Claude Code accepts an array of skill directories containing skill folders. This provides a documented route for grouped authoring on our two initial hosts. [Codex manifest fields](https://developers.openai.com/plugins/deploy/submission), [Claude manifest reference](https://code.claude.com/docs/en/plugins-reference).
+Each functional group is registered explicitly in both plugin manifests. Codex's compatibility manifest accepts a skill directory or an array of directories; Claude Code accepts an array of skill directories containing skill folders. Both installed hosts discovered the grouped library. [Codex manifest fields](https://developers.openai.com/plugins/deploy/submission), [Claude manifest reference](https://code.claude.com/docs/en/plugins-reference).
 
 Use `.codex-plugin/plugin.json` and `.claude-plugin/plugin.json` for this layout. OpenAI continues to support the Codex compatibility manifest. Its newer portable package and public submission guidance use immediate children of `skills/`; publishing through that route would require a flat package. We are designing the Codex/Claude plugin layout here. [OpenAI packaging](https://developers.openai.com/plugins/build/plugins), [submission layout rules](https://developers.openai.com/plugins/deploy/submission-errors).
 
-The shared `skills` field in the two manifests will list:
+The shared `skills` field in the two manifests lists:
 
 ```json
 {
@@ -31,9 +31,9 @@ The shared `skills` field in the two manifests will list:
 
 This is a component-field example, not a complete manifest. Group folders contain no `SKILL.md`; only individual skill folders do. Skill names stay unique across groups. The initial installation unit is the complete plugin, preserving its internal dependencies and assets.
 
-Before calling the package compatible, load it in both hosts and confirm all declared skills are discovered once, upskill can use its helpers and principles, and references and assets resolve. Documented manifest support is not a completed installation test.
+Packaging checks confirm unique discovery, upskill invocation routing, and helper/resource resolution in both hosts. Model-backed generation was unavailable in the isolated probes; see the exact scope in [installation evidence](installation.md). Recheck these boundaries when changing manifests, library layout, or host-specific entry points.
 
-## Proposed layout
+## Layout
 
 ```text
 tlearn/
@@ -45,7 +45,11 @@ tlearn/
 ├── .codex-plugin/
 │   └── plugin.json
 ├── .claude-plugin/
-│   └── plugin.json
+│   ├── plugin.json
+│   └── marketplace.json
+├── .agents/
+│   └── plugins/
+│       └── marketplace.json
 ├── skills/
 │   ├── workflow/
 │   │   ├── upskill/
@@ -91,15 +95,33 @@ tlearn/
 │   │   └── principle-independent-performance/
 │   ├── design/
 │   │   ├── design-interface/
-│   │   │   └── SKILL.md
+│   │   │   ├── SKILL.md
+│   │   │   ├── scripts/
+│   │   │   │   └── check_contrast.py
+│   │   │   └── references/
+│   │   │       ├── interface-format.md
+│   │   │       ├── interface-defaults.md
+│   │   │       ├── interface-review.md
+│   │   │       └── design-rationale.md
 │   │   └── principle-attention-first/
 │   └── engineering/
 │       ├── build-learning-tool/
 │       │   ├── SKILL.md
+│       │   ├── scripts/
+│       │   │   └── bundle_html.py
+│       │   ├── references/
+│       │   │   ├── authoring-and-delivery.md
+│       │   │   ├── browser-checks.md
+│       │   │   └── sharing-and-hosting.md
 │       │   └── assets/
-│       │       └── starter.html
+│       │       └── starter/
+│       │           ├── index.html
+│       │           ├── styles.css
+│       │           └── app.js
 │       └── principle-simple-html/
 └── docs/
+    ├── tlearn-guide.md
+    ├── installation.md
     ├── repository-structure.md
     ├── learning-philosophy-research.md
     ├── paper-to-learning-research.md
@@ -108,7 +130,7 @@ tlearn/
 
 Every principle directory contains its own `SKILL.md`; repeated filenames are omitted above. References and the starter are concrete resources to author with their owning skills. Add scripts only when a repeated operation actually needs one.
 
-The README owns the vision and eventual installation instructions. AGENTS.md holds concise maintainer guidance; CLAUDE.md imports it. Choose the repository license before distribution. Existing research notes retain the supporting evidence without duplicating the philosophy into another document.
+The README owns the vision and quick start; the tlearn guide walks through actual usage. AGENTS.md holds concise maintainer guidance; CLAUDE.md imports it. Original tlearn material uses the MIT license. Existing research notes retain supporting evidence without duplicating the philosophy. The user-requested demonstration lives under `examples/genomics-file-formats/`, outside the skill library, with its canonical artifacts, source implementation, delivery, and verification.
 
 ## Six core workflow skills
 
@@ -118,10 +140,14 @@ The README owns the vision and eventual installation instructions. AGENTS.md hol
 | research / **research-topic** | Find authoritative materials; inspect relevant sections; extract definitions, mechanisms, examples, uncertainties, and source anchors. For papers, capture the question, method, evidence, and limitations. | A compact source record |
 | knowledge / **map-knowledge** | Define observable target capabilities and a selected route; distinguish required prerequisites from helpful background. Research missing foundations recursively and preserve scope and gaps. | Canonical `knowledge.json` |
 | learning / **design-learning** | Sequence foundations and target capabilities. Write explanations, worked examples, practice, checked answers, hints, feedback, mixed review, and application tasks. | Canonical `lesson.json`, bound to a graph revision |
-| design / **design-interface** | Shape the authored lesson into a focused, accessible interface with clear hierarchy, purposeful visuals, and section completion in one click. | Interface decisions for construction |
-| engineering / **build-learning-tool** | Adapt the starter, implement the lesson and interactions, and verify content, answer handling, accessibility, and browser behavior. | A lightweight HTML tool |
+| design / **design-interface** | Shape the authored lesson into a focused, accessible interface with clear hierarchy, purposeful visuals, local feedback, and section completion in one click. | Supporting `interface.md` for construction |
+| engineering / **build-learning-tool** | Adapt the starter, implement the lesson and interactions, bundle one portable file, and verify content, answer handling, accessibility, and browser behavior. | Derived `dist/index.html` |
 
 Practice creation belongs in design-learning initially. Paper reading belongs in research-topic, with its conditional reference. Interface design remains separate from construction because it governs the learner's experience.
+
+[Design-interface](../skills/design/design-interface/SKILL.md) and [attention-first](../skills/design/principle-attention-first/SKILL.md) are authored. Their references separate adjustable visual defaults, the content-preserving handoff, rendered review, and research rationale. Vercel-style web guidelines inform semantic controls, focus, input feedback, motion, and responsive behavior; engineering will implement and exercise these. Stack-specific defaults are not imported into portable HTML.
+
+[Build-learning-tool](../skills/engineering/build-learning-tool/SKILL.md) and [simple-html](../skills/engineering/principle-simple-html/SKILL.md) are authored. A small HTML/CSS/JavaScript starter and deterministic standard-library packager support one-file delivery. The starter supplies focused helpers rather than a universal lesson engine. The browser and sharing references cover direct-file use, static hosting, and optional public previews.
 
 The core chain is:
 
@@ -175,15 +201,17 @@ Generated tools live in the learner's working project, outside the installed plu
 | `sources.md` | research-topic | Objective, baseline, source registry, coverage, search record, links to notes, and unresolved questions |
 | `knowledge.json` | map-knowledge | Revision, observable capabilities, sourced required/helpful dependencies, inferred rationale, targets, scope, and research gaps |
 | `lesson.json` | design-learning | Graph revision and item IDs, ordered sections, explanations, examples, exercises, checked answers, hints, feedback, and application tasks |
-| `index.html` | build-learning-tool | Designed interface, lesson presentation, optional graph view, and completion controls that allow reopening |
+| `dist/index.html` | build-learning-tool | Derived portable interface, lesson presentation, optional graph view, and completion controls that allow reopening |
 
 The [source format](../skills/research/research-topic/references/source-format.md), [knowledge format](../skills/knowledge/map-knowledge/references/knowledge-format.md), and [lesson format](../skills/learning/design-learning/references/lesson-format.md) define their stage contracts. Save a ready graph before completing its dependent lesson; author and verify content before interface construction. Later stages return missing or changed content to its owner. Graph revision changes require review of the affected lesson before regenerating HTML.
 
-Supporting `verification.md` records the checked artifact identities, independent expectations, reusable commands or reviewer steps, observed results, and pending checks. It supplies evidence for the four canonical artifacts without duplicating their content. A pass from the artifact checker means mechanical consistency only; it does not certify source support, answers, or learning effectiveness.
+Supporting `verification.md` records the checked artifact identities, independent expectations, reusable commands or reviewer steps, observed results, and pending checks. It supplies evidence for the four core artifacts without duplicating their content. A pass from the artifact checker means mechanical consistency only; it does not certify source support, answers, or learning effectiveness.
+
+Supporting `interface.md` binds the design to its graph revision and lesson identity, then specifies tokens, layout, block presentation, task states, visual equivalents, navigation, and concrete acceptance checks. The [interface format](../skills/design/design-interface/references/interface-format.md) avoids duplicating the lesson or adding another content schema. Design changes with instructional consequences return to design-learning; visual implementation and browser proof belong to engineering.
 
 Supporting source files live under `sources/<source-id>/` in the generated project: inspected notes, optional originals, and optional extraction with original locators. Use notes as working context and inspect original passages for new details, uncertainty, or freshness checks. Preserve source identity and inspected versions; substantive updates get a new linked ID. See [research decisions](source-research.md) for grounding and limits. The graph supplies the instructional structure without claiming a validated Knowledge Space Theory assessment model.
 
-Start with a self-contained HTML output that may embed derived graph and lesson copies. Separate canonical files preserve independent authoring and revision without requiring runtime fetches or a local server. Source originals need not travel inside the app. A companion notebook or script can support an objective that needs substantial computation; it is conditional on the learning task.
+Author implementation in `src/index.html`, `src/styles.css`, and `src/app.js`; bundle those and derived graph/lesson copies into `dist/index.html`. Keep source materials outside the served `dist/` directory. The same output supports direct-file use and static hosting without runtime fetches or a local server for the learner. Required media must be embedded explicitly; an optional hosted social-preview image is separate from learner assets. A companion notebook, larger static bundle, or web app is conditional on a concrete learning requirement. See [delivery decisions](../skills/engineering/build-learning-tool/references/authoring-and-delivery.md).
 
 ## Skill format and implementation order
 
@@ -191,13 +219,12 @@ Use portable frontmatter with `name` matching the leaf directory and a concise `
 
 Keep bodies short. Read source excerpts, format references, and related principles only when they affect the current stage. Reuse the four artifacts instead of repeating research or handing off long transcripts.
 
-Continue in this order:
+The core path is connected:
 
-1. Learning principles and design-learning are authored, with the initial lesson format. Refine them through the first complete tool.
-2. Source-integrity/research-topic and objective-and-foundations/map-knowledge are authored, with source and graph contracts. Refine the recursive mapping loop using one narrow computational biology objective.
-   Shared verification and deterministic-operation principles are authored, with a reusable graph/lesson checker. Add actual delivery checks when the builder exists.
-3. Attention-first and design-interface; simple-html, the starter, and build-learning-tool.
-4. Connect the working stages through a concise upskill; add both manifests and verify discovery and invocation.
-5. Produce one complete learning tool and improve the core path from using it.
+1. Learning principles and design-learning preserve instruction and checked tasks separately from the implementation.
+2. Source-integrity/research-topic and objective-and-foundations/map-knowledge preserve inspected evidence and recursive foundation requests. Shared verification distinguishes mechanical consistency from scientific and teaching judgments.
+3. Attention-first/design-interface and simple-html/build-learning-tool provide handoffs, a starter, deterministic packaging, and actual browser recipes.
+4. [Upskill](../skills/workflow/upskill/SKILL.md) coordinates the stages. Both manifests/catalogs and host discovery checks are present; [the guide](tlearn-guide.md) covers first requests, reuse, verification, and sharing.
+5. The complete genomics example exercises all stages. Content and browser review corrected a repeated application, ambiguous coordinate wording, a skip-link navigation defect, and companion source links.
 
-This first scope includes the core workflow, principles, starter, and existing notes. Evals, CI, an examples gallery, a setup skill, and additional playbooks are deferred.
+This first scope includes the core workflow, principles, starter, guides, and one explicit demonstration. Evals, CI, an examples gallery, a setup skill, and additional playbooks remain deferred.

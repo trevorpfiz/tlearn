@@ -1,0 +1,63 @@
+:root {
+  color-scheme: light;
+  --canvas: #f7f8f5;
+  --paper: #ffffff;
+  --ink: #202822;
+  --muted: #58635b;
+  --action: #21664e;
+  --accent: #dff39a;
+  --space: 1rem;
+  font-family: system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--canvas);
+  line-height: 1.6;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+.page-header, main, .notice {
+  max-width: 72ch;
+  margin-inline: auto;
+  padding: var(--space);
+}
+.page-header { padding-block: 2rem 1rem; }
+.eyebrow { color: var(--muted); font-size: .9rem; }
+h1, h2, h3 { line-height: 1.25; text-wrap: balance; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+section { margin-block: 2rem; }
+p, li, label { overflow-wrap: anywhere; }
+button, input, textarea, select { font: inherit; }
+button, input:not([type="radio"]):not([type="checkbox"]), select { min-height: 2.75rem; }
+button {
+  border: 1px solid var(--action);
+  border-radius: .5rem;
+  padding: .5rem 1rem;
+  color: white;
+  background: var(--action);
+  cursor: pointer;
+}
+button.secondary { color: var(--action); background: var(--paper); }
+button:disabled { cursor: default; }
+input, textarea, select {
+  max-width: 100%;
+  padding: .5rem;
+  border: 1px solid var(--muted);
+  border-radius: .25rem;
+  color: var(--ink);
+  background: var(--paper);
+}
+fieldset { min-width: 0; border: 0; padding: 0; }
+legend, label { font-weight: 600; }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-block: 1rem; }
+.feedback { border-inline-start: .25rem solid var(--action); padding-inline-start: .75rem; }
+.muted { color: var(--muted); }
+a { color: var(--action); text-underline-offset: .2em; }
+:focus-visible { outline: 3px solid var(--action); outline-offset: 3px; }
+[hidden] { display: none !important; }
+svg, img { max-width: 100%; height: auto; }
+pre, .scientific-overflow { max-width: 100%; overflow-x: auto; }
+pre { padding: 1rem; background: var(--paper); }
+.skip-link { position: absolute; inset-block-start: .5rem; inset-inline-start: .5rem; transform: translateY(-200%); }
+.skip-link:focus { transform: none; background: var(--paper); padding: .5rem; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto; }
+}

@@ -33,9 +33,11 @@ Check meaningful counterexamples: a likely wrong unit, reversed ratio, ambiguous
 
 ## Exercise the delivered tool
 
-When HTML exists, open the actual delivery file through an available browser harness. Run recipes for its implemented or promised interactions: correct and incorrect responses, empty or invalid input, numerical boundaries where relevant, hints and explicit reveals, completion and reopening, and keyboard navigation. Check authored retry controls, remediation links, and purposeful visuals when present; a later fresh task can supply practice without a retry control. Confirm the initial interface does not reveal practice or application solutions inadvertently.
+When HTML exists, open the actual delivery file through an available browser harness. Use the [browser checks](../../engineering/build-learning-tool/references/browser-checks.md) for direct-file/offline and static-server modes. Run recipes for its implemented or promised interactions: correct and incorrect responses, empty or invalid input, numerical boundaries where relevant, hints and explicit reveals, completion and reopening, and keyboard navigation. Check authored retry controls, remediation links, and purposeful visuals when present; a later fresh task can supply practice without a retry control. Confirm the initial interface does not reveal practice or application solutions inadvertently.
 
 Check the promised delivery mode and content against the canonical artifacts. A screenshot cannot establish answer handling; an artifact validator cannot establish browser behavior. Reuse an existing harness and stable accessible controls. Retain compact results and useful failure evidence; clean up only processes or temporary state created by this run. Report an unavailable browser check as pending rather than verified.
+
+For rendered design, use [interface review](../../design/design-interface/references/interface-review.md) to check the planned hierarchy, responsive states, keyboard/focus behavior, meaningful alternatives, and solution concealment. Mechanical contrast checks supplement this review; they cannot certify accessibility.
 
 ## Report and maintain
 

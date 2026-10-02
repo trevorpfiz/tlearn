@@ -1,0 +1,3659 @@
+{
+  "version": 1,
+  "knowledge_revision": 1,
+  "objective": "Demonstrate understanding of different data formats and types by recognizing each file type and assessing its validity. Data formats to include FASTA, FASTQ, BED, BEDPE, WIG, GTF/GFF3, SAM, BAM, CRAM, gVCF, VCF, and GFA.",
+  "baseline": [
+    "everyday language",
+    "basic arithmetic"
+  ],
+  "target_item_ids": [
+    "k-fasta",
+    "k-fastq",
+    "k-bed",
+    "k-bedpe",
+    "k-wig",
+    "k-gtf",
+    "k-gff3",
+    "k-sam",
+    "k-bam",
+    "k-cram",
+    "k-gvcf",
+    "k-vcf",
+    "k-gfa"
+  ],
+  "sections": [
+    {
+      "id": "sec-basics",
+      "title": "Read the evidence before judging a file",
+      "item_ids": [
+        "k-records",
+        "k-sequence-notation",
+        "k-containers",
+        "k-evidence",
+        "k-sequence-roles"
+      ],
+      "required_section_ids": [],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "The goal is to recognize 13 formats and make defensible validity judgments. Start with the fundamentals; you can mark any section complete in one click and reopen it. Completion is a navigation choice, not evidence that an answer was correct. These small synthetic examples teach selected checks; they do not substitute for production validators.",
+          "source_refs": [
+            {
+              "source_id": "s022",
+              "locator": "DNA, DNA Sequencing, Human Genome Reference Sequence, Protein: Definition sections"
+            },
+            {
+              "source_id": "s011",
+              "locator": "§§1.2–1.4: reference names and missing values"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION: scope and middle-of-file limitation"
+            }
+          ]
+        },
+        {
+          "kind": "explanation",
+          "text": "A sequence is an ordered string of symbols. DNA uses A, C, G and T; a declared alphabet may also allow ambiguity codes such as N, which means an unspecified nucleotide. Protein sequences use amino-acid letters, so a DNA-only rule cannot judge a declared protein sequence. A sequencing read is an observed sequence; a reference sequence is a named comparison sequence. A file’s syntax does not prove whether its contents are authentic reads or the correct reference. Reference identity includes the assembly/version and sequence names, lengths and, when required, checksums.",
+          "source_refs": [
+            {
+              "source_id": "s022",
+              "locator": "DNA, DNA Sequencing, Human Genome Reference Sequence, Protein: Definition sections"
+            },
+            {
+              "source_id": "s011",
+              "locator": "§§1.2–1.4: reference names and missing values"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION: scope and middle-of-file limitation"
+            }
+          ]
+        },
+        {
+          "kind": "explanation",
+          "text": "A record is one structured entry; a header declares context. Tabs separate fields in the examples below; line breaks separate rows. A format can use a specific missing marker, such as . or *, rather than an empty field. Plain text, compressed text and binary containers are different representations. Compression or an extension such as .bam is a clue; inspect the container or parse the contents to establish its type. An index supports lookup and is separate from the data file.",
+          "source_refs": [
+            {
+              "source_id": "s022",
+              "locator": "DNA, DNA Sequencing, Human Genome Reference Sequence, Protein: Definition sections"
+            },
+            {
+              "source_id": "s011",
+              "locator": "§§1.2–1.4: reference names and missing values"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION: scope and middle-of-file limitation"
+            },
+            {
+              "source_id": "s011",
+              "locator": "§§4.1–4.2: BAM binary encoding and BGZF"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION; view DESCRIPTION and output options"
+            }
+          ]
+        },
+        {
+          "kind": "explanation",
+          "text": "Use three bounded conclusions: a stated rule is violated; the shown data pass the stated checks; or the evidence is insufficient. A row can be structurally well formed while its reference identity, bounds, biological truth or intended consumer compatibility remains unknown. An excerpt cannot certify unseen records, and a limited checker cannot certify checks it never performed. Record the next evidence needed.",
+          "source_refs": [
+            {
+              "source_id": "s022",
+              "locator": "DNA, DNA Sequencing, Human Genome Reference Sequence, Protein: Definition sections"
+            },
+            {
+              "source_id": "s011",
+              "locator": "§§1.2–1.4: reference names and missing values"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION: scope and middle-of-file limitation"
+            }
+          ]
+        },
+        {
+          "kind": "task",
+          "id": "t-evidence",
+          "role": "practice",
+          "item_ids": [
+            "k-evidence",
+            "k-records"
+          ],
+          "prompt": "An excerpt contains the first ten well-formed rows of a much larger file. Which conclusion is justified?",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "The entire file is valid because the first ten rows parse."
+              },
+              {
+                "id": "b",
+                "text": "The shown rows pass the stated checks; unseen records and biological claims remain unverified."
+              },
+              {
+                "id": "c",
+                "text": "The file is invalid because only ten rows are visible."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [
+            "How much of the file was inspected?"
+          ],
+          "feedback": {
+            "correct": "The scope is the excerpt. Passing those checks says nothing decisive about unseen rows, reference agreement or biological truth.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity.",
+            "patterns": [
+              {
+                "option_id": "a",
+                "when": "The learner selects option a.",
+                "text": "A valid prefix can precede corruption or inconsistent later records."
+              },
+              {
+                "option_id": "c",
+                "when": "The learner selects option c.",
+                "text": "Missing evidence limits a conclusion; it does not itself prove invalidity."
+              }
+            ]
+          },
+          "source_refs": [
+            {
+              "source_id": "s022",
+              "locator": "DNA, DNA Sequencing, Human Genome Reference Sequence, Protein: Definition sections"
+            },
+            {
+              "source_id": "s011",
+              "locator": "§§1.2–1.4: reference names and missing values"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION: scope and middle-of-file limitation"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal."
+        },
+        {
+          "kind": "explanation",
+          "text": "For a DNA segment traversed in the reverse orientation, take its reverse complement: reverse the order and replace each base with its complement. Use A↔T and C↔G. This changes the sequence read in that direction; it does not rewrite the stored segment.",
+          "source_refs": [
+            {
+              "source_id": "s019",
+              "locator": "Segment, Link and Path records: names and orientations"
+            },
+            {
+              "source_id": "s022",
+              "locator": "DNA: Definition and complementary bases"
+            }
+          ]
+        },
+        {
+          "kind": "task",
+          "id": "t-reverse-basics",
+          "role": "practice",
+          "item_ids": [
+            "k-sequence-notation"
+          ],
+          "prompt": "Using A↔T and C↔G, give the reverse complement of AGTC and explain why simply reversing the letters is insufficient.",
+          "response": {
+            "kind": "short-text"
+          },
+          "check": {
+            "kind": "rubric",
+            "criteria": [
+              "The reverse complement is GACT.",
+              "The answer reverses order and complements bases; reversing alone gives CTGA."
+            ],
+            "acceptable_alternatives": [
+              "Complement first to TCAG, then reverse to GACT."
+            ],
+            "sample_answer": "Reverse AGTC to CTGA, then complement each base to obtain GACT.",
+            "judgment": "self-check"
+          },
+          "hints": [
+            "Apply both operations, in either order."
+          ],
+          "feedback": {
+            "correct": "Compare both your conclusion and your reason with the rubric. This is a self-check, not automatic verification of your reasoning.",
+            "otherwise": "Locate the criterion your answer missed, revisit its rule, and try a fresh instance later in the mixed cases."
+          },
+          "source_refs": [
+            {
+              "source_id": "s019",
+              "locator": "Segment, Link and Path records: names and orientations"
+            },
+            {
+              "source_id": "s022",
+              "locator": "DNA: Definition and complementary bases"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed."
+        }
+      ]
+    },
+    {
+      "id": "sec-coordinates",
+      "title": "Count bases without an off-by-one error",
+      "item_ids": [
+        "k-coordinates"
+      ],
+      "required_section_ids": [
+        "sec-basics"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "For an ordinary interval, 0-based half-open [start,end) includes start and excludes end: length = end − start. A 1-based inclusive interval includes both endpoints: length = end − start + 1. The same bases [1,4) in the first convention are [2,4] in the second. For ordinary nonempty intervals, add 1 to a 0-based start to get an inclusive start; the end number stays the same. Individual formats also define special insertion, unknown-coordinate or circular cases; do not override those rules with this ordinary-interval shortcut.",
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.5–1.6: chromStart/chromEnd"
+            },
+            {
+              "source_id": "s010",
+              "locator": "Columns 4 and 5: 1-based inclusive coordinates"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Compare two ways to name the same three bases.",
+          "steps": [
+            {
+              "name": "Count the half-open interval",
+              "text": "[1,4) contains positions 1, 2 and 3: 4 − 1 = 3 bases."
+            },
+            {
+              "name": "Translate the labels",
+              "text": "Those bases have 1-based positions 2, 3 and 4: [2,4] also has length 4 − 2 + 1 = 3."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.5–1.6: chromStart/chromEnd"
+            },
+            {
+              "source_id": "s010",
+              "locator": "Columns 4 and 5: 1-based inclusive coordinates"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic."
+        },
+        {
+          "kind": "visual",
+          "purpose": "Align two coordinate conventions to the same bases, then count their shared span.",
+          "representation": "An aligned ten-base strip with both 0-based and 1-based labels. Highlight the ordinary interval given in data. Do not show its length until an attempt. Provide an equivalent accessible table of the base labels; this visual remains static and explanatory.",
+          "data": {
+            "base_count": 10,
+            "zero_based": {
+              "start": 2,
+              "end_exclusive": 6
+            },
+            "one_based": {
+              "start": 3,
+              "end_inclusive": 6
+            }
+          },
+          "task_id": "t-coordinate-count",
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.5–1.6: chromStart/chromEnd"
+            },
+            {
+              "source_id": "s010",
+              "locator": "Columns 4 and 5: 1-based inclusive coordinates"
+            }
+          ]
+        },
+        {
+          "kind": "task",
+          "id": "t-coordinate-count",
+          "role": "practice",
+          "item_ids": [
+            "k-coordinates"
+          ],
+          "prompt": "The highlighted bases are [2,6) in 0-based half-open coordinates, or [3,6] in 1-based inclusive coordinates. How many bases are covered?",
+          "response": {
+            "kind": "number",
+            "units": "bases"
+          },
+          "check": {
+            "kind": "number",
+            "expected": 4,
+            "absolute_tolerance": 0,
+            "units": "bases"
+          },
+          "hints": [
+            "Choose either convention and its matching length formula."
+          ],
+          "feedback": {
+            "correct": "6 − 2 = 4, and 6 − 3 + 1 = 4: both conventions describe the same four bases.",
+            "otherwise": "Write the counting or subtraction step explicitly, then check its units."
+          },
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.5–1.6: chromStart/chromEnd"
+            },
+            {
+              "source_id": "s010",
+              "locator": "Columns 4 and 5: 1-based inclusive coordinates"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed."
+        },
+        {
+          "kind": "task",
+          "id": "t-coordinate-start",
+          "role": "practice",
+          "item_ids": [
+            "k-coordinates"
+          ],
+          "prompt": "An ordinary 1-based inclusive interval runs from 5 through 9. Its 0-based half-open end is 9. What is its 0-based start?",
+          "response": {
+            "kind": "number",
+            "units": "0-based position"
+          },
+          "check": {
+            "kind": "number",
+            "expected": 4,
+            "absolute_tolerance": 0,
+            "units": "0-based position"
+          },
+          "hints": [
+            "Apply the stated counting rule to this new instance."
+          ],
+          "feedback": {
+            "correct": "Subtract 1 from the inclusive start: 5 − 1 = 4. [4,9) contains the same five bases.",
+            "otherwise": "Write the counting or subtraction step explicitly, then check its units."
+          },
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.5–1.6: chromStart/chromEnd"
+            },
+            {
+              "source_id": "s010",
+              "locator": "Columns 4 and 5: 1-based inclusive coordinates"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed."
+        },
+        {
+          "kind": "task",
+          "id": "t-coordinate-context",
+          "role": "practice",
+          "item_ids": [
+            "k-coordinates",
+            "k-sequence-roles",
+            "k-evidence"
+          ],
+          "prompt": "A structurally well-formed ordinary interval is [90,120) on sequence chrA. No assembly identity or chrA length is available. What can you conclude about its reference bounds?",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "It is out of bounds because 120 is large."
+              },
+              {
+                "id": "b",
+                "text": "It is within bounds because start is less than end."
+              },
+              {
+                "id": "c",
+                "text": "Reference bounds cannot be established until the matching sequence length and identity are known."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "c"
+          },
+          "hints": [
+            "Which missing context would settle the question?"
+          ],
+          "feedback": {
+            "correct": "The interval has a sensible local order, but a matching reference is required to check whether end 120 exists on that sequence.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.5–1.6: chromStart/chromEnd"
+            },
+            {
+              "source_id": "s010",
+              "locator": "Columns 4 and 5: 1-based inclusive coordinates"
+            },
+            {
+              "source_id": "s006",
+              "locator": "Genome file format: chromosome names and lengths"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal."
+        }
+      ]
+    },
+    {
+      "id": "sec-sequences",
+      "title": "Recognize named sequence records",
+      "item_ids": [
+        "k-fasta"
+      ],
+      "required_section_ids": [
+        "sec-basics"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "FASTA stores named sequences: a definition line starts with >, followed by one or more sequence lines. It has no per-base quality string. Declare the molecule and alphabet before checking letters. Wrapping alone is not an error. NCBI nucleotide submissions impose their own identifier and header rules; faidx indexing expects regular sequence-line widths except the last line and uses the first header word as its name. Those are specific submission/indexing requirements, not universal FASTA grammar. Unique usable names matter for reliable lookup.",
+          "source_refs": [
+            {
+              "source_id": "s001",
+              "locator": "FASTA Files and DESCRIPTION: records, line wrapping, indexed names"
+            },
+            {
+              "source_id": "s002",
+              "locator": "Definition-line and nucleotide sequence paragraphs: submission dialect"
+            },
+            {
+              "source_id": "s024",
+              "locator": "FASTA protein sequence input format"
+            },
+            {
+              "source_id": "s022",
+              "locator": "Protein: Definition"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Recognize this complete two-record DNA file and check its declared alphabet A/C/G/T/N.",
+          "steps": [
+            {
+              "name": "Find the records",
+              "text": "Each > line starts a named sequence; the remaining lines contain sequence symbols."
+            },
+            {
+              "name": "Check the selected rules",
+              "text": "Both sequences are nonempty and use the declared alphabet. No quality strings are expected."
+            },
+            {
+              "name": "Bound the conclusion",
+              "text": "It passes these record/alphabet checks. The letters alone do not establish organism, sequencing origin or the correct assembly."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s001",
+              "locator": "FASTA Files and DESCRIPTION: records, line wrapping, indexed names"
+            },
+            {
+              "source_id": "s002",
+              "locator": "Definition-line and nucleotide sequence paragraphs: submission dialect"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": ">r1\nACGTN\n>r2\nTTAA\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "Complete synthetic DNA file; alphabet A/C/G/T/N; generic record checks only."
+        },
+        {
+          "kind": "task",
+          "id": "t-sequence-record",
+          "role": "practice",
+          "item_ids": [
+            "k-fasta",
+            "k-evidence"
+          ],
+          "prompt": "This is the complete file. Choose the most specific supported format and the justified judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "FASTA; it passes the stated DNA record/alphabet checks."
+              },
+              {
+                "id": "b",
+                "text": "FASTQ; it is invalid because there are no quality strings."
+              },
+              {
+                "id": "c",
+                "text": "FASTA; it proves the sequences are the correct genome reference."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "a"
+          },
+          "hints": [
+            "Identify the record grammar before judging its fields.",
+            "Check only what the stated profile and available evidence let you check."
+          ],
+          "feedback": {
+            "correct": "> headers and sequence-only bodies identify FASTA. N is allowed by the declared DNA alphabet. Reference identity and biological accuracy remain unverified.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s001",
+              "locator": "FASTA Files and DESCRIPTION: records, line wrapping, indexed names"
+            },
+            {
+              "source_id": "s002",
+              "locator": "Definition-line and nucleotide sequence paragraphs: submission dialect"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": ">piece1\nACNT\n>piece2\nGGT\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Generic named DNA sequences; allowed symbols A/C/G/T/N; complete file.",
+          "revisit_section_ids": [
+            "sec-sequences",
+            "sec-basics"
+          ]
+        },
+        {
+          "kind": "task",
+          "id": "t-protein-sequence",
+          "role": "practice",
+          "item_ids": [
+            "k-fasta",
+            "k-sequence-notation",
+            "k-evidence"
+          ],
+          "prompt": "This complete file is declared to contain a protein, and M/K/L/V/A are allowed amino-acid symbols. Name the format, judge its shown structure/alphabet, and explain whether a DNA-only alphabet test would be appropriate.",
+          "response": {
+            "kind": "short-text"
+          },
+          "check": {
+            "kind": "rubric",
+            "criteria": [
+              "Recognizes FASTA from the > header and sequence-only body.",
+              "The one record passes the stated protein alphabet and structure checks.",
+              "A DNA-only alphabet rule is inappropriate for the declared protein; biological identity still needs provenance/context."
+            ],
+            "acceptable_alternatives": [],
+            "sample_answer": "It is FASTA and passes these protein record checks. MKLVA uses allowed amino-acid symbols; rejecting it for non-DNA letters applies the wrong molecule profile. Its biological identity is not proven.",
+            "judgment": "self-check"
+          },
+          "hints": [
+            "Which molecule was explicitly declared?"
+          ],
+          "feedback": {
+            "correct": "Compare both your conclusion and your reason with the rubric. This is a self-check, not automatic verification of your reasoning.",
+            "otherwise": "Locate the criterion your answer missed, revisit its rule, and try a fresh instance later in the mixed cases."
+          },
+          "source_refs": [
+            {
+              "source_id": "s001",
+              "locator": "FASTA Files and DESCRIPTION: records, line wrapping, indexed names"
+            },
+            {
+              "source_id": "s002",
+              "locator": "Definition-line and nucleotide sequence paragraphs: submission dialect"
+            },
+            {
+              "source_id": "s024",
+              "locator": "FASTA protein sequence input format"
+            },
+            {
+              "source_id": "s022",
+              "locator": "Protein: Definition"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed.",
+          "snippet": ">pep\nMKLVA\n",
+          "snippet_label": "Synthetic instance"
+        }
+      ]
+    },
+    {
+      "id": "sec-quality",
+      "title": "Decode a quality symbol using a declared encoding",
+      "item_ids": [
+        "k-quality"
+      ],
+      "required_section_ids": [
+        "sec-basics"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "A per-base quality string assigns one encoded quality symbol to each sequence base. For the modern Phred+33 profile, quality score Q = ASCII code − 33. The encoding is supplied context; historical encodings overlap, so characters alone do not always identify it. Here Q is only decoded as a confidence score: higher is greater stated confidence, and Q=0 can be a legal low-confidence value. Per-base, mapping, genotype and variant quality measure different things and cannot be treated as interchangeable.",
+          "source_refs": [
+            {
+              "source_id": "s003",
+              "locator": "SANGER FASTQ FORMAT and Table 1: Phred+33 encoding"
+            },
+            {
+              "source_id": "s004",
+              "locator": "FASTQ Files / File Format"
+            },
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            },
+            {
+              "source_id": "s013",
+              "locator": "§§1.4–1.6: headers, typed cardinality, fields, genotype values"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Decode the supplied symbols under Phred+33.",
+          "steps": [
+            {
+              "name": "Use the ASCII key",
+              "text": "! has ASCII 33; I has ASCII 73."
+            },
+            {
+              "name": "Subtract the declared offset",
+              "text": "! represents Q=0; I represents Q=40. A low score can be structurally valid."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s003",
+              "locator": "SANGER FASTQ FORMAT and Table 1: Phred+33 encoding"
+            },
+            {
+              "source_id": "s004",
+              "locator": "FASTQ Files / File Format"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic."
+        },
+        {
+          "kind": "task",
+          "id": "t-quality-decode",
+          "role": "practice",
+          "item_ids": [
+            "k-quality"
+          ],
+          "prompt": "The supplied ASCII code for ? is 63. Under the declared Phred+33 encoding, what quality score does ? represent?",
+          "response": {
+            "kind": "number",
+            "units": "Phred score"
+          },
+          "check": {
+            "kind": "number",
+            "expected": 30,
+            "absolute_tolerance": 0,
+            "units": "Phred score"
+          },
+          "hints": [
+            "Subtract the encoding offset from the supplied ASCII code."
+          ],
+          "feedback": {
+            "correct": "63 − 33 = 30. The ASCII code is not itself the quality score.",
+            "otherwise": "Write the counting or subtraction step explicitly, then check its units."
+          },
+          "source_refs": [
+            {
+              "source_id": "s003",
+              "locator": "SANGER FASTQ FORMAT and Table 1: Phred+33 encoding"
+            },
+            {
+              "source_id": "s004",
+              "locator": "FASTQ Files / File Format"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed."
+        }
+      ]
+    },
+    {
+      "id": "sec-reads",
+      "title": "Match each read base to one quality symbol",
+      "item_ids": [
+        "k-fastq"
+      ],
+      "required_section_ids": [
+        "sec-basics",
+        "sec-quality"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "Modern unwrapped FASTQ uses four lines per read: @title, sequence, +separator, quality. Under our DNA profile, sequence symbols are A/C/G/T/N; quality symbols are printable ASCII 33–126 using Phred+33. Sequence and quality lengths must match. A repeated title after + is optional. Historical/general FASTQ can wrap sequence and quality over multiple lines; compare concatenated lengths there. @ and + can also be quality symbols, so do not split wrapped files merely whenever a line starts with @. Producer metadata is needed when historical encoding is ambiguous.",
+          "source_refs": [
+            {
+              "source_id": "s003",
+              "locator": "FASTQ DEFINITION; SANGER FASTQ FORMAT; historical encodings"
+            },
+            {
+              "source_id": "s004",
+              "locator": "FASTQ Files / File Format: modern four-line profile"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Inspect one complete modern read record.",
+          "steps": [
+            {
+              "name": "Recognize the layout",
+              "text": "The @ title, sequence, + separator and quality occupy four lines."
+            },
+            {
+              "name": "Match the lengths",
+              "text": "ACGT has four bases and IIII has four quality symbols."
+            },
+            {
+              "name": "Decode only what was declared",
+              "text": "Phred+33 gives Q40 for each I; that is a reported confidence, not a guarantee the bases are correct."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s003",
+              "locator": "FASTQ DEFINITION; SANGER FASTQ FORMAT; historical encodings"
+            },
+            {
+              "source_id": "s004",
+              "locator": "FASTQ Files / File Format: modern four-line profile"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "@readA\nACGT\n+\nIIII\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "Modern unwrapped DNA FASTQ; Phred+33; one complete record."
+        },
+        {
+          "kind": "task",
+          "id": "t-read-length",
+          "role": "practice",
+          "item_ids": [
+            "k-fastq",
+            "k-quality"
+          ],
+          "prompt": "This is one complete record under the stated profile. Choose the most specific supported format and judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "FASTQ; it passes because the title and separator look right."
+              },
+              {
+                "id": "b",
+                "text": "FASTQ; it violates the equal sequence/quality length rule."
+              },
+              {
+                "id": "c",
+                "text": "FASTA; it is valid because it contains DNA letters."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [
+            "Identify the record grammar before judging its fields.",
+            "Check only what the stated profile and available evidence let you check."
+          ],
+          "feedback": {
+            "correct": "The FASTQ sequence has five bases, but its quality string has four symbols. A familiar layout cannot repair this mismatch.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity.",
+            "patterns": [
+              {
+                "option_id": "a",
+                "when": "The learner selects option a.",
+                "text": "Count the sequence and quality separately; the signature is only the first check."
+              },
+              {
+                "option_id": "c",
+                "when": "The learner selects option c.",
+                "text": "FASTA starts records with > and does not pair sequence with a + quality separator."
+              }
+            ]
+          },
+          "source_refs": [
+            {
+              "source_id": "s003",
+              "locator": "FASTQ DEFINITION; SANGER FASTQ FORMAT; historical encodings"
+            },
+            {
+              "source_id": "s004",
+              "locator": "FASTQ Files / File Format: modern four-line profile"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "@readB\nACGTA\n+\nIIII\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Modern unwrapped DNA reads; Phred+33; one complete record."
+        },
+        {
+          "kind": "task",
+          "id": "t-wrapped-read",
+          "role": "practice",
+          "item_ids": [
+            "k-fastq",
+            "k-quality",
+            "k-evidence"
+          ],
+          "prompt": "This is one complete historical/general read record, with wrapped sequence and quality. Recognize the format, compare concatenated lengths, and distinguish a four-line consumer restriction from universal validity. Can IIII alone prove its historical encoding?",
+          "response": {
+            "kind": "short-text"
+          },
+          "check": {
+            "kind": "rubric",
+            "criteria": [
+              "Recognizes wrapped FASTQ, with concatenated sequence ACGT and quality IIII, both length four.",
+              "It passes the stated wrapped-record length/layout checks but is outside the modern unwrapped four-line profile.",
+              "The overlapping historical encoding ranges mean the producer/encoding declaration is still needed."
+            ],
+            "acceptable_alternatives": [],
+            "sample_answer": "It is wrapped FASTQ: AC+GT and II+II each contain four symbols. A consumer requiring four lines may reject it, but wrapping does not universally invalidate FASTQ. The I characters alone do not settle the historical offset.",
+            "judgment": "self-check"
+          },
+          "hints": [
+            "Concatenate within each sequence/quality component before comparing lengths.",
+            "Separate general format rules from this lesson’s modern consumer profile."
+          ],
+          "feedback": {
+            "correct": "Compare both your conclusion and your reason with the rubric. This is a self-check, not automatic verification of your reasoning.",
+            "otherwise": "Locate the criterion your answer missed, revisit its rule, and try a fresh instance later in the mixed cases."
+          },
+          "source_refs": [
+            {
+              "source_id": "s003",
+              "locator": "FASTQ DEFINITION; SANGER FASTQ FORMAT; historical encodings"
+            },
+            {
+              "source_id": "s004",
+              "locator": "FASTQ Files / File Format: modern four-line profile"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed.",
+          "snippet": "@readC\nAC\nGT\n+\nII\nII\n",
+          "snippet_label": "Synthetic instance"
+        }
+      ]
+    },
+    {
+      "id": "sec-intervals",
+      "title": "Recognize one interval or a pair of intervals",
+      "item_ids": [
+        "k-bed",
+        "k-bedpe"
+      ],
+      "required_section_ids": [
+        "sec-basics",
+        "sec-coordinates"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "Canonical BEDv1 describes 0-based half-open intervals. The first three fields are chromosome, start and end. Optional fields extend the standard row through BED9, or all the way to BED12; BED10 and BED11 are not allowed in that specification. Use a consistent field count within a file. Our portable examples use tabs. A standard score is an integer 0–1000; strand is +, − or .. End may equal start for an insertion site, so do not reject every zero-length BED interval. Bounds and names need the matching reference.",
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.3, 1.5–1.10 and Table 2: fields, coordinates, score, blocks"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Inspect this complete BED6 file against chrA length 10.",
+          "steps": [
+            {
+              "name": "Recognize the fields",
+              "text": "The row has one interval plus name, score and strand."
+            },
+            {
+              "name": "Check local rules",
+              "text": "[2,6) covers four bases, score 0 is in range, and + is allowed."
+            },
+            {
+              "name": "Check supplied context",
+              "text": "Both endpoints fit the declared sequence length. Passing these selected checks does not establish biological meaning."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.3, 1.5–1.10 and Table 2: fields, coordinates, score, blocks"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "chrA\t2\t6\tsiteA\t0\t+\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "Canonical BEDv1; complete BED6 file; chrA length 10."
+        },
+        {
+          "kind": "task",
+          "id": "t-interval-order",
+          "role": "practice",
+          "item_ids": [
+            "k-bed",
+            "k-coordinates"
+          ],
+          "prompt": "Choose the most specific supported format and judgment for this complete file.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "BED; it passes because all six fields are present."
+              },
+              {
+                "id": "b",
+                "text": "BED; its ordinary interval is invalid because start exceeds end."
+              },
+              {
+                "id": "c",
+                "text": "BEDPE; it is valid because there are six fields."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [
+            "Identify the record grammar before judging its fields.",
+            "Check only what the stated profile and available evidence let you check."
+          ],
+          "feedback": {
+            "correct": "The BED6 fields describe one interval [8,5), whose start exceeds its end. BEDPE needs two chromosome/start/end triples; this is not one.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.3, 1.5–1.10 and Table 2: fields, coordinates, score, blocks"
+            },
+            {
+              "source_id": "s006",
+              "locator": "BEDPE format: required six fields, optional fields, unknown endpoints"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "chrA\t8\t5\tsiteB\t0\t+\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Canonical interval rules; chrA length 20; ordinary interval; complete file."
+        },
+        {
+          "kind": "explanation",
+          "text": "BED12 adds a block count, block sizes and block starts relative to the outer chromStart. Counts must agree; blocks are ordered, contained and nonoverlapping. The first block begins at the feature start and the last block reaches the feature end. A block can be inside the outer interval yet still violate this final endpoint rule.",
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.3, 1.5–1.10 and Table 2: fields, coordinates, score, blocks"
+            }
+          ]
+        },
+        {
+          "kind": "task",
+          "id": "t-interval-blocks",
+          "role": "practice",
+          "item_ids": [
+            "k-bed",
+            "k-coordinates"
+          ],
+          "prompt": "This complete 12-field file uses two blocks. Choose the most specific supported format and judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "BED; it passes because both blocks are contained."
+              },
+              {
+                "id": "b",
+                "text": "BED; it violates the last-block/outer-end rule."
+              },
+              {
+                "id": "c",
+                "text": "BEDPE; its two blocks define an interval pair."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [
+            "Block starts are relative to the outer start.",
+            "Compare the last block’s end with the outer end."
+          ],
+          "feedback": {
+            "correct": "The last block starts at 10+6=16 and has size 3, so it ends at 19 rather than chromEnd 20. Containment alone is insufficient under the declared canonical block rules.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.3, 1.5–1.10 and Table 2: fields, coordinates, score, blocks"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "chrA\t10\t20\ttx\t0\t+\t10\t20\t0\t2\t2,3\t0,6\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Canonical 12-field blocked interval rules; chrA length 100; complete file."
+        },
+        {
+          "kind": "explanation",
+          "text": "BEDPE describes a pair: chromosome1/start1/end1, then chromosome2/start2/end2. These first six fields are required in the bedtools profile; name, score and two strands are optional, and extra columns can be passed through. Ten columns are common, not universal. Both intervals use half-open coordinates. Different chromosomes are allowed. The profile allows . for an unknown chromosome and −1 for an unknown coordinate. A tool’s permissive score handling must not be confused with the canonical BED score rule.",
+          "source_refs": [
+            {
+              "source_id": "s006",
+              "locator": "BEDPE format: required six fields, optional fields, unknown endpoints"
+            },
+            {
+              "source_id": "s006",
+              "locator": "BED format: tool-specific score and tab-delimiter handling"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Inspect a complete pair of intervals with known endpoints.",
+          "steps": [
+            {
+              "name": "Split the endpoints",
+              "text": "chrA [2,6) and chrB [10,14) are different endpoints, each four bases long."
+            },
+            {
+              "name": "Check the profile",
+              "text": "Both orders and supplied length-20 bounds pass. + and − are endpoint strand fields."
+            },
+            {
+              "name": "Bound the conclusion",
+              "text": "Different chromosomes do not make a pair invalid; this says nothing about whether the biological relationship is real."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s006",
+              "locator": "BEDPE format: required six fields, optional fields, unknown endpoints"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "chrA\t2\t6\tchrB\t10\t14\tpairA\t0\t+\t-\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "bedtools paired-interval profile; both chromosomes length 20; complete file."
+        },
+        {
+          "kind": "task",
+          "id": "t-pair-order",
+          "role": "practice",
+          "item_ids": [
+            "k-bedpe",
+            "k-coordinates"
+          ],
+          "prompt": "Choose the most specific supported format and judgment for this complete paired-endpoint file.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "BEDPE; it is invalid solely because the chromosomes differ."
+              },
+              {
+                "id": "b",
+                "text": "BEDPE; it violates the second endpoint’s interval order."
+              },
+              {
+                "id": "c",
+                "text": "BED; it passes because its first interval is well formed."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [
+            "Identify the record grammar before judging its fields.",
+            "Check only what the stated profile and available evidence let you check."
+          ],
+          "feedback": {
+            "correct": "This is BEDPE. The second endpoint has start 44 > end 40. Interchromosomal pairs are allowed; inspecting only the first endpoint misses the actual error.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s006",
+              "locator": "BEDPE format: required six fields, optional fields, unknown endpoints"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "chrA\t10\t16\tchrB\t44\t40\tpairB\t0\t+\t-\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Paired-interval rules taught above; both chromosomes length 100; complete file."
+        }
+      ]
+    },
+    {
+      "id": "sec-signals",
+      "title": "Read values assigned to genomic positions",
+      "item_ids": [
+        "k-signal-values",
+        "k-wig"
+      ],
+      "required_section_ids": [
+        "sec-basics",
+        "sec-coordinates"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "A genomic signal assigns numeric measurements to positions or spans; it is not a sequence string. WIG uses 1-based starts. variableStep declares chrom and optional span (default 1), then position/value pairs in numeric order. fixedStep declares chrom, start and step, with optional span; each subsequent line contains one value, and successive starts advance by step. Span counts covered bases. Positive and negative real values are allowed. Omitted positions are unreported data, not automatically zero. The UCSC custom-track dialect requires a track line; wigToBigWig input omits it. Our data-only examples use the conversion-input profile.",
+          "source_refs": [
+            {
+              "source_id": "s007",
+              "locator": "General structure; variableStep; fixedStep; Data values; 1-start coordinates"
+            },
+            {
+              "source_id": "s021",
+              "locator": "bigWig: preparation and wigToBigWig input restrictions"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Locate two measurements in this complete data-only fixed-step file.",
+          "steps": [
+            {
+              "name": "Read the declaration",
+              "text": "The first start is 2, successive starts advance by 3, and each value spans two bases."
+            },
+            {
+              "name": "Place the values",
+              "text": "4.5 covers 1-based bases 2–3; −1.0 covers 5–6."
+            },
+            {
+              "name": "Separate absence from zero",
+              "text": "Bases outside the listed spans have no reported value here. A negative value is not a syntax error."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s007",
+              "locator": "General structure; variableStep; fixedStep; Data values; 1-start coordinates"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "fixedStep chrom=chrA start=2 step=3 span=2\n4.5\n-1.0\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "Data-only conversion input; chrA length 10; complete file."
+        },
+        {
+          "kind": "task",
+          "id": "t-variable-signal",
+          "role": "practice",
+          "item_ids": [
+            "k-wig",
+            "k-signal-values"
+          ],
+          "prompt": "Choose the most specific supported format and judgment for this complete data-only signal file.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "WIG; it passes the stated position/value rules, and base 3 is unreported."
+              },
+              {
+                "id": "b",
+                "text": "WIG; it is invalid because a measurement is negative."
+              },
+              {
+                "id": "c",
+                "text": "BED; it assigns zero to every unlisted position."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "a"
+          },
+          "hints": [
+            "Identify the record grammar before judging its fields.",
+            "Check only what the stated profile and available evidence let you check."
+          ],
+          "feedback": {
+            "correct": "The variableStep declaration and position/value pairs identify WIG. Positions 2 and 4 are ordered and within bounds; −0.5 is allowed. Base 3 is missing data, not zero.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s007",
+              "locator": "General structure; variableStep; fixedStep; Data values; 1-start coordinates"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "variableStep chrom=chrA span=1\n2 -0.5\n4 2.0\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Data-only conversion input; chrA length 10; complete file."
+        },
+        {
+          "kind": "task",
+          "id": "t-fixed-start",
+          "role": "practice",
+          "item_ids": [
+            "k-wig",
+            "k-signal-values",
+            "k-coordinates"
+          ],
+          "prompt": "This complete data-only file has three values. What is the 1-based start of the third value’s span?",
+          "response": {
+            "kind": "number",
+            "units": "1-based position"
+          },
+          "check": {
+            "kind": "number",
+            "expected": 8,
+            "absolute_tolerance": 0,
+            "units": "1-based position"
+          },
+          "hints": [
+            "Advance by step once for each value after the first."
+          ],
+          "feedback": {
+            "correct": "The starts are 4, 6 and 8: start + 2×step = 4 + 2×2 = 8. Span controls coverage, not the advance between starts.",
+            "otherwise": "Write the counting or subtraction step explicitly, then check its units."
+          },
+          "source_refs": [
+            {
+              "source_id": "s007",
+              "locator": "General structure; variableStep; fixedStep; Data values; 1-start coordinates"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed.",
+          "snippet": "fixedStep chrom=chrA start=4 step=2 span=2\n1.0\n2.0\n3.0\n",
+          "snippet_label": "Synthetic instance"
+        }
+      ]
+    },
+    {
+      "id": "sec-features",
+      "title": "Distinguish feature relationships and coding phase",
+      "item_ids": [
+        "k-features"
+      ],
+      "required_section_ids": [
+        "sec-basics",
+        "sec-coordinates"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "A gene can have transcripts; a transcript can contain exons. Exons are retained in mature RNA and can include untranslated regions, so exon does not mean entirely protein-coding. CDS is the portion used to encode protein. A codon is a three-base unit. For a CDS row, phase 0, 1 or 2 tells how many bases to move from that row’s 5′ end to the 5′ genomic coordinate of the next complete codon, rather than necessarily its lower genomic endpoint. On + the 5′ end is the lower coordinate; on − it is the higher coordinate and movement proceeds toward lower coordinates. Phase is not genomic coordinate modulo 3. These are annotation rules, not evidence that a prediction is biologically correct.",
+          "source_refs": [
+            {
+              "source_id": "s022",
+              "locator": "Exon and Codon: Definition sections"
+            },
+            {
+              "source_id": "s023",
+              "locator": "Exons and introns; cDNA and protein sequences"
+            },
+            {
+              "source_id": "s010",
+              "locator": "Column 8: CDS phase and strand-relative 5′ end"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "A minus-strand CDS occupies 1-based bases 5–13 with phase 1. What is the 5′ genomic coordinate of its next complete codon?",
+          "steps": [
+            {
+              "name": "Choose the 5′ end",
+              "text": "On the minus strand the row’s 5′ coordinate is 13."
+            },
+            {
+              "name": "Apply the phase",
+              "text": "Move one base toward lower coordinates: the next complete codon’s 5′ genomic coordinate is 12. The preceding base may complete a codon begun in an earlier CDS segment."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s022",
+              "locator": "Exon and Codon: Definition sections"
+            },
+            {
+              "source_id": "s023",
+              "locator": "Exons and introns; cDNA and protein sequences"
+            },
+            {
+              "source_id": "s010",
+              "locator": "Column 8: CDS phase and strand-relative 5′ end"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic."
+        },
+        {
+          "kind": "task",
+          "id": "t-feature-phase",
+          "role": "practice",
+          "item_ids": [
+            "k-features",
+            "k-coordinates"
+          ],
+          "prompt": "A minus-strand CDS occupies bases 5–13 with phase 2. Give the 5′ genomic coordinate of the next complete codon and explain the direction used. Also state whether an exon is necessarily all CDS.",
+          "response": {
+            "kind": "short-text"
+          },
+          "check": {
+            "kind": "rubric",
+            "criteria": [
+              "The next complete codon’s 5′ genomic coordinate is 11, distinct from the lower genomic endpoint of that codon.",
+              "Uses the minus-strand 5′ end 13 and moves two bases toward lower coordinates.",
+              "States that an exon can contain untranslated sequence and need not be entirely CDS."
+            ],
+            "acceptable_alternatives": [],
+            "sample_answer": "Start at the minus-strand CDS row’s 5′ end, 13, and move two bases toward lower coordinates. The next complete codon’s 5′ genomic coordinate is 11. An exon is not necessarily all CDS; it can include untranslated sequence.",
+            "judgment": "self-check"
+          },
+          "hints": [
+            "Locate the 5′ end before applying phase."
+          ],
+          "feedback": {
+            "correct": "Compare both your conclusion and your reason with the rubric. This is a self-check, not automatic verification of your reasoning.",
+            "otherwise": "Locate the criterion your answer missed, revisit its rule, and try a fresh instance later in the mixed cases."
+          },
+          "source_refs": [
+            {
+              "source_id": "s022",
+              "locator": "Exon and Codon: Definition sections"
+            },
+            {
+              "source_id": "s023",
+              "locator": "Exons and introns; cDNA and protein sequences"
+            },
+            {
+              "source_id": "s010",
+              "locator": "Column 8: CDS phase and strand-relative 5′ end"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed."
+        }
+      ]
+    },
+    {
+      "id": "sec-annotations",
+      "title": "Read two annotation grammars separately",
+      "item_ids": [
+        "k-gtf",
+        "k-gff3"
+      ],
+      "required_section_ids": [
+        "sec-basics",
+        "sec-coordinates",
+        "sec-features"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "GTF uses nine tab-separated columns: sequence, source, feature, start, end, score, strand, phase/frame, attributes. Ordinary coordinates are 1-based inclusive. Its common attributes use quoted values and semicolons, such as gene_id \"g1\"; transcript_id \"t1\";. In our minimal Ensembl-style profile, exon/transcript rows need their relevant gene/transcript IDs; a gene row may lack transcript_id. Full GENCODE releases add mandatory metadata, so these small teaching records are not claims of full GENCODE conformance.",
+          "source_refs": [
+            {
+              "source_id": "s008",
+              "locator": "Fields and Sample GTF output"
+            },
+            {
+              "source_id": "s009",
+              "locator": "Table A; B.1 mandatory attributes and the gene-row exception"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Inspect a complete one-row minimal GTF example.",
+          "steps": [
+            {
+              "name": "Recognize the grammar",
+              "text": "There are nine tab-separated fields and quoted gene_id/transcript_id attributes."
+            },
+            {
+              "name": "Count and check",
+              "text": "The exon runs from 3 through 7 inclusive: five bases, with ordered endpoints and a known parent transcript label."
+            },
+            {
+              "name": "State the scope",
+              "text": "It passes the selected minimal row rules with chrA length 20. This alone does not establish a biologically correct annotation or a full release’s metadata."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s008",
+              "locator": "Fields and Sample GTF output"
+            },
+            {
+              "source_id": "s009",
+              "locator": "Table A; B.1 mandatory attributes and the gene-row exception"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "chrA\tlesson\texon\t3\t7\t.\t+\t.\tgene_id \"g1\"; transcript_id \"t1\";\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "Minimal Ensembl-style row checks; chrA length 20; complete one-row file."
+        },
+        {
+          "kind": "task",
+          "id": "t-quoted-annotation",
+          "role": "practice",
+          "item_ids": [
+            "k-gtf",
+            "k-coordinates"
+          ],
+          "prompt": "Choose the most specific supported format and judgment for this complete minimal annotation file.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "GTF; it passes because the attributes are quoted."
+              },
+              {
+                "id": "b",
+                "text": "GFF3; it is invalid only because there is no ID attribute."
+              },
+              {
+                "id": "c",
+                "text": "GTF; it violates start ≤ end for the ordinary exon interval."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "c"
+          },
+          "hints": [
+            "Identify the record grammar before judging its fields.",
+            "Check only what the stated profile and available evidence let you check."
+          ],
+          "feedback": {
+            "correct": "Quoted key/value attributes indicate the GTF grammar. Start 9 exceeds end 4, so this ordinary interval fails its coordinate rule despite well-formed attributes.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s008",
+              "locator": "Fields and Sample GTF output"
+            },
+            {
+              "source_id": "s009",
+              "locator": "Table A; B.1 mandatory attributes and the gene-row exception"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "chrA\tlesson\texon\t9\t4\t.\t+\t.\tgene_id \"g1\"; transcript_id \"t1\";\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Minimal quoted-attribute annotation profile; chrA length 20; ordinary non-circular exon; complete file."
+        },
+        {
+          "kind": "explanation",
+          "text": "GFF3 is a distinct nine-column grammar, with a required topmost ##gff-version 3 directive and unquoted tag=value attributes separated by semicolons. Reserved characters in values require the specified percent escaping. Ordinary coordinates are 1-based inclusive; strand can be +, −, . or ?. CDS phase must be 0, 1 or 2; . is permitted for non-CDS rows. ID is needed for features with children and discontinuous features, while a leaf can lack ID. Repeated ID can describe pieces of one discontinuous feature. Parent names a part-of relationship: in a complete file its reference must resolve. A missing parent in an excerpt may appear elsewhere.",
+          "source_refs": [
+            {
+              "source_id": "s010",
+              "locator": "Columns 4–9; ID and Parent attributes; Directives; Canonical Gene example"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Inspect this complete tiny feature hierarchy.",
+          "steps": [
+            {
+              "name": "Recognize the grammar",
+              "text": "The version directive and ID=/Parent= attributes identify GFF3."
+            },
+            {
+              "name": "Resolve the relationships",
+              "text": "The exon’s Parent=t1 resolves to the mRNA; that mRNA’s Parent=g1 resolves to the gene."
+            },
+            {
+              "name": "Check selected row rules",
+              "text": "The leaf exon can omit ID, and its non-CDS phase may be .. Coordinates are ordered and fit chrA length 20."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s010",
+              "locator": "Columns 4–9; ID and Parent attributes; Directives; Canonical Gene example"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "##gff-version 3\nchrA\tlesson\tgene\t2\t12\t.\t+\t.\tID=g1\nchrA\tlesson\tmRNA\t2\t12\t.\t+\t.\tID=t1;Parent=g1\nchrA\tlesson\texon\t3\t7\t.\t+\t.\tParent=t1\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "GFF3 v1.26 selected hierarchy/row checks; complete file; chrA length 20."
+        },
+        {
+          "kind": "task",
+          "id": "t-feature-parent",
+          "role": "practice",
+          "item_ids": [
+            "k-gff3",
+            "k-features"
+          ],
+          "prompt": "This is the entire file, with no omitted rows. Choose the most specific supported format and judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "GFF3; it passes because the exon need not have an ID."
+              },
+              {
+                "id": "b",
+                "text": "GFF3; it violates the relationship rule because Parent=absent has no target."
+              },
+              {
+                "id": "c",
+                "text": "GTF; it is valid because gene and exon rows are present."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [
+            "Identify the record grammar before judging its fields.",
+            "Check only what the stated profile and available evidence let you check."
+          ],
+          "feedback": {
+            "correct": "The directive and tag=value attributes identify GFF3. In this complete file there is no feature with ID=absent, so the Parent relationship cannot resolve. The missing leaf ID is not the defect.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s010",
+              "locator": "Columns 4–9; ID and Parent attributes; Directives; Canonical Gene example"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "##gff-version 3\nchrA\tlesson\tgene\t2\t12\t.\t+\t.\tID=g1\nchrA\tlesson\texon\t3\t7\t.\t+\t.\tParent=absent\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete ordinary annotation; chrA length 20; selected relationship checks."
+        },
+        {
+          "kind": "task",
+          "id": "t-feature-excerpt",
+          "role": "practice",
+          "item_ids": [
+            "k-gff3",
+            "k-evidence"
+          ],
+          "prompt": "This single row is an excerpt from a larger annotation whose header and other rows are not shown. Choose the most specific supported grammar and judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "GFF3-style row; its Parent target cannot be judged without the rest of the file."
+              },
+              {
+                "id": "b",
+                "text": "GFF3; the whole file is invalid because the parent is not in this excerpt."
+              },
+              {
+                "id": "c",
+                "text": "GTF; it passes because Parent is a quoted attribute."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "a"
+          },
+          "hints": [
+            "Is the parent absent from the whole file, or just from your view?"
+          ],
+          "feedback": {
+            "correct": "The tag=value Parent attribute supports GFF3-style row recognition. Parent=unseen may resolve elsewhere; the omitted header and records must be inspected before judging the whole file.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s010",
+              "locator": "Columns 4–9; ID and Parent attributes; Directives; Canonical Gene example"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "chrA\tlesson\texon\t3\t7\t.\t+\t.\tParent=unseen\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "One-row excerpt only; no claim that a required file header is absent."
+        }
+      ]
+    },
+    {
+      "id": "sec-alignments",
+      "title": "Account for query and reference consumption",
+      "item_ids": [
+        "k-alignments"
+      ],
+      "required_section_ids": [
+        "sec-basics",
+        "sec-coordinates",
+        "sec-quality"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "An alignment relates a query/read sequence to a reference. CIGAR contains length/operator pairs. M, = and X consume both query and reference; M alone does not distinguish a match from a mismatch. I and S consume query only; D and N consume reference only; H and P consume neither. If SEQ is present, its length must equal query-consuming CIGAR lengths when CIGAR is available. With a nonzero mapped POS, the last ordinary covered reference coordinate is POS + reference-consumed length − 1. Missing values and unmapped records have their own rules; this shortcut is for the explicitly mapped examples.",
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            }
+          ]
+        },
+        {
+          "kind": "explanation",
+          "text": "Flags are bit fields. In the supplied examples FLAG=0 is an unpaired mapped record; bit 4 indicates unmapped. A nonzero flag is not inherently invalid, and an unmapped record may still be placed on a reference. MAPQ is mapping confidence; 255 means unavailable, not maximum confidence. QUAL is per-base quality or * for unavailable. If a non-* SEQ and QUAL are supplied, their lengths must agree.",
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "For CIGAR 3M1I2M at mapped POS 4, account for both strings.",
+          "steps": [
+            {
+              "name": "Consume the query",
+              "text": "3M + 1I + 2M = 6 query bases."
+            },
+            {
+              "name": "Consume the reference",
+              "text": "3M + 2M = 5 reference bases; the insertion does not advance the reference."
+            },
+            {
+              "name": "Locate the span",
+              "text": "The last ordinary reference coordinate is 4 + 5 − 1 = 8."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic."
+        },
+        {
+          "kind": "visual",
+          "purpose": "Compare which CIGAR operators advance the query and reference before calculating a new query length.",
+          "representation": "An accessible operator table or two-lane accounting diagram. Each authored operator has query/reference consumption booleans. For the linked task show its operation lengths but keep summed consumption hidden until an attempt. Include a text equivalent of the same key; no biological base matching is inferred from M.",
+          "data": {
+            "key": [
+              {
+                "operator": "M",
+                "query": true,
+                "reference": true
+              },
+              {
+                "operator": "I",
+                "query": true,
+                "reference": false
+              },
+              {
+                "operator": "S",
+                "query": true,
+                "reference": false
+              },
+              {
+                "operator": "D",
+                "query": false,
+                "reference": true
+              },
+              {
+                "operator": "N",
+                "query": false,
+                "reference": true
+              },
+              {
+                "operator": "=",
+                "query": true,
+                "reference": true
+              },
+              {
+                "operator": "X",
+                "query": true,
+                "reference": true
+              },
+              {
+                "operator": "H",
+                "query": false,
+                "reference": false
+              },
+              {
+                "operator": "P",
+                "query": false,
+                "reference": false
+              }
+            ],
+            "operations": [
+              {
+                "length": 2,
+                "operator": "S"
+              },
+              {
+                "length": 3,
+                "operator": "M"
+              },
+              {
+                "length": 1,
+                "operator": "I"
+              },
+              {
+                "length": 2,
+                "operator": "M"
+              }
+            ]
+          },
+          "task_id": "t-query-count",
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            }
+          ]
+        },
+        {
+          "kind": "task",
+          "id": "t-query-count",
+          "role": "practice",
+          "item_ids": [
+            "k-alignments"
+          ],
+          "prompt": "CIGAR is 2S3M1I2M and SEQ is present. How many bases must SEQ contain?",
+          "response": {
+            "kind": "number",
+            "units": "bases"
+          },
+          "check": {
+            "kind": "number",
+            "expected": 8,
+            "absolute_tolerance": 0,
+            "units": "bases"
+          },
+          "hints": [
+            "Sum query-consuming operations, including soft clipping."
+          ],
+          "feedback": {
+            "correct": "S, M and I consume query: 2 + 3 + 1 + 2 = 8 bases. Soft-clipped bases remain in SEQ.",
+            "otherwise": "Write the counting or subtraction step explicitly, then check its units."
+          },
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed."
+        },
+        {
+          "kind": "task",
+          "id": "t-reference-end",
+          "role": "practice",
+          "item_ids": [
+            "k-alignments",
+            "k-coordinates"
+          ],
+          "prompt": "A mapped ordinary alignment starts at POS 21 with CIGAR 3M2D2M. What is the last 1-based reference position covered by its reference span?",
+          "response": {
+            "kind": "number",
+            "units": "1-based position"
+          },
+          "check": {
+            "kind": "number",
+            "expected": 27,
+            "absolute_tolerance": 0,
+            "units": "1-based position"
+          },
+          "hints": [
+            "Count reference consumption, then include both endpoints."
+          ],
+          "feedback": {
+            "correct": "M and D consume reference: 3 + 2 + 2 = 7. The last coordinate is 21 + 7 − 1 = 27.",
+            "otherwise": "Write the counting or subtraction step explicitly, then check its units."
+          },
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed."
+        }
+      ]
+    },
+    {
+      "id": "sec-alignmentfiles",
+      "title": "Distinguish alignment text from binary containers",
+      "item_ids": [
+        "k-sam",
+        "k-bam",
+        "k-cram"
+      ],
+      "required_section_ids": [
+        "sec-basics",
+        "sec-coordinates",
+        "sec-quality",
+        "sec-alignments"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "SAM is alignment text. Optional header rows precede records; @SQ gives reference SN (name) and LN (length). A record has at least eleven tab-separated fields: QNAME FLAG RNAME POS MAPQ CIGAR RNEXT PNEXT TLEN SEQ QUAL. POS is 1-based in ordinary mapped records. Extra tags use TAG:TYPE:VALUE. Headers, flags, missing markers and supplied reference context must be interpreted together; optional unavailable CIGAR or QUAL is not universally an error. Sorting, an index or a particular producer’s read-group policy is not a universal requirement for every valid SAM file.",
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            },
+            {
+              "source_id": "s011",
+              "locator": "§1.3: header records; §1.5: optional tags"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Inspect this complete tiny mapped alignment file.",
+          "steps": [
+            {
+              "name": "Recognize the grammar",
+              "text": "Header records begin @HD/@SQ; the data row contains the eleven mandatory SAM fields."
+            },
+            {
+              "name": "Check the stated fields",
+              "text": "FLAG 0 is mapped. CIGAR 4M consumes four query bases, matching ACTG and IIII. POS 3 through 6 fits chrA length 30."
+            },
+            {
+              "name": "Bound the conclusion",
+              "text": "The selected structure and length checks pass. M and the quality scores do not prove the reported alignment is biologically correct."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "@HD\tVN:1.6\tSO:unsorted\n@SQ\tSN:chrA\tLN:30\nreadA\t0\tchrA\t3\t30\t4M\t*\t0\t0\tACTG\tIIII\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "SAM1.6 selected checks; complete file; ordinary mapped record."
+        },
+        {
+          "kind": "task",
+          "id": "t-alignment-confidence",
+          "role": "practice",
+          "item_ids": [
+            "k-sam",
+            "k-alignments",
+            "k-quality"
+          ],
+          "prompt": "Choose the most specific supported format and judgment for this complete text file. The supplied Phred+33 key makes ! a legal Q0 quality symbol.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "SAM; it passes these length/coordinate checks, while MAPQ 255 means unavailable."
+              },
+              {
+                "id": "b",
+                "text": "SAM; it is invalid because 255 claims impossible mapping confidence."
+              },
+              {
+                "id": "c",
+                "text": "FASTQ; it is invalid because its quality is low."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "a"
+          },
+          "hints": [
+            "Identify the record grammar before judging its fields.",
+            "Check only what the stated profile and available evidence let you check."
+          ],
+          "feedback": {
+            "correct": "This is SAM: 5M agrees with the five-base SEQ and five quality symbols, and POS 6–10 fits chrA. MAPQ 255 is unavailable; Q0 is low confidence, not a syntax violation.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            },
+            {
+              "source_id": "s003",
+              "locator": "SANGER FASTQ FORMAT and Table 1: Phred+33 encoding"
+            },
+            {
+              "source_id": "s004",
+              "locator": "FASTQ Files / File Format"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "@SQ\tSN:chrA\tLN:30\nreadB\t0\tchrA\t6\t255\t5M\t*\t0\t0\tAACGT\t!!!!!\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Selected mapped-text rules; complete file; Phred+33 per-base quality."
+        },
+        {
+          "kind": "explanation",
+          "text": "BAM represents SAM alignment data in a BGZF-compressed binary container. The magic BAM\\x01 is at the start of the decompressed BAM stream, not the outer on-disk compressed bytes. A text preview produced by decoding is SAM output, not proof that the original container was plain SAM. BAM stores reference offsets internally as 0-based values while a SAM rendering uses its specified 1-based POS. A compatible parser establishes container type more strongly than a filename. Header/EOF checks, full restoration and semantic validation provide different evidence.",
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§§4.1–4.2: BAM binary encoding and BGZF"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION; view DESCRIPTION and output options"
+            }
+          ]
+        },
+        {
+          "kind": "explanation",
+          "text": "samtools quickcheck input.bam checks the beginning/header and expected EOF, skipping the middle. For a full sequential restoration use samtools view -h input.bam and inspect its exit status/stderr; avoid regional filters. -H displays only the header and optimized -c counting is weaker than full restoration. Picard ValidateSamFile can add declared alignment consistency checks, for example java -jar picard.jar ValidateSamFile I=input.bam MODE=SUMMARY. Record tool version, errors/warnings, reference inputs and ignored rules: a stricter consumer policy can differ from the format specification. These commands are guidance; no tools were run on the synthetic examples.",
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§§4.1–4.2: BAM binary encoding and BGZF"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION; view DESCRIPTION and output options"
+            },
+            {
+              "source_id": "s016",
+              "locator": "ValidateSamFile command and options; SAM differences: stricter policy"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Interpret this synthetic binary inspection report.",
+          "steps": [
+            {
+              "name": "Recognize the representation",
+              "text": "The decompressed magic supports a BAM container identification."
+            },
+            {
+              "name": "Bound quickcheck",
+              "text": "Exit 0 supports its limited header/EOF checks, not intact middle records."
+            },
+            {
+              "name": "Choose the next check",
+              "text": "Fully restore/decode all records, then apply the needed semantic/reference checks."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§§4.1–4.2: BAM binary encoding and BGZF"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION; view DESCRIPTION and output options"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "Decompressed stream begins: BAM\\x01\nquickcheck: exit 0\nFull sequential restoration: not run\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "Synthetic inspection report, not actual command output."
+        },
+        {
+          "kind": "task",
+          "id": "t-binary-preview",
+          "role": "practice",
+          "item_ids": [
+            "k-bam",
+            "k-containers",
+            "k-evidence",
+            "k-alignments"
+          ],
+          "prompt": "This synthetic report includes one decoded text record. Choose the most specific supported original container and judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "BAM; its shown record passes the selected length rules, but whole-file restoration remains unverified."
+              },
+              {
+                "id": "b",
+                "text": "SAM; the original file must be plain text because the preview is text."
+              },
+              {
+                "id": "c",
+                "text": "BAM; quickcheck exit 0 certifies all records and biological correctness."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "a"
+          },
+          "hints": [
+            "Identify the record grammar before judging its fields.",
+            "Check only what the stated profile and available evidence let you check."
+          ],
+          "feedback": {
+            "correct": "The original container is identified as BAM by the decompressed signature. Its decoded SAM preview has 4M, four sequence bases and four quality symbols, but quickcheck does not inspect the entire middle of the file.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§§4.1–4.2: BAM binary encoding and BGZF"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION; view DESCRIPTION and output options"
+            },
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "Decompressed stream begins: BAM\\x01\nquickcheck: exit 0\nDecoded SAM preview only:\nreadC\t0\tchrA\t3\t20\t4M\t*\t0\t0\tACTG\tIIII\nFull sequential restoration: not run\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Synthetic binary inspection; reference header reports chrA length 30; exactly one preview record, not the entire file."
+        },
+        {
+          "kind": "task",
+          "id": "t-compression-clue",
+          "role": "practice",
+          "item_ids": [
+            "k-bam",
+            "k-containers",
+            "k-evidence"
+          ],
+          "prompt": "A file is named reads.bam and starts with outer compressed bytes 1f 8b 08. No decompression or parser inspection has occurred. What is justified?",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "BAM; the suffix and generic gzip signature establish its type and validity."
+              },
+              {
+                "id": "b",
+                "text": "The compression signature and suffix are clues; BAM type and whole-file validity remain unestablished."
+              },
+              {
+                "id": "c",
+                "text": "CRAM; every compressed alignment begins with gzip bytes."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [
+            "Which signature belongs to the payload rather than generic compression?"
+          ],
+          "feedback": {
+            "correct": "Generic gzip-compatible bytes do not establish a BAM payload. Inspect the decompressed stream with an appropriate parser before concluding BAM, and then perform the checks needed for validity.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§§4.1–4.2: BAM binary encoding and BGZF"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION; view DESCRIPTION and output options"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal."
+        },
+        {
+          "kind": "explanation",
+          "text": "CRAM is another binary alignment container. Its file definition begins with CRAM and version bytes. A slice may need an external reference, contain an embedded reference or use a reference-free mode. Missing or wrong external context can prevent restoring sequences without making the original file intrinsically corrupt. When required, obtain the exact matching reference, including checksum identity, and use full restoration such as samtools view -h -T reference.fa input.cram, checking exit status/stderr. A successful decode still needs the required semantic checks; an index only supports access.",
+          "source_refs": [
+            {
+              "source_id": "s012",
+              "locator": "§6: file definition; §§8.4–8.5: reference-required flag and slices; §11: reference sequences"
+            },
+            {
+              "source_id": "s015",
+              "locator": "view: -T reference and full SAM output"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Interpret a complete synthetic restoration report using an embedded reference.",
+          "steps": [
+            {
+              "name": "Recognize the container",
+              "text": "The file definition reports CRAM version 3.1."
+            },
+            {
+              "name": "Inspect the reference condition",
+              "text": "This example reports an embedded reference; no external reference was required."
+            },
+            {
+              "name": "State the achieved evidence",
+              "text": "Full sequential restoration succeeded and selected decoded-record checks passed. This supports those checks, not biological truth."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s012",
+              "locator": "§6: file definition; §§8.4–8.5: reference-required flag and slices; §11: reference sequences"
+            },
+            {
+              "source_id": "s015",
+              "locator": "view: -T reference and full SAM output"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "File definition: CRAM; version bytes 03 01\nReference mode: embedded\nsamtools view -h: exit 0 after all records\nSelected decoded-record checks: passed\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "Synthetic inspection report; no actual tool execution."
+        },
+        {
+          "kind": "task",
+          "id": "t-reference-mismatch",
+          "role": "practice",
+          "item_ids": [
+            "k-cram",
+            "k-sequence-roles",
+            "k-evidence"
+          ],
+          "prompt": "Choose the most specific supported original container and judgment from this synthetic report.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "CRAM; it is intrinsically corrupt because any external reference failed."
+              },
+              {
+                "id": "b",
+                "text": "CRAM; the supplied reference is mismatched, so full restoration cannot yet be assessed using the correct context."
+              },
+              {
+                "id": "c",
+                "text": "BAM; reference checksums are never relevant to binary alignment files."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [
+            "Identify the record grammar before judging its fields.",
+            "Check only what the stated profile and available evidence let you check."
+          ],
+          "feedback": {
+            "correct": "The CRAM definition establishes the container candidate. This reference-required slice was given a mismatched reference; obtain the checksum-matching reference and retry full restoration before concluding intrinsic corruption.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s012",
+              "locator": "§6: file definition; §§8.4–8.5: reference-required flag and slices; §11: reference sequences"
+            },
+            {
+              "source_id": "s015",
+              "locator": "view: -T reference and full SAM output"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "File definition: CRAM; version bytes 03 01\nExternal reference required: yes\nSupplied reference checksum: does not match recorded reference\nFull restoration: stopped at reference mismatch\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Synthetic report; reference-required mode; no matching reference supplied."
+        }
+      ]
+    },
+    {
+      "id": "sec-alleles",
+      "title": "Decode allele indexes and genotype separators",
+      "item_ids": [
+        "k-alleles"
+      ],
+      "required_section_ids": [
+        "sec-basics"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "An allele is a version of a sequence at a locus; genotype describes the alleles carried. In VCF genotype notation, 0 indexes REF, 1 the first ALT, 2 the second ALT, and so on. . denotes a missing allele. / is an unphased separator; | indicates phasing. Our genotype examples are explicitly diploid, but ploidy is not universally two. A valid index is not proof the stated REF agrees with the exact reference assembly; that is a separate contextual check.",
+          "source_refs": [
+            {
+              "source_id": "s022",
+              "locator": "Allele and Genotype: Definition sections"
+            },
+            {
+              "source_id": "s013",
+              "locator": "§1.6: GT genotype indexes and separators"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Decode REF=A, ALT=C,G, GT=0/2 in a diploid example.",
+          "steps": [
+            {
+              "name": "Map the indexes",
+              "text": "0 refers to A; 2 refers to the second alternate G."
+            },
+            {
+              "name": "Read the separator",
+              "text": "The / separator makes the A/G genotype unphased; it does not establish which haplotype carries which allele."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s022",
+              "locator": "Allele and Genotype: Definition sections"
+            },
+            {
+              "source_id": "s013",
+              "locator": "§1.6: GT genotype indexes and separators"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic."
+        },
+        {
+          "kind": "task",
+          "id": "t-genotype-index",
+          "role": "practice",
+          "item_ids": [
+            "k-alleles"
+          ],
+          "prompt": "For REF=G, ALT=A,T and diploid GT=1|2, which interpretation follows the supplied key?",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "Reference G on both copies, unphased."
+              },
+              {
+                "id": "b",
+                "text": "A then T in a phased genotype."
+              },
+              {
+                "id": "c",
+                "text": "G then A in a phased genotype."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [
+            "Map each index before interpreting the separator."
+          ],
+          "feedback": {
+            "correct": "1 indexes the first ALT, A; 2 indexes the second ALT, T. The | separator indicates phasing.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s022",
+              "locator": "Allele and Genotype: Definition sections"
+            },
+            {
+              "source_id": "s013",
+              "locator": "§1.6: GT genotype indexes and separators"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal."
+        }
+      ]
+    },
+    {
+      "id": "sec-variants",
+      "title": "Separate variant rows from reference-confidence blocks",
+      "item_ids": [
+        "k-vcf",
+        "k-gvcf"
+      ],
+      "required_section_ids": [
+        "sec-basics",
+        "sec-coordinates",
+        "sec-quality",
+        "sec-alleles"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "VCF begins with ##fileformat metadata and a #CHROM header. Its eight fixed columns are CHROM POS ID REF ALT QUAL FILTER INFO; optional FORMAT and sample columns follow. Tabs delimit fields. Missing values use . rather than an empty field. Ordinary POS is 1-based, with specific telomeric exceptions outside our examples. Header definitions declare INFO/FORMAT type and cardinality: Number=A means one value per ALT; Number=R means one per REF plus ALTs; Number=G depends on genotype combinations/ploidy. GT indexes must exist. FILTER=PASS means applied filters passed; . means filters were not applied, not automatic success. REF agreement requires the exact matching reference.",
+          "source_refs": [
+            {
+              "source_id": "s013",
+              "locator": "§§1.4–1.6: headers, typed cardinality, fields, genotype values"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Inspect a complete single-site eight-column variant file. The exact matching reference has chrA:4=A and chrA length 20.",
+          "steps": [
+            {
+              "name": "Recognize the grammar",
+              "text": "The fileformat metadata and #CHROM header identify VCF."
+            },
+            {
+              "name": "Check the selected fields",
+              "text": "POS 4 is in chrA length 20; REF A agrees with the supplied reference base; ALT C is a nucleotide allele."
+            },
+            {
+              "name": "Limit the inference",
+              "text": "The selected row/reference check passes; QUAL . is missing, not proof of certainty, and no biological variant truth is established."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s013",
+              "locator": "§§1.4–1.6: headers, typed cardinality, fields, genotype values"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "##fileformat=VCFv4.5\n##contig=<ID=chrA,length=20>\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\nchrA\t4\t.\tA\tC\t.\t.\t.\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "Complete synthetic VCF4.5 file; ordinary position; exact supplied reference base chrA:4=A."
+        },
+        {
+          "kind": "task",
+          "id": "t-variant-cardinality",
+          "role": "practice",
+          "item_ids": [
+            "k-vcf",
+            "k-alleles"
+          ],
+          "prompt": "The complete file declares AF as Number=A. Choose the most specific supported format/profile and judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "Ordinary VCF; it passes because GT=0/2 references an existing ALT."
+              },
+              {
+                "id": "b",
+                "text": "Ordinary VCF; AF violates its declared cardinality because two ALTs need two AF values."
+              },
+              {
+                "id": "c",
+                "text": "gVCF reference-confidence profile; every row containing a genotype is a reference block."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [
+            "Identify the record grammar before judging its fields.",
+            "Check only what the stated profile and available evidence let you check."
+          ],
+          "feedback": {
+            "correct": "The ordinary VCF has two alternate alleles C,G but only one AF value. GT 0/2 is in range; the INFO cardinality is the defect. A genotype column alone does not identify gVCF reference-confidence data.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s013",
+              "locator": "§§1.4–1.6: headers, typed cardinality, fields, genotype values"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "##fileformat=VCFv4.5\n##contig=<ID=chrA,length=20>\n##INFO=<ID=AF,Number=A,Type=Float,Description=\"Allele frequencies\">\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS1\nchrA\t4\t.\tA\tC,G\t.\tPASS\tAF=0.2\tGT\t0/2\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Ordinary variant profile; complete file; matching reference base chrA:4=A."
+        },
+        {
+          "kind": "explanation",
+          "text": "gVCF is a reference-confidence profile within VCF, not a separate unrelated text container. Ask for the most specific supported profile when both names are offered. In the common GATK-style VCF4.2 profile, non-variant blocks use symbolic ALT <NON_REF> and INFO END; an ordinary block covers POS through END inclusively. <NON_REF> represents possible unobserved alternate alleles, not literal DNA. The BP_RESOLUTION mode can report positions individually without END blocks. Coverage is judged against a declared expected territory; an all-sites VCF is not automatically suitable reference-confidence data. VCF4.5 also specifies a newer <*> / FORMAT LEN convention and retains legacy END/NON_REF compatibility; this lesson practices the stated common profile.",
+          "source_refs": [
+            {
+              "source_id": "s014",
+              "locator": "Types of GVCF; example header and records; non-variant blocks"
+            },
+            {
+              "source_id": "s013",
+              "locator": "§5.5: gVCF and backward-compatible END / NON_REF convention"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Interpret a complete synthetic reference-confidence teaching subset covering the expected territory chrA:7–10.",
+          "steps": [
+            {
+              "name": "Recognize the declared subtype",
+              "text": "The context declares the common GATK-style reference-confidence profile, including symbolic NON_REF and END."
+            },
+            {
+              "name": "Read the block",
+              "text": "POS 7 through END 10 includes four bases."
+            },
+            {
+              "name": "Check the stated scope",
+              "text": "The block covers exactly the supplied territory. This teaching subset is not an assertion of full producer metadata or joint-genotyping readiness."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s014",
+              "locator": "Types of GVCF; example header and records; non-variant blocks"
+            },
+            {
+              "source_id": "s013",
+              "locator": "§5.5: gVCF and backward-compatible END / NON_REF convention"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "##fileformat=VCFv4.2\n##contig=<ID=chrA,length=20>\n##ALT=<ID=NON_REF,Description=\"Represents any possible alternative allele\">\n##INFO=<ID=END,Number=1,Type=Integer,Description=\"End of reference block\">\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Read depth\">\n##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype quality\">\n##FORMAT=<ID=PL,Number=G,Type=Integer,Description=\"Phred-scaled genotype likelihoods\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS1\nchrA\t7\t.\tG\t<NON_REF>\t.\t.\tEND=10\tGT:DP:GQ:PL\t0/0:12:60:0,60,90\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "Complete synthetic teaching subset of common reference-confidence block rules; diploid sample; matching reference chrA:7=G."
+        },
+        {
+          "kind": "task",
+          "id": "t-reference-territory",
+          "role": "practice",
+          "item_ids": [
+            "k-gvcf",
+            "k-evidence",
+            "k-coordinates"
+          ],
+          "prompt": "The context explicitly declares the common reference-confidence profile. The expected territory is chrA:11–16; this is the complete block list, with no additional records. Choose the most specific supported profile and judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "gVCF; the block is locally consistent, but expected bases 15–16 are uncovered."
+              },
+              {
+                "id": "b",
+                "text": "Ordinary VCF only; NON_REF is a literal DNA allele."
+              },
+              {
+                "id": "c",
+                "text": "gVCF; any END value proves the full expected territory is covered."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "a"
+          },
+          "hints": [
+            "Compare the inclusive block with the explicitly expected territory."
+          ],
+          "feedback": {
+            "correct": "The reference-confidence block covers 11–14 inclusively, leaving 15–16 outside the complete block list. This is a coverage failure against the declared territory, not a claim that its serialized row is inherently malformed.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s014",
+              "locator": "Types of GVCF; example header and records; non-variant blocks"
+            },
+            {
+              "source_id": "s013",
+              "locator": "§5.5: gVCF and backward-compatible END / NON_REF convention"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "CHROM\tPOS\tREF\tALT\tINFO\tFORMAT\tS1\nchrA\t11\tC\t<NON_REF>\tEND=14\tGT:DP:GQ:PL\t0/0:12:60:0,60,90\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Inspection table extracted from a file with the metadata declarations shown in the worked example; complete block list, not raw full VCF; matching reference chrA:11=C."
+        },
+        {
+          "kind": "task",
+          "id": "t-block-count",
+          "role": "practice",
+          "item_ids": [
+            "k-gvcf",
+            "k-coordinates"
+          ],
+          "prompt": "In the declared common reference-confidence block profile, an ordinary non-variant block has POS=21 and END=25. How many bases does it cover?",
+          "response": {
+            "kind": "number",
+            "units": "bases"
+          },
+          "check": {
+            "kind": "number",
+            "expected": 5,
+            "absolute_tolerance": 0,
+            "units": "bases"
+          },
+          "hints": [
+            "Use the inclusive endpoint rule, not a half-open interval formula."
+          ],
+          "feedback": {
+            "correct": "END is inclusive in this profile: 25 − 21 + 1 = 5 bases.",
+            "otherwise": "Write the counting or subtraction step explicitly, then check its units."
+          },
+          "source_refs": [
+            {
+              "source_id": "s014",
+              "locator": "Types of GVCF; example header and records; non-variant blocks"
+            },
+            {
+              "source_id": "s013",
+              "locator": "§5.5: gVCF and backward-compatible END / NON_REF convention"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed."
+        }
+      ]
+    },
+    {
+      "id": "sec-graphs",
+      "title": "Read an oriented walk through sequence segments",
+      "item_ids": [
+        "k-sequence-graphs"
+      ],
+      "required_section_ids": [
+        "sec-basics"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "A sequence graph contains named segments and links between oriented segments. In our DNA graph profile, + traverses the stored sequence as written; − traverses its reverse complement. A path is an ordered walk, such as a+,b−, rather than a new sequence file. Link overlap 0M means adjacency with zero overlapping aligned bases; * means an unspecified overlap, not zero. Resolve referenced segment names when the whole graph is available; an excerpt may omit their definitions.",
+          "source_refs": [
+            {
+              "source_id": "s019",
+              "locator": "Segment, Link and Path records: names and orientations"
+            },
+            {
+              "source_id": "s022",
+              "locator": "DNA: Definition and complementary bases"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Segment b stores CCA. What sequence is read through b−?",
+          "steps": [
+            {
+              "name": "Keep the stored segment",
+              "text": "The stored b string remains CCA."
+            },
+            {
+              "name": "Apply reverse orientation",
+              "text": "Reverse to ACC and complement to TGG: this is the sequence encountered in the − traversal."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s019",
+              "locator": "Segment, Link and Path records: names and orientations"
+            },
+            {
+              "source_id": "s022",
+              "locator": "DNA: Definition and complementary bases"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic."
+        },
+        {
+          "kind": "task",
+          "id": "t-oriented-segment",
+          "role": "practice",
+          "item_ids": [
+            "k-sequence-graphs",
+            "k-sequence-notation"
+          ],
+          "prompt": "Segment b stores AGTC. What sequence is encountered in b−, and does this change the stored string?",
+          "response": {
+            "kind": "short-text"
+          },
+          "check": {
+            "kind": "rubric",
+            "criteria": [
+              "The encountered sequence is GACT, using reverse complementation.",
+              "The stored string remains AGTC; orientation changes traversal rather than editing the segment."
+            ],
+            "acceptable_alternatives": [
+              "Complement then reverse, or reverse then complement, gives the same traversal."
+            ],
+            "sample_answer": "b− is read as GACT. This reverse-complement traversal does not alter the stored AGTC sequence.",
+            "judgment": "self-check"
+          },
+          "hints": [
+            "Use the complement key from the fundamentals."
+          ],
+          "feedback": {
+            "correct": "Compare both your conclusion and your reason with the rubric. This is a self-check, not automatic verification of your reasoning.",
+            "otherwise": "Locate the criterion your answer missed, revisit its rule, and try a fresh instance later in the mixed cases."
+          },
+          "source_refs": [
+            {
+              "source_id": "s019",
+              "locator": "Segment, Link and Path records: names and orientations"
+            },
+            {
+              "source_id": "s022",
+              "locator": "DNA: Definition and complementary bases"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rule and earlier lesson sections are allowed."
+        }
+      ]
+    },
+    {
+      "id": "sec-graphfile",
+      "title": "Check graph records and their relationships",
+      "item_ids": [
+        "k-gfa"
+      ],
+      "required_section_ids": [
+        "sec-basics",
+        "sec-graphs"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "GFA1.0 is tab-separated graph text: H header with VN:Z:1.0, S segment records, L oriented links and P paths. A segment sequence may be * when unavailable; an optional LN:i:length records its length. Names use a shared namespace and references must resolve within a complete graph. A P record lists oriented segment names and either * for unspecified overlaps or one explicit overlap entry per transition: N segments require N−1 entries. Later GFA1 versions add W/J records, while GFA2 has a different grammar; do not judge every version using only this GFA1.0 profile.",
+          "source_refs": [
+            {
+              "source_id": "s019",
+              "locator": "GFA1.0 Header, Segment, Link, Path and shared namespace rules"
+            }
+          ]
+        },
+        {
+          "kind": "worked-example",
+          "prompt": "Inspect a complete tiny graph with one sequence unavailable.",
+          "steps": [
+            {
+              "name": "Recognize record types",
+              "text": "H declares version 1.0, S defines segments, L connects orientations and P names a path."
+            },
+            {
+              "name": "Resolve names and overlaps",
+              "text": "a and b are defined; a+,b+ has one transition and one 0M overlap."
+            },
+            {
+              "name": "Handle missing sequence correctly",
+              "text": "b’s * sequence is allowed, with LN:i:3 declaring a length. Selected relationship rules pass without claiming the missing bases are known."
+            }
+          ],
+          "source_refs": [
+            {
+              "source_id": "s019",
+              "locator": "GFA1.0 Header, Segment, Link, Path and shared namespace rules"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "snippet": "H\tVN:Z:1.0\nS\ta\tACG\nS\tb\t*\tLN:i:3\nL\ta\t+\tb\t+\t0M\nP\troute\ta+,b+\t0M\n",
+          "snippet_label": "Synthetic worked example",
+          "profile": "GFA1.0 DNA graph; complete file; selected name/path rules."
+        },
+        {
+          "kind": "task",
+          "id": "t-path-overlaps",
+          "role": "practice",
+          "item_ids": [
+            "k-gfa",
+            "k-sequence-graphs"
+          ],
+          "prompt": "Choose the most specific supported format and judgment for this complete graph.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "GFA1.0; it passes because every segment is defined."
+              },
+              {
+                "id": "b",
+                "text": "GFA1.0; its path supplies one explicit overlap for two transitions."
+              },
+              {
+                "id": "c",
+                "text": "SAM; it passes because 0M is a CIGAR expression."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [
+            "Count transitions between path segments, rather than counting segments."
+          ],
+          "feedback": {
+            "correct": "The H/S/L/P grammar identifies GFA1.0. Three path segments require two explicit overlap entries; one 0M is insufficient even though the names resolve and links exist.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s019",
+              "locator": "GFA1.0 Header, Segment, Link, Path and shared namespace rules"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "The supplied rules, earlier lesson sections, your notes, and linked primary documentation are allowed. Answer keys and feedback remain hidden until an attempt or explicit reveal.",
+          "snippet": "H\tVN:Z:1.0\nS\ta\tACG\nS\tb\tTT\nS\tc\tCAG\nL\ta\t+\tb\t+\t0M\nL\tb\t+\tc\t-\t0M\nP\troute\ta+,b+,c-\t0M\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete GFA1.0 graph; explicit path overlaps."
+        }
+      ]
+    },
+    {
+      "id": "sec-cases",
+      "title": "Apply the rules to fresh mixed cases",
+      "item_ids": [
+        "k-fasta",
+        "k-fastq",
+        "k-bed",
+        "k-bedpe",
+        "k-wig",
+        "k-gtf",
+        "k-gff3",
+        "k-sam",
+        "k-bam",
+        "k-cram",
+        "k-gvcf",
+        "k-vcf",
+        "k-gfa"
+      ],
+      "required_section_ids": [
+        "sec-sequences",
+        "sec-reads",
+        "sec-intervals",
+        "sec-signals",
+        "sec-annotations",
+        "sec-alignmentfiles",
+        "sec-variants",
+        "sec-graphfile"
+      ],
+      "blocks": [
+        {
+          "kind": "explanation",
+          "text": "These fresh cases mix the formats without naming the answer in their headings. Choose the most specific supported original format/profile and a justified bounded conclusion. gVCF is a subtype of VCF; prefer that subtype when the declared reference-confidence context supports it. For binary cases, the readable report is inspection evidence, not the original file’s text. Your notes, supplied keys and primary documentation are allowed resources. Answers, worked solutions and feedback remain hidden until an attempt or explicit reveal. Revealing a solution counts as assisted practice; section completion and self-checks do not certify independent performance.",
+          "source_refs": [
+            {
+              "source_id": "s014",
+              "locator": "Types of GVCF; example header and records; non-variant blocks"
+            },
+            {
+              "source_id": "s013",
+              "locator": "§5.5: gVCF and backward-compatible END / NON_REF convention"
+            },
+            {
+              "source_id": "s011",
+              "locator": "§§4.1–4.2: BAM binary encoding and BGZF"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION; view DESCRIPTION and output options"
+            },
+            {
+              "source_id": "s012",
+              "locator": "§6: file definition; §§8.4–8.5: reference-required flag and slices; §11: reference sequences"
+            },
+            {
+              "source_id": "s015",
+              "locator": "view: -T reference and full SAM output"
+            }
+          ]
+        },
+        {
+          "kind": "task",
+          "id": "case01",
+          "role": "application",
+          "item_ids": [
+            "k-sam"
+          ],
+          "prompt": "This is the complete text file. The operation-consumption key taught earlier is available. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "SAM; it passes because SEQ and QUAL both have eight symbols."
+              },
+              {
+                "id": "b",
+                "text": "BAM; text records certify the original binary stream."
+              },
+              {
+                "id": "c",
+                "text": "SAM; CIGAR requires nine query bases but SEQ contains eight."
+              },
+              {
+                "id": "d",
+                "text": "FASTQ; the quality string alone identifies the format."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "c"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "The header and eleven-field row identify SAM text. Query-consuming 2S+4M+3M totals nine bases; D consumes reference only. Both SEQ and QUAL have eight, so the CIGAR/SEQ consistency rule fails.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity.",
+            "patterns": [
+              {
+                "option_id": "a",
+                "when": "The learner selects option a.",
+                "text": "SEQ/QUAL agreement is necessary but does not replace CIGAR/SEQ agreement."
+              }
+            ]
+          },
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§1.4: FLAG, POS, MAPQ, CIGAR, SEQ and QUAL"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "@HD\tVN:1.6\tSO:unsorted\n@SQ\tSN:chrQ\tLN:100\nq7\t0\tchrQ\t9\t30\t2S4M1D3M\t*\t0\t0\tAACCGGTT\tIIIIIIII\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete ordinary mapped text record; Phred+33; chrQ length 100.",
+          "revisit_section_ids": [
+            "sec-alignments",
+            "sec-alignmentfiles"
+          ],
+          "title": "Case 01"
+        },
+        {
+          "kind": "task",
+          "id": "case02",
+          "role": "application",
+          "item_ids": [
+            "k-bedpe"
+          ],
+          "prompt": "This complete tab-separated file uses the six-required-field paired-endpoint rules taught earlier. Unknown endpoints use . and −1. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "BEDPE; it passes the stated minimal endpoint rules, with the second endpoint unknown."
+              },
+              {
+                "id": "b",
+                "text": "BED; it is invalid solely because . is not a score."
+              },
+              {
+                "id": "c",
+                "text": "BEDPE; it is invalid because every file requires exactly ten fields."
+              },
+              {
+                "id": "d",
+                "text": "WIG; negative endpoints are real-valued measurements."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "a"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "Two chromosome/start/end triples identify BEDPE under the declared profile. The first interval is ordered and fits chrA length 20; ./−1/−1 is the allowed unknown endpoint. Six fields are sufficient here, but unknown context cannot verify the second endpoint’s biological location.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s006",
+              "locator": "BEDPE format: required six fields, optional fields, unknown endpoints"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "chrA\t4\t8\t.\t-1\t-1\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete minimal paired-endpoint file; chrA length 20; allowed unknown second endpoint.",
+          "revisit_section_ids": [
+            "sec-intervals"
+          ],
+          "title": "Case 02"
+        },
+        {
+          "kind": "task",
+          "id": "case03",
+          "role": "application",
+          "item_ids": [
+            "k-fasta"
+          ],
+          "prompt": "The entire file is shown. It is declared to contain DNA, and its allowed alphabet is A/C/G/T/N. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "FASTQ; it is invalid because it lacks a + separator."
+              },
+              {
+                "id": "b",
+                "text": "FASTA; X violates the explicitly declared DNA alphabet."
+              },
+              {
+                "id": "c",
+                "text": "FASTA; it passes because any letter is allowed in every molecule profile."
+              },
+              {
+                "id": "d",
+                "text": "GFA; any named sequence is a graph segment record."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "The > header and sequence-only body support FASTA recognition. T/G/C/A are allowed, but X is outside the declared A/C/G/T/N DNA alphabet. This is a profile/alphabet violation; a familiar record structure does not override the declared symbol rules.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s001",
+              "locator": "FASTA Files and DESCRIPTION: definition lines and sequence records"
+            },
+            {
+              "source_id": "s002",
+              "locator": "Nucleotide sequence paragraphs: IUPAC nucleotide symbols and ambiguity codes"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": ">dna_new\nTGCAX\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete generic DNA sequence record; declared alphabet A/C/G/T/N; selected structure/alphabet rules.",
+          "revisit_section_ids": [
+            "sec-sequences"
+          ],
+          "title": "Case 03"
+        },
+        {
+          "kind": "task",
+          "id": "case04",
+          "role": "application",
+          "item_ids": [
+            "k-gvcf"
+          ],
+          "prompt": "The context declares a diploid single-sample reference-confidence block profile using symbolic NON_REF and inclusive END. This is the complete synthetic teaching subset, and the exact reference has chrQ:31=A. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "Ordinary VCF only; symbolic alleles are always literal base strings."
+              },
+              {
+                "id": "b",
+                "text": "gVCF; it passes because its metadata declares END."
+              },
+              {
+                "id": "c",
+                "text": "gVCF; its ordinary block ends before it starts."
+              },
+              {
+                "id": "d",
+                "text": "GFF3; END is a required parent attribute."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "c"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "The declared reference-confidence context supports the gVCF subtype within VCF. POS 31 exceeds inclusive END 29, so this ordinary block is inconsistent. Correct-looking headers and a legal symbolic allele do not repair its endpoints.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s014",
+              "locator": "Types of GVCF; example header and records; non-variant blocks"
+            },
+            {
+              "source_id": "s013",
+              "locator": "§5.5: gVCF and backward-compatible END / NON_REF convention"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "##fileformat=VCFv4.2\n##contig=<ID=chrQ,length=100>\n##ALT=<ID=NON_REF,Description=\"Represents any possible alternative allele\">\n##INFO=<ID=END,Number=1,Type=Integer,Description=\"End of reference block\">\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Read depth\">\n##FORMAT=<ID=GQ,Number=1,Type=Integer,Description=\"Genotype quality\">\n##FORMAT=<ID=PL,Number=G,Type=Integer,Description=\"Phred-scaled genotype likelihoods\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS1\nchrQ\t31\t.\tA\t<NON_REF>\t.\t.\tEND=29\tGT:DP:GQ:PL\t0/0:10:40:0,40,70\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Common legacy reference-confidence teaching subset; ordinary non-circular block; complete file.",
+          "revisit_section_ids": [
+            "sec-variants",
+            "sec-coordinates"
+          ],
+          "title": "Case 04"
+        },
+        {
+          "kind": "task",
+          "id": "case05",
+          "role": "application",
+          "item_ids": [
+            "k-wig"
+          ],
+          "prompt": "The complete file is intended as data-only conversion input, with numerically ordered signal positions required. chrQ has length 100. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "BED; the two numbers are half-open interval endpoints."
+              },
+              {
+                "id": "b",
+                "text": "WIG; its listed positions are out of numeric order."
+              },
+              {
+                "id": "c",
+                "text": "WIG; it is invalid only because there is no custom-track header."
+              },
+              {
+                "id": "d",
+                "text": "WIG; it passes because both measurements are positive."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "The variableStep declaration identifies WIG. The positions decrease from 14 to 13, violating this ordered-input rule. In the declared data-only conversion profile, omitting a custom-track line is appropriate.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s007",
+              "locator": "General structure; variableStep; fixedStep; Data values; 1-start coordinates"
+            },
+            {
+              "source_id": "s021",
+              "locator": "bigWig: input preparation"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "variableStep chrom=chrQ span=2\n14 1.5\n13 2.0\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete data-only signal file; span=2 and numeric position-order rule explicitly declared.",
+          "revisit_section_ids": [
+            "sec-signals"
+          ],
+          "title": "Case 05"
+        },
+        {
+          "kind": "task",
+          "id": "case06",
+          "role": "application",
+          "item_ids": [
+            "k-cram"
+          ],
+          "prompt": "This is a synthetic inspection report of the original binary file, not text contained in that file. No matching external reference is locally available or retrievable in this check. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "CRAM; restoration remains unassessed with the required reference, so intrinsic corruption is not established."
+              },
+              {
+                "id": "b",
+                "text": "CRAM; every missing external reference makes the original file invalid."
+              },
+              {
+                "id": "c",
+                "text": "BAM; all binary alignments have the same file definition."
+              },
+              {
+                "id": "d",
+                "text": "SAM; the readable report establishes a plain-text original."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "a"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "The file definition supports CRAM identification. For this reference-required slice, unavailable context prevents full restoration; obtain the exact reference and inspect all records before deciding intrinsic integrity. CRAM also permits embedded/reference-free modes, so this condition is not universal.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s012",
+              "locator": "§6: file definition; §§8.4–8.5: reference-required flag and slices; §11: reference sequences"
+            },
+            {
+              "source_id": "s015",
+              "locator": "view: -T reference and full SAM output"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "File definition begins: CRAM\nVersion bytes: 03 01\nSlice reports external reference required: yes\nFull sequence restoration: stopped, unable to retrieve reference\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Synthetic binary inspection report; reference-required mode and missing context.",
+          "revisit_section_ids": [
+            "sec-alignmentfiles",
+            "sec-basics"
+          ],
+          "title": "Case 06"
+        },
+        {
+          "kind": "task",
+          "id": "case07",
+          "role": "application",
+          "item_ids": [
+            "k-gtf"
+          ],
+          "prompt": "The entire minimal annotation file is shown. Apply the quoted-attribute gene-row rules taught earlier, rather than a full release’s additional metadata requirements. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "GFF3; it passes because quoted attributes are mandatory."
+              },
+              {
+                "id": "b",
+                "text": "GTF; it is invalid because every gene row must have transcript_id."
+              },
+              {
+                "id": "c",
+                "text": "GTF; it passes the selected gene-row rules and supplied coordinate bounds."
+              },
+              {
+                "id": "d",
+                "text": "BED; nine fields prove the half-open convention."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "c"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "Nine fields plus quoted gene_id syntax support GTF. In this declared Ensembl-style minimal profile, a gene row need not have transcript_id. The 1-based inclusive interval 7–12 fits chrQ length 100; full-release conformance and biological truth are separate.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s008",
+              "locator": "Fields and Sample GTF output"
+            },
+            {
+              "source_id": "s009",
+              "locator": "Table A; B.1 mandatory attributes and the gene-row exception"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "chrQ\tlesson\tgene\t7\t12\t.\t+\t.\tgene_id \"gx\";\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete minimal quoted-attribute gene annotation; chrQ length 100; ordinary interval.",
+          "revisit_section_ids": [
+            "sec-annotations"
+          ],
+          "title": "Case 07"
+        },
+        {
+          "kind": "task",
+          "id": "case08",
+          "role": "application",
+          "item_ids": [
+            "k-bam"
+          ],
+          "prompt": "This is a synthetic report of a binary file. Only the stated inspections occurred; no alignment records have been fully restored. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "BAM; its type and limited header/EOF checks are supported, but whole-file integrity remains unverified."
+              },
+              {
+                "id": "b",
+                "text": "BAM; quickcheck exit 0 proves there is no corruption in any middle record."
+              },
+              {
+                "id": "c",
+                "text": "SAM; a readable header means the original container is text."
+              },
+              {
+                "id": "d",
+                "text": "CRAM; every compressed alignment uses this decompressed magic."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "a"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "The BGZF container and decompressed BAM magic support BAM recognition. quickcheck skips the middle, so its successful limited result cannot certify all records. A full sequential restoration and required semantic/context checks are the next steps.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity.",
+            "patterns": [
+              {
+                "option_id": "b",
+                "when": "The learner selects option b.",
+                "text": "A beginning/EOF check cannot certify bytes it skipped."
+              }
+            ]
+          },
+          "source_refs": [
+            {
+              "source_id": "s011",
+              "locator": "§§4.1–4.2: BAM binary encoding and BGZF"
+            },
+            {
+              "source_id": "s015",
+              "locator": "quickcheck DESCRIPTION; view DESCRIPTION and output options"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "Outer container: BGZF\nDecompressed stream begins: BAM\\x01\nquickcheck: readable header and expected EOF; exit 0\nFull sequential restoration: not run\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Synthetic binary inspection; no full-file record scan.",
+          "revisit_section_ids": [
+            "sec-alignmentfiles"
+          ],
+          "title": "Case 08"
+        },
+        {
+          "kind": "task",
+          "id": "case09",
+          "role": "application",
+          "item_ids": [
+            "k-fastq"
+          ],
+          "prompt": "The entire modern unwrapped DNA read record is shown. Allowed bases are A/C/G/T/N; qualities use printable ASCII 33–126 under Phred+33. + and @ are included in that quality range. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "FASTA; all sequence records may start with @."
+              },
+              {
+                "id": "b",
+                "text": "FASTQ; it is invalid because quality strings cannot contain @ or +."
+              },
+              {
+                "id": "c",
+                "text": "FASTQ; it passes the stated four-line/alphabet/length checks, with varied quality confidence."
+              },
+              {
+                "id": "d",
+                "text": "FASTQ; any Q0 symbol makes the serialization invalid."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "c"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "The four-line layout identifies FASTQ; five sequence symbols match five legal quality symbols. N is allowed ambiguity, and +/@/! can be qualities. Low confidence is not malformed syntax, nor do these checks prove the bases are correct.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s003",
+              "locator": "FASTQ DEFINITION; SANGER FASTQ FORMAT; historical encodings"
+            },
+            {
+              "source_id": "s004",
+              "locator": "FASTQ Files / File Format: modern four-line profile"
+            },
+            {
+              "source_id": "s003",
+              "locator": "SANGER FASTQ FORMAT and Table 1: Phred+33 encoding"
+            },
+            {
+              "source_id": "s004",
+              "locator": "FASTQ Files / File Format"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "@newread\nACNGT\n+\nI?+@!\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete modern unwrapped DNA read; declared encoding and alphabet.",
+          "revisit_section_ids": [
+            "sec-reads",
+            "sec-quality"
+          ],
+          "title": "Case 09"
+        },
+        {
+          "kind": "task",
+          "id": "case10",
+          "role": "application",
+          "item_ids": [
+            "k-gfa"
+          ],
+          "prompt": "This is the complete version-1.0 graph; no segment declarations are omitted. Apply the name-resolution and missing-sequence rules taught earlier. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "GFA1.0; it passes because the link’s overlap is 0M."
+              },
+              {
+                "id": "b",
+                "text": "GFA1.0; the link references undefined segment gamma."
+              },
+              {
+                "id": "c",
+                "text": "GFA1.0; it is invalid solely because beta’s sequence is *."
+              },
+              {
+                "id": "d",
+                "text": "SAM; every L row is an alignment record."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "b"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "H/S/L records support GFA1.0. In the complete graph, gamma is undefined, so the link cannot resolve. beta’s unavailable sequence * with a declared length is allowed and is not the defect.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s019",
+              "locator": "GFA1.0 Header, Segment, Link, Path and shared namespace rules"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "H\tVN:Z:1.0\nS\talpha\tATGG\nS\tbeta\t*\tLN:i:4\nL\talpha\t+\tgamma\t+\t0M\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete synthetic graph; reference names must resolve.",
+          "revisit_section_ids": [
+            "sec-graphfile",
+            "sec-graphs"
+          ],
+          "title": "Case 10"
+        },
+        {
+          "kind": "task",
+          "id": "case11",
+          "role": "application",
+          "item_ids": [
+            "k-vcf"
+          ],
+          "prompt": "This entire diploid variant file is shown; the exact reference has chrQ:18=A. Use the supplied allele-index key. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "Ordinary VCF; it passes because REF agrees with the reference."
+              },
+              {
+                "id": "b",
+                "text": "gVCF; every missing QUAL means a reference-confidence block."
+              },
+              {
+                "id": "c",
+                "text": "Ordinary VCF; genotype index 3 refers to an ALT that is not listed."
+              },
+              {
+                "id": "d",
+                "text": "GTF; its sample field supplies a transcript identifier."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "c"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "This is ordinary VCF. With REF A and two ALTs C,G, allowed indexes are 0,1,2; 3 is out of range. Correct reference agreement does not repair the genotype field.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s013",
+              "locator": "§§1.4–1.6: headers, typed cardinality, fields, genotype values"
+            },
+            {
+              "source_id": "s022",
+              "locator": "Allele and Genotype: Definition sections"
+            },
+            {
+              "source_id": "s013",
+              "locator": "§1.6: GT genotype indexes and separators"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "##fileformat=VCFv4.5\n##contig=<ID=chrQ,length=100>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS1\nchrQ\t18\t.\tA\tC,G\t.\tPASS\t.\tGT\t0/3\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete ordinary variant file; diploid sample; matching reference context supplied.",
+          "revisit_section_ids": [
+            "sec-variants",
+            "sec-alleles"
+          ],
+          "title": "Case 11"
+        },
+        {
+          "kind": "task",
+          "id": "case12",
+          "role": "application",
+          "item_ids": [
+            "k-gff3"
+          ],
+          "prompt": "This entire non-circular annotation is shown, and all named parent relationships resolve. Apply the feature-specific phase rule. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "GFF3; it passes because the CDS length is nine, a multiple of three."
+              },
+              {
+                "id": "b",
+                "text": "GTF; every nine-column annotation has quoted attributes."
+              },
+              {
+                "id": "c",
+                "text": "GFF3; its CDS row lacks a required phase 0, 1 or 2."
+              },
+              {
+                "id": "d",
+                "text": "GFF3; every leaf row is invalid unless it has its own ID."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "c"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "The directive and tag=value attributes identify GFF3. The CDS phase is ., but CDS specifically requires 0,1 or 2. Coordinate arithmetic cannot replace phase; leaf ID omission is not the issue.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s010",
+              "locator": "Columns 4–9; ID and Parent attributes; Directives; Canonical Gene example"
+            },
+            {
+              "source_id": "s022",
+              "locator": "Exon and Codon: Definition sections"
+            },
+            {
+              "source_id": "s023",
+              "locator": "Exons and introns; cDNA and protein sequences"
+            },
+            {
+              "source_id": "s010",
+              "locator": "Column 8: CDS phase and strand-relative 5′ end"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "##gff-version 3\nchrQ\tlesson\tgene\t10\t40\t.\t+\t.\tID=gx\nchrQ\tlesson\tmRNA\t10\t40\t.\t+\t.\tID=tx;Parent=gx\nchrQ\tlesson\tCDS\t20\t28\t.\t+\t.\tParent=tx\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete ordinary annotation; chrQ length 100; CDS phase rules apply.",
+          "revisit_section_ids": [
+            "sec-annotations",
+            "sec-features"
+          ],
+          "title": "Case 12"
+        },
+        {
+          "kind": "task",
+          "id": "case13",
+          "role": "application",
+          "item_ids": [
+            "k-bed"
+          ],
+          "prompt": "The complete file follows the canonical single-interval score rules taught earlier. Use those specification rules even if a downstream parser is more permissive. Choose the most specific supported original format/profile and the bounded judgment.",
+          "response": {
+            "kind": "choice",
+            "options": [
+              {
+                "id": "a",
+                "text": "BED; it passes because a permissive interval tool might read it."
+              },
+              {
+                "id": "b",
+                "text": "BEDPE; its six fields describe two chromosome/start/end triples."
+              },
+              {
+                "id": "c",
+                "text": "BED; its score 2000 violates the canonical 0–1000 range."
+              },
+              {
+                "id": "d",
+                "text": "WIG; every positive score is a signal measurement row."
+              }
+            ]
+          },
+          "check": {
+            "kind": "choice",
+            "correct_option_id": "c"
+          },
+          "hints": [],
+          "feedback": {
+            "correct": "The chromosome/start/end/name/score/strand grammar supports BED6. Its coordinates fit chrQ length 100, but score 2000 exceeds the canonical BED range. Consumer acceptance and specification conformance are different judgments.",
+            "otherwise": "Recheck the declared rules and the scope of the evidence. A familiar signature alone cannot establish whole-file or biological validity."
+          },
+          "source_refs": [
+            {
+              "source_id": "s005",
+              "locator": "§§1.3, 1.5–1.10 and Table 2: fields, coordinates, score, blocks"
+            },
+            {
+              "source_id": "s006",
+              "locator": "BED format: permissive tool-specific score handling"
+            }
+          ],
+          "origin": "Invented teaching instance; all sequences, coordinates, values, identifiers, and inspection reports are synthetic.",
+          "resources": "Your own notes, the supplied context/keys, and linked primary documentation are allowed; worked solutions, answer keys and feedback are hidden before an attempt. Opening documentation is permitted resource use; revealing a solution is assisted practice and must be recorded separately.",
+          "snippet": "chrQ\t6\t12\tpeakQ\t2000\t+\n",
+          "snippet_label": "Synthetic evidence",
+          "profile": "Complete canonical single-interval file; chrQ length 100; ordinary interval.",
+          "revisit_section_ids": [
+            "sec-intervals"
+          ],
+          "title": "Case 13"
+        }
+      ]
+    }
+  ],
+  "navigation": {
+    "completion": "manual",
+    "reopen": true,
+    "gating": "none"
+  },
+  "verification_notes": [
+    "The full thirteen-format objective is preserved. All data, tiny files and inspection reports are synthetic. Complete-file labels mean no rows are omitted from that fixture, not certification of full producer metadata or biological accuracy.",
+    "Read foundations before using their rules. The ordered route introduces ordinary coordinates, declared quality decoding, feature phase, CIGAR consumption, allele indexes and graph orientation before dependent tasks; navigation remains open.",
+    "Each format has instruction, a worked example, active practice and a fresh shuffled application. Follow-up instances fade support; the final cases do not automatically expose format names through titles, item IDs, profile headings or source titles.",
+    "Documentation and supplied keys are allowed resources. Opening an answer or worked solution is assisted practice and must be tracked separately. Short-text comparisons use transparent self-check rubrics; they are never automatically verified successes.",
+    "Profile boundaries: generic DNA/protein FASTA versus NCBI submission/faidx indexability; modern four-line Phred+33 versus historical wrapped FASTQ; canonical BEDv1 versus permissive consumer dialects; bedtools BEDPE; data-only WIG conversion input versus custom tracks; minimal Ensembl-style GTF versus full GENCODE metadata; GFF3 v1.26; selected SAM/BAM1.6 and CRAM3.0/3.1 rules; ordinary VCF4.5; common legacy GATK-style VCF4.2 gVCF teaching subsets; GFA1.0.",
+    "Validity is scoped: local syntax/fields, relationships in complete files, container restoration, exact reference/context, expected coverage and consumer compatibility are separate checks. No filename, signature, parser success, quickcheck result or valid excerpt is presented as whole-file or biological proof.",
+    "Exact tab/newline snippets are canonical authored content. Optional snippet/snippet_label/profile/title fields support readable presentation without raw HTML. Visual data fixes the authored coordinate and operator relationships; it does not authorize inventing additional scientific content.",
+    "Tool commands are source-backed guidance and were not executed on the synthetic fixtures. Record installed versions, inputs, references, exit status/stderr and validation policy when applying them to real files. samtools view -h means full unfiltered restoration here; -H and optimized -c are weaker evidence.",
+    "Mechanical artifact consistency and numeric/count derivations passed. An independent blind reviewer solved all 44 tasks with no answer-key mismatches and confirmed semantic agreement with all five self-check rubrics. Review identified wording ambiguity about a minus-strand codon coordinate; the explanation, worked example, task and rubric now explicitly ask for the codon’s 5′ genomic coordinate. HTML behavior still requires separate verification."
+  ]
+}

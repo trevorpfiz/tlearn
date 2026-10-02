@@ -27,7 +27,7 @@ Use enough cases to cover the real risks; do not generate a fixed quota or an ex
 
 **Lesson:** run `verify_artifacts.py <project> --stage lesson`; review foundation teaching order and actual target coverage; solve tasks independently; challenge answer choices, precision, units, and rubrics; inspect source qualifications and solution cues. Section/block associations are declarations, not proof of instructional adequacy. The script does not execute embedded code or scientific models.
 
-**HTML:** run saved browser recipes against the actual delivery file. Test both accepted and rejected responses, explicit help/reveal, feedback, navigation, completion/reopening, visuals, and promised offline behavior. Check content against the saved lesson and graph. Record real interaction results; no HTML stage is currently established by the artifact checker.
+**HTML:** run the builder's [browser recipes](../../../engineering/build-learning-tool/references/browser-checks.md) against the actual `dist/index.html`, copied alone for direct-file/offline checks and also served over HTTP. Test both accepted and rejected responses, explicit help/reveal, feedback, navigation, completion/reopening, visuals, and storage failure. Check content against the saved lesson and graph. Record real interaction results; the artifact checker does not establish an HTML stage.
 
 ## Example expectation
 

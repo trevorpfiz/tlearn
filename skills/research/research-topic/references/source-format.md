@@ -24,7 +24,7 @@ learning-project/
 │       └── notes.md             # Notes and link; original not cached
 ├── knowledge.json              # Authored by the mapping stage
 ├── lesson.json                 # Authored by the learning stage
-└── index.html                  # Authored by the HTML stage
+└── dist/index.html             # Portable output from the HTML stage
 ```
 
 Create only files used by the project. An HTML original may replace the PDF; a browser-reader transcript belongs in `extracted.md`, with its limitations, rather than being labeled an original. Keep raw acquisition, derived extraction, and agent notes distinguishable. Figure assets are conditional and retain their source and reuse terms.

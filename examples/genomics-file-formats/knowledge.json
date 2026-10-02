@@ -1,0 +1,1498 @@
+{
+  "version": 1,
+  "revision": 1,
+  "status": "ready",
+  "objective": "Demonstrate understanding of different data formats and types by recognizing each file type and assessing its validity. Data formats to include FASTA, FASTQ, BED, BEDPE, WIG, GTF/GFF3, SAM, BAM, CRAM, gVCF, VCF, and GFA.",
+  "baseline": [
+    "everyday language",
+    "basic arithmetic"
+  ],
+  "scope_note": "Introductory operational recognition and justified validity assessment for all 13 named formats, with GTF and GFF3 as distinct targets. Teach necessary sequence, read/reference, record, coordinate, quality, feature, alignment, allele, graph and container foundations. Conditions always state excerpt versus complete file, version/producer profile, supplied lookup keys, available reference context and tool-report scope. Main examples use genomic DNA FASTA while recognizing protein FASTA; modern unwrapped Phred+33 FASTQ with wrapping/encoding boundaries; GA4GH BEDv1 and explicit consumer differences; bedtools BEDPE; both UCSC WIG modes; Ensembl-style GTF; GFF3 specification 1.26; SAM/BAM1.6; CRAM3.0/3.1; version-declared simple VCF; common GATK VCF4.2 <NON_REF>/END gVCF with newer VCF4.5 representation boundaries; GFA1.0 H/S/L/P with later-version boundaries. Complex permitted constructs are identified as documentation/context cases, not incorrectly rejected by a simplified rule. This route does not require programming, alignment algorithms, probability/logarithm derivations, a full analysis pipeline or memorization of every specification field. Selecting/interpreting bounded checks is in scope; executing production validators and establishing biological correctness of unknown files require additional evidence. Required edges describe the component operations of this chosen instructional route, not measured learner mastery or an empirically validated KST space.",
+  "target_item_ids": [
+    "k-fasta",
+    "k-fastq",
+    "k-bed",
+    "k-bedpe",
+    "k-wig",
+    "k-gtf",
+    "k-gff3",
+    "k-sam",
+    "k-bam",
+    "k-cram",
+    "k-gvcf",
+    "k-vcf",
+    "k-gfa"
+  ],
+  "items": [
+    {
+      "id": "k-records",
+      "label": "Read structured records",
+      "capability": "Given a field key and a labeled text example, distinguish headers from data, split records using the stated delimiter, identify named fields and identifiers, and distinguish a missing-value marker from an empty or malformed field.",
+      "entry_reason": "Instruction introduces a record as one structured entry and a header as its key using familiar labeled lists; only reading and counting are assumed.",
+      "source_refs": [
+        {
+          "source_id": "s001",
+          "locator": "FASTA Files"
+        },
+        {
+          "source_id": "s005",
+          "locator": "§§1.3 and 1.5: terminology and BED fields"
+        },
+        {
+          "source_id": "s013",
+          "locator": "§§1.5–1.6: header line and data lines"
+        }
+      ]
+    },
+    {
+      "id": "k-sequence-notation",
+      "label": "Sequence letters and orientation",
+      "capability": "Given a declared molecule/alphabet profile and supplied ambiguity/complement key, count sequence symbols, interpret A/C/G/T and N in DNA, distinguish nucleotide from protein examples, and find the reverse complement of a short DNA sequence.",
+      "entry_reason": "Instruction introduces sequences as ordered letters and provides the complement key; reading, reversal of a short list, and counting use the baseline.",
+      "notes": "An alphabet-compatible short string does not uniquely determine DNA versus protein. Use the declared profile; N denotes an ambiguous nucleotide, not an absent tabular value.",
+      "source_refs": [
+        {
+          "source_id": "s022",
+          "locator": "Definition sections: Deoxyribonucleic Acid (DNA), Protein"
+        },
+        {
+          "source_id": "s002",
+          "locator": "Nucleotide sequence paragraph"
+        },
+        {
+          "source_id": "s024",
+          "locator": "Definition-line guidance and Sample Protein FASTA"
+        },
+        {
+          "source_id": "s019",
+          "locator": "L (Link) line: FromOrient and ToOrient"
+        }
+      ]
+    },
+    {
+      "id": "k-containers",
+      "label": "Text, compression and indexes",
+      "capability": "Given a labeled storage/decoding description, distinguish plain sequence or tabular text, compressed text, binary alignment containers and indexes; explain why a filename, magic bytes, decoded preview or index establishes only the stated kind of evidence.",
+      "entry_reason": "Instruction introduces storage, decoding and indexes with a document/container analogy; no programming, compression algorithm or command-line experience is assumed.",
+      "source_refs": [
+        {
+          "source_id": "s001",
+          "locator": "DESCRIPTION: index fields"
+        },
+        {
+          "source_id": "s011",
+          "locator": "§§4.1–4.2: BAM and BGZF"
+        },
+        {
+          "source_id": "s012",
+          "locator": "§6 File definition; §12 Indexing"
+        }
+      ]
+    },
+    {
+      "id": "k-evidence",
+      "label": "Scope a validity judgment",
+      "capability": "Given a stated version/profile and an excerpt, complete fixture or check report, separate record-level violations, whole-file consistency/decoding, reference or producer context, and consumer policy; conclude 'violation found', 'passes the stated checks', or 'insufficient evidence' with the missing evidence named.",
+      "entry_reason": "Instruction first contrasts checking one entry with checking a whole document and with checking its claims; later format branches supply the domain-specific rules.",
+      "notes": "The three conclusions describe available evidence. A passed parser or scoped validator does not prove biological correctness; command examples are guidance unless an actual execution report is supplied.",
+      "source_refs": [
+        {
+          "source_id": "s015",
+          "locator": "quickcheck DESCRIPTION; view DESCRIPTION and -h/-T options"
+        },
+        {
+          "source_id": "s016",
+          "locator": "ValidateSamFile overview; SAM Differences in Picard"
+        },
+        {
+          "source_id": "s017",
+          "locator": "Overview; Usage examples; --validate-GVCF"
+        },
+        {
+          "source_id": "s018",
+          "locator": "DESCRIPTION: -typecheck and -xrfcheck"
+        },
+        {
+          "source_id": "s021",
+          "locator": "bigBed Creating a bigBed track/Troubleshooting; bigWig Creating a bigWig track"
+        }
+      ]
+    },
+    {
+      "id": "k-signal-values",
+      "label": "Positioned numeric signals",
+      "capability": "Given a declaration and short numeric series, distinguish positions from measured values, compute successive positions using start and step, apply span as a count, and distinguish an omitted measurement from zero.",
+      "entry_reason": "The sequence is a familiar table of positions and numbers; supplied start/step/span definitions require only counting and basic arithmetic.",
+      "source_refs": [
+        {
+          "source_id": "s007",
+          "locator": "variableStep format; fixedStep format; Data values"
+        }
+      ]
+    },
+    {
+      "id": "k-sequence-roles",
+      "label": "Reads and named references",
+      "capability": "Given a small sequencing example, distinguish a read from a reference sequence, identify the named sequence on which a position is defined, and explain why reference/assembly identity and supplied length are needed for contextual checks.",
+      "source_refs": [
+        {
+          "source_id": "s022",
+          "locator": "Definition sections: DNA Sequencing, Human Genome Reference Sequence, Chromosome"
+        },
+        {
+          "source_id": "s004",
+          "locator": "FASTQ Files: File Format"
+        },
+        {
+          "source_id": "s011",
+          "locator": "§1.2 Terminologies; §1.3 @SQ SN and LN"
+        },
+        {
+          "source_id": "s006",
+          "locator": "Genome file format"
+        }
+      ]
+    },
+    {
+      "id": "k-coordinates",
+      "label": "Coordinate conventions",
+      "capability": "Given a named reference and an explicitly stated convention, locate a feature using zero-based half-open or one-based inclusive coordinates, calculate covered length, convert an ordinary nonempty interval between conventions, and distinguish a bounds violation from unavailable reference-length evidence.",
+      "notes": "Ordinary interval conversions are the starting route. Zero-length BED sites, unknown BEDPE sentinels and circular or telomeric exceptions require their explicitly declared format rules.",
+      "source_refs": [
+        {
+          "source_id": "s005",
+          "locator": "§1.6 Coordinates"
+        },
+        {
+          "source_id": "s007",
+          "locator": "1-start coordinate system"
+        },
+        {
+          "source_id": "s008",
+          "locator": "Fields: start and end"
+        },
+        {
+          "source_id": "s006",
+          "locator": "Genome file format"
+        }
+      ]
+    },
+    {
+      "id": "k-quality",
+      "label": "Quality values and their referents",
+      "capability": "Given a declared Phred offset and character-value table, decode per-base quality characters, match one character to each base, distinguish base quality from mapping and variant/genotype confidence, and identify unavailable quality rather than treating it as maximal confidence.",
+      "notes": "Use lookup and subtraction with an explicit encoding key; logarithms and probability derivations are not prerequisites. Low confidence is a data-quality issue, not by itself malformed serialization.",
+      "source_refs": [
+        {
+          "source_id": "s003",
+          "locator": "SANGER FASTQ FORMAT; Table 1; historical Solexa/Illumina sections"
+        },
+        {
+          "source_id": "s004",
+          "locator": "FASTQ Files: File Format"
+        },
+        {
+          "source_id": "s011",
+          "locator": "§1.4 MAPQ and QUAL"
+        },
+        {
+          "source_id": "s013",
+          "locator": "§1.6 QUAL and genotype fields"
+        },
+        {
+          "source_id": "s014",
+          "locator": "Example header: genotype-quality/reference-confidence metadata"
+        }
+      ]
+    },
+    {
+      "id": "k-features",
+      "label": "Annotation features and relationships",
+      "capability": "Given a small labeled gene model and feature key, distinguish gene, transcript, exon and CDS, follow a feature's parent relationship, and identify the strand-relative 5′ end used by a supplied CDS-phase rule; explain why an exon need not be wholly protein-coding.",
+      "source_refs": [
+        {
+          "source_id": "s022",
+          "locator": "Definition sections: Exon, Protein, Codon"
+        },
+        {
+          "source_id": "s023",
+          "locator": "Transcript sequence; Exons and Introns; cDNA and protein"
+        },
+        {
+          "source_id": "s010",
+          "locator": "Column 8: phase; Column 9: Parent; The Canonical Gene"
+        }
+      ]
+    },
+    {
+      "id": "k-alignments",
+      "label": "Read alignment consistency",
+      "capability": "Given a mapped or unmapped read example with a FLAG/CIGAR key, identify read/reference roles, interpret the selected flag and missing markers, sum query- and reference-consuming CIGAR operations, check sequence/quality lengths, and relate an ordinary mapped span to its reference position.",
+      "notes": "The key supplies bit meanings and operation consumption; binary arithmetic and alignment algorithms are not assumed. M does not distinguish a match from a mismatch; unmapped and unavailable-field cases use their stated rules.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§1.2 Terminologies; §1.4 FLAG, POS, CIGAR, SEQ and QUAL"
+        }
+      ]
+    },
+    {
+      "id": "k-alleles",
+      "label": "Alleles and genotype indexes",
+      "capability": "Given a reference/alternate allele list and a genotype key, identify REF and each ALT, decode indexes 0/1/2 and phased/unphased separators, distinguish missing alleles from homozygous reference, and state what exact-reference evidence would establish REF agreement.",
+      "notes": "Initial examples use simple substitutions and explicitly stated ploidy; diploidy is not a rule for every sample or locus.",
+      "source_refs": [
+        {
+          "source_id": "s022",
+          "locator": "Definition sections: Allele, Genotype"
+        },
+        {
+          "source_id": "s013",
+          "locator": "§1.6 REF, ALT and genotype fields"
+        },
+        {
+          "source_id": "s017",
+          "locator": "Overview: REF validation"
+        }
+      ]
+    },
+    {
+      "id": "k-sequence-graphs",
+      "label": "Named, oriented sequence graphs",
+      "capability": "Given a tiny labeled sequence graph and orientation key, identify segments, oriented links and an ordered path, resolve segment names, and distinguish a segment's reverse-complement traversal from a change to its stored sequence.",
+      "source_refs": [
+        {
+          "source_id": "s019",
+          "locator": "Introduction; Segment and path names; S (Segment), L (Link) and P (Path) lines"
+        }
+      ]
+    },
+    {
+      "id": "k-fasta",
+      "label": "FASTA",
+      "capability": "Given a labeled excerpt or complete tiny file and a declared nucleotide/protein profile, recognize FASTA's definition lines and sequence portions; check the supplied alphabet, record boundaries and identifier requirements; distinguish wrapping, submission and indexability constraints from universal format rules, and bound the validity conclusion.",
+      "source_refs": [
+        {
+          "source_id": "s001",
+          "locator": "FASTA Files"
+        },
+        {
+          "source_id": "s002",
+          "locator": "Definition-line and nucleotide sequence paragraphs"
+        },
+        {
+          "source_id": "s024",
+          "locator": "Definition-line guidance and Sample Protein FASTA"
+        },
+        {
+          "source_id": "s015",
+          "locator": "faidx DESCRIPTION"
+        }
+      ]
+    },
+    {
+      "id": "k-fastq",
+      "label": "FASTQ",
+      "capability": "Given a declared modern Phred+33 DNA profile and labeled excerpt or complete tiny file, recognize FASTQ title/sequence/separator/quality portions, check sequence-quality length and encoding constraints, and explain how wrapping, quality characters or overlapping historical encodings affect recognition and the warranted validity conclusion.",
+      "source_refs": [
+        {
+          "source_id": "s003",
+          "locator": "FASTQ DEFINITION; SANGER FASTQ FORMAT; Table 1; historical variant sections"
+        },
+        {
+          "source_id": "s004",
+          "locator": "FASTQ Files: File Format and Sequence Identifier Fields"
+        }
+      ]
+    },
+    {
+      "id": "k-bed",
+      "label": "BED",
+      "capability": "Given the declared GA4GH BEDv1 profile, a labeled excerpt or complete tiny file and any supplied chromosome lengths, recognize interval records and apply field-count, ordered-field, coordinate, score/strand and selected BED12 block checks; distinguish intrinsic violations, missing context and explicitly different consumer requirements.",
+      "source_refs": [
+        {
+          "source_id": "s005",
+          "locator": "§§1.3, 1.5–1.9: terminology, fields, coordinates, attributes and blocks"
+        },
+        {
+          "source_id": "s006",
+          "locator": "BED format; Genome file format"
+        },
+        {
+          "source_id": "s021",
+          "locator": "bigBed Creating a bigBed track; Troubleshooting"
+        }
+      ]
+    },
+    {
+      "id": "k-bedpe",
+      "label": "BEDPE",
+      "capability": "Given the bedtools BEDPE profile, a labeled excerpt or complete tiny file and any supplied reference context, recognize two interval endpoints, check each endpoint and selected optional columns, interpret unknown-value sentinels, and distinguish permissible interchromosomal pairs or extra columns from actual violations.",
+      "source_refs": [
+        {
+          "source_id": "s006",
+          "locator": "BEDPE format; Genome file format"
+        }
+      ]
+    },
+    {
+      "id": "k-wig",
+      "label": "WIG",
+      "capability": "Given a UCSC WIG custom-track or converter profile and labeled data, recognize fixedStep and variableStep declarations, expand positions/span, check value/row structure and reference bounds when available, and distinguish absent data, valid negative values, and profile-specific track-line requirements.",
+      "source_refs": [
+        {
+          "source_id": "s007",
+          "locator": "General structure; variableStep format; fixedStep format; Data values; 1-start coordinate system"
+        },
+        {
+          "source_id": "s021",
+          "locator": "bigWig Creating a bigWig track"
+        }
+      ]
+    },
+    {
+      "id": "k-gtf",
+      "label": "GTF",
+      "capability": "Given an Ensembl-style GTF profile, a labeled excerpt or complete tiny annotation and a field/phase key, recognize nine tab-separated fields and quoted semicolon-terminated attributes; check inclusive coordinates, selected feature/strand/phase rules and feature-dependent gene/transcript IDs, and distinguish this profile from GFF3 or stricter producer policies.",
+      "source_refs": [
+        {
+          "source_id": "s008",
+          "locator": "Fields; Sample GTF output from Ensembl data dump; Track lines"
+        },
+        {
+          "source_id": "s009",
+          "locator": "Table A; B.1 Mandatory fields; B.2 Optional fields"
+        }
+      ]
+    },
+    {
+      "id": "k-gff3",
+      "label": "GFF3",
+      "capability": "Given GFF3 specification 1.26, a labeled excerpt or complete tiny annotation and field/phase key, recognize directives and nine tab-separated fields; check coordinates, strand, CDS phase, tag=value escaping and ID/Parent consistency at the supplied scope, allowing documented leaf-ID, discontinuous-feature and multiple-parent cases.",
+      "source_refs": [
+        {
+          "source_id": "s010",
+          "locator": "Description of the Format; Columns 4–9; ID; Parent; GFF3 directives; The Canonical Gene"
+        },
+        {
+          "source_id": "s018",
+          "locator": "DESCRIPTION: -typecheck and -xrfcheck"
+        }
+      ]
+    },
+    {
+      "id": "k-sam",
+      "label": "SAM",
+      "capability": "Given SAM1.6, a labeled excerpt or complete tiny file and field/FLAG/CIGAR keys, recognize optional headers and alignment records; check selected header/reference, mandatory-field, flag, position, CIGAR, sequence/quality and optional-tag consistency, allowing stated missing/unmapped cases and distinguishing format rules from stricter validator policy.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§§1.3–1.5: headers, mandatory fields and optional tags"
+        },
+        {
+          "source_id": "s016",
+          "locator": "ValidateSamFile overview; SAM Differences in Picard"
+        }
+      ]
+    },
+    {
+      "id": "k-bam",
+      "label": "BAM",
+      "capability": "Given a candidate BAM, its labeled signature/decoding evidence and selected decoded alignment records or check reports, recognize the BGZF binary alignment container, assess what header/EOF, whole-file decoding and semantic checks establish, check selected decoded-record consistency, and name missing evidence without treating an index or preview as a whole-file certificate.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§§4.1–4.2: BAM and BGZF; §1.4 alignment fields"
+        },
+        {
+          "source_id": "s015",
+          "locator": "quickcheck DESCRIPTION/OPTIONS; view DESCRIPTION and -h"
+        },
+        {
+          "source_id": "s016",
+          "locator": "ValidateSamFile overview; SAM Differences in Picard"
+        }
+      ]
+    },
+    {
+      "id": "k-cram",
+      "label": "CRAM",
+      "capability": "Given a candidate CRAM3.0/3.1, labeled container/check reports and available reference information, recognize CRAM signature/version, determine whether the stated encoding needs an external reference, and distinguish scoped integrity checks, successful full restoration, missing-reference evidence and intrinsic violations; assess selected decoded alignment consistency.",
+      "source_refs": [
+        {
+          "source_id": "s012",
+          "locator": "§6 File definition; §8.4 Preservation map; §8.5 Slice header; §11 Reference sequences; §12 Indexing"
+        },
+        {
+          "source_id": "s015",
+          "locator": "quickcheck DESCRIPTION; view DESCRIPTION and -h/-T options"
+        },
+        {
+          "source_id": "s011",
+          "locator": "§1.4 alignment fields"
+        }
+      ]
+    },
+    {
+      "id": "k-vcf",
+      "label": "VCF",
+      "capability": "Given a stated VCF version, a labeled excerpt or complete tiny file, field/type/genotype keys and any supplied exact reference, recognize metadata, #CHROM header and variant records; check selected column/type/cardinality, REF/ALT/genotype and missing/filter consistency, then distinguish local conformance, external REF agreement and additional consumer checks.",
+      "source_refs": [
+        {
+          "source_id": "s013",
+          "locator": "§§1.4–1.6: metadata, header, fields and genotype fields"
+        },
+        {
+          "source_id": "s017",
+          "locator": "Overview; Usage examples; --validation-type-to-exclude"
+        }
+      ]
+    },
+    {
+      "id": "k-gvcf",
+      "label": "gVCF",
+      "capability": "Given the declared GATK-style VCF4.2 reference-confidence profile and labeled records/headers or validation reports, recognize variant and nonvariant evidence, interpret <NON_REF>, inclusive END blocks and per-position output, check selected VCF/block consistency and intended territory when supplied, and distinguish ordinary all-sites VCF or newer VCF4.5 block conventions from this profile.",
+      "source_refs": [
+        {
+          "source_id": "s014",
+          "locator": "What is a GVCF?; Types of GVCFs; example header/records; nonvariant-block explanation"
+        },
+        {
+          "source_id": "s013",
+          "locator": "§§1.4–1.6; §5.5 REF-only blocks (gVCF)"
+        },
+        {
+          "source_id": "s017",
+          "locator": "Overview; --validate-GVCF"
+        }
+      ]
+    },
+    {
+      "id": "k-gfa",
+      "label": "GFA",
+      "capability": "Given a declared GFA1.0 H/S/L/P profile and labeled excerpt or complete tiny graph, recognize record types; check selected segment names, oriented link/path references and overlap counts, allowing unspecified sequence/overlap markers; distinguish incomplete evidence, unsupported later-version records and actual violations under the declared grammar.",
+      "source_refs": [
+        {
+          "source_id": "s019",
+          "locator": "Introduction; Segment and path names; H, S, L and P lines; GFA1.1/GFA1.2 additions"
+        },
+        {
+          "source_id": "s020",
+          "locator": "Validation levels; The Gfa class: from_file/version/validation"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "k-sequence-notation",
+      "to": "k-sequence-roles",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected route identifies a read and its comparison reference as sequences before interpreting their different roles.",
+      "source_refs": [
+        {
+          "source_id": "s022",
+          "locator": "Definition sections: DNA, DNA Sequencing, Human Genome Reference Sequence"
+        },
+        {
+          "source_id": "s004",
+          "locator": "FASTQ Files: File Format"
+        }
+      ]
+    },
+    {
+      "from": "k-sequence-roles",
+      "to": "k-coordinates",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected interval checks locate a feature on a named reference and distinguish a coordinate error from missing sequence-length context.",
+      "source_refs": [
+        {
+          "source_id": "s005",
+          "locator": "§1.6 Coordinates"
+        },
+        {
+          "source_id": "s006",
+          "locator": "Genome file format"
+        },
+        {
+          "source_id": "s011",
+          "locator": "§1.3 @SQ SN and LN"
+        }
+      ]
+    },
+    {
+      "from": "k-sequence-roles",
+      "to": "k-quality",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "Distinguishing confidence about an individual read base from confidence about a read's placement or a variant requires the sequence/read/reference roles used by the selected examples.",
+      "source_refs": [
+        {
+          "source_id": "s004",
+          "locator": "FASTQ Files: File Format"
+        },
+        {
+          "source_id": "s011",
+          "locator": "§1.4 MAPQ and QUAL"
+        },
+        {
+          "source_id": "s013",
+          "locator": "§1.6 QUAL and genotype fields"
+        }
+      ]
+    },
+    {
+      "from": "k-sequence-roles",
+      "to": "k-features",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected model treats annotation features as labeled regions of a reference sequence and distinguishes those regions from a sequenced read.",
+      "source_refs": [
+        {
+          "source_id": "s023",
+          "locator": "Transcript sequence; Exons and Introns; cDNA and protein"
+        },
+        {
+          "source_id": "s010",
+          "locator": "Columns 4 and 5; The Canonical Gene"
+        }
+      ]
+    },
+    {
+      "from": "k-coordinates",
+      "to": "k-alignments",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected alignment task computes the reference span from POS and reference-consuming CIGAR operations, requiring explicit coordinate/length interpretation.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§1.4 POS and CIGAR consumption table"
+        },
+        {
+          "source_id": "s005",
+          "locator": "§1.6 Coordinates"
+        }
+      ]
+    },
+    {
+      "from": "k-sequence-roles",
+      "to": "k-alleles",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected genotype procedure indexes alternatives relative to a named reference allele rather than treating every sequence difference as a different file grammar.",
+      "source_refs": [
+        {
+          "source_id": "s013",
+          "locator": "§1.6 REF, ALT and genotype fields"
+        },
+        {
+          "source_id": "s022",
+          "locator": "Definition sections: Allele, Genotype"
+        }
+      ]
+    },
+    {
+      "from": "k-sequence-notation",
+      "to": "k-sequence-graphs",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected graph task interprets negative segment orientation as reverse-complement traversal of the stored DNA sequence.",
+      "source_refs": [
+        {
+          "source_id": "s019",
+          "locator": "L (Link) line: FromOrient and ToOrient"
+        },
+        {
+          "source_id": "s022",
+          "locator": "Definition section: DNA"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-fasta",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s001",
+          "locator": "FASTA Files"
+        },
+        {
+          "source_id": "s002",
+          "locator": "Definition-line and nucleotide sequence paragraphs"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-fasta",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s001",
+          "locator": "FASTA Files"
+        },
+        {
+          "source_id": "s002",
+          "locator": "Definition-line and nucleotide sequence paragraphs"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-fastq",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s003",
+          "locator": "FASTQ DEFINITION; SANGER FASTQ FORMAT"
+        },
+        {
+          "source_id": "s004",
+          "locator": "FASTQ Files: File Format"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-fastq",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s003",
+          "locator": "FASTQ DEFINITION; SANGER FASTQ FORMAT"
+        },
+        {
+          "source_id": "s004",
+          "locator": "FASTQ Files: File Format"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-bed",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s005",
+          "locator": "§§1.3 and 1.5–1.9"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-bed",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s005",
+          "locator": "§§1.3 and 1.5–1.9"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-bedpe",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s006",
+          "locator": "BEDPE format"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-bedpe",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s006",
+          "locator": "BEDPE format"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-wig",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s007",
+          "locator": "General structure; variableStep format; fixedStep format"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-wig",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s007",
+          "locator": "General structure; variableStep format; fixedStep format"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-gtf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s008",
+          "locator": "Fields; Sample GTF output from Ensembl data dump"
+        },
+        {
+          "source_id": "s009",
+          "locator": "Table A; B.1 Mandatory fields"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-gtf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s008",
+          "locator": "Fields; Sample GTF output from Ensembl data dump"
+        },
+        {
+          "source_id": "s009",
+          "locator": "Table A; B.1 Mandatory fields"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-gff3",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s010",
+          "locator": "Description of the Format; Columns 4–9; GFF3 directives"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-gff3",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s010",
+          "locator": "Description of the Format; Columns 4–9; GFF3 directives"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-sam",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§§1.3–1.5"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-sam",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§§1.3–1.5"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-bam",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§1.4; §§4.1–4.2"
+        },
+        {
+          "source_id": "s015",
+          "locator": "quickcheck DESCRIPTION; view DESCRIPTION and -h"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-bam",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§1.4; §§4.1–4.2"
+        },
+        {
+          "source_id": "s015",
+          "locator": "quickcheck DESCRIPTION; view DESCRIPTION and -h"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-cram",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s012",
+          "locator": "§6 File definition; §8.4 Preservation map; §11 Reference sequences"
+        },
+        {
+          "source_id": "s015",
+          "locator": "quickcheck DESCRIPTION; view DESCRIPTION and -h/-T"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-cram",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s012",
+          "locator": "§6 File definition; §8.4 Preservation map; §11 Reference sequences"
+        },
+        {
+          "source_id": "s015",
+          "locator": "quickcheck DESCRIPTION; view DESCRIPTION and -h/-T"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-vcf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s013",
+          "locator": "§§1.4–1.6"
+        },
+        {
+          "source_id": "s017",
+          "locator": "Overview; Usage examples"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-vcf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s013",
+          "locator": "§§1.4–1.6"
+        },
+        {
+          "source_id": "s017",
+          "locator": "Overview; Usage examples"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-gvcf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s014",
+          "locator": "Types of GVCFs; example header/records"
+        },
+        {
+          "source_id": "s017",
+          "locator": "--validate-GVCF"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-gvcf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s014",
+          "locator": "Types of GVCFs; example header/records"
+        },
+        {
+          "source_id": "s017",
+          "locator": "--validate-GVCF"
+        }
+      ]
+    },
+    {
+      "from": "k-records",
+      "to": "k-gfa",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected recognition and consistency checks identify headers, record boundaries, named fields or decoded alignment fields using the supplied format key.",
+      "source_refs": [
+        {
+          "source_id": "s019",
+          "locator": "H, S, L and P lines; Segment and path names"
+        },
+        {
+          "source_id": "s020",
+          "locator": "Validation levels; The Gfa class"
+        }
+      ]
+    },
+    {
+      "from": "k-evidence",
+      "to": "k-gfa",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The target's validity judgment must distinguish a demonstrated violation from passing only the supplied checks, and must not turn an excerpt, preview or consumer result into a whole-file or biological certificate.",
+      "source_refs": [
+        {
+          "source_id": "s019",
+          "locator": "H, S, L and P lines; Segment and path names"
+        },
+        {
+          "source_id": "s020",
+          "locator": "Validation levels; The Gfa class"
+        }
+      ]
+    },
+    {
+      "from": "k-sequence-notation",
+      "to": "k-fasta",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected alphabet/profile checks count sequence symbols and distinguish DNA ambiguity from protein sequence letters.",
+      "source_refs": [
+        {
+          "source_id": "s002",
+          "locator": "Nucleotide sequence paragraph"
+        },
+        {
+          "source_id": "s024",
+          "locator": "Definition-line guidance and Sample Protein FASTA"
+        }
+      ]
+    },
+    {
+      "from": "k-quality",
+      "to": "k-fastq",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected FASTQ checks pair one quality symbol with each sequence base and interpret it under the declared Phred encoding rather than guessing from overlapping character ranges.",
+      "source_refs": [
+        {
+          "source_id": "s003",
+          "locator": "FASTQ DEFINITION; SANGER FASTQ FORMAT; Table 1"
+        },
+        {
+          "source_id": "s004",
+          "locator": "FASTQ Files: File Format"
+        }
+      ]
+    },
+    {
+      "from": "k-coordinates",
+      "to": "k-bed",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected BED checks use half-open interval length, bounds and relative BED12 block positions.",
+      "source_refs": [
+        {
+          "source_id": "s005",
+          "locator": "§1.6 Coordinates; §1.9 Blocks"
+        }
+      ]
+    },
+    {
+      "from": "k-coordinates",
+      "to": "k-bedpe",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected BEDPE checks apply half-open interval interpretation separately to both endpoints and require reference lengths for contextual bounds.",
+      "source_refs": [
+        {
+          "source_id": "s006",
+          "locator": "BEDPE format; Genome file format"
+        }
+      ]
+    },
+    {
+      "from": "k-coordinates",
+      "to": "k-wig",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected WIG checks translate 1-start positions and spans to covered reference bases and distinguish them from BED/bedGraph coordinates.",
+      "source_refs": [
+        {
+          "source_id": "s007",
+          "locator": "1-start coordinate system; variableStep format; fixedStep format"
+        }
+      ]
+    },
+    {
+      "from": "k-signal-values",
+      "to": "k-wig",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected WIG checks expand fixedStep values to positions and interpret missing positions as absent data rather than numerical zero.",
+      "source_refs": [
+        {
+          "source_id": "s007",
+          "locator": "fixedStep format; variableStep format; Data values"
+        }
+      ]
+    },
+    {
+      "from": "k-coordinates",
+      "to": "k-gtf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected GTF checks use one-based inclusive start/end and contextual sequence bounds.",
+      "source_refs": [
+        {
+          "source_id": "s008",
+          "locator": "Fields: start and end"
+        },
+        {
+          "source_id": "s009",
+          "locator": "Table A"
+        }
+      ]
+    },
+    {
+      "from": "k-features",
+      "to": "k-gtf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected GTF checks interpret feature-specific identifiers and the provided strand/phase key rather than requiring transcript_id on every gene row.",
+      "source_refs": [
+        {
+          "source_id": "s008",
+          "locator": "Fields; Sample GTF output from Ensembl data dump"
+        },
+        {
+          "source_id": "s009",
+          "locator": "B.1 Mandatory fields"
+        }
+      ]
+    },
+    {
+      "from": "k-coordinates",
+      "to": "k-gff3",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected GFF3 checks use inclusive genomic coordinates and explicitly supplied sequence-region bounds and exceptions.",
+      "source_refs": [
+        {
+          "source_id": "s010",
+          "locator": "Columns 4 and 5: start and end; GFF3 directives: sequence-region"
+        }
+      ]
+    },
+    {
+      "from": "k-features",
+      "to": "k-gff3",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected GFF3 checks distinguish gene/transcript/CDS features, strand-relative CDS phase and Parent part-of relationships before assessing their serialized consistency.",
+      "source_refs": [
+        {
+          "source_id": "s010",
+          "locator": "Column 8: phase; Column 9: ID and Parent; The Canonical Gene"
+        }
+      ]
+    },
+    {
+      "from": "k-alignments",
+      "to": "k-sam",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected SAM checks interpret FLAG/POS/CIGAR/SEQ/QUAL consistency rather than assessing field counts alone.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§1.4 FLAG, POS, CIGAR, SEQ and QUAL"
+        }
+      ]
+    },
+    {
+      "from": "k-quality",
+      "to": "k-sam",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected SAM judgment distinguishes QUAL from MAPQ and recognizes MAPQ255 as unavailable while permitting stated missing-quality markers.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§1.4 MAPQ and QUAL"
+        }
+      ]
+    },
+    {
+      "from": "k-alignments",
+      "to": "k-bam",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected BAM assessment includes decoded alignment-record consistency, whose semantics are shared with SAM rather than inferred from binary appearance.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§1.4; §4.2 The BAM format"
+        },
+        {
+          "source_id": "s016",
+          "locator": "ValidateSamFile overview"
+        }
+      ]
+    },
+    {
+      "from": "k-containers",
+      "to": "k-bam",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected evidence task distinguishes the BGZF container, decompressed BAM signature, decoded records and optional index before interpreting check reports.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§§4.1–4.2: BAM and BGZF"
+        },
+        {
+          "source_id": "s015",
+          "locator": "quickcheck DESCRIPTION; view DESCRIPTION"
+        }
+      ]
+    },
+    {
+      "from": "k-alignments",
+      "to": "k-cram",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected CRAM assessment interprets restored alignment records and reference roles instead of requiring the learner to inspect binary compression internals.",
+      "source_refs": [
+        {
+          "source_id": "s012",
+          "locator": "§11 Reference sequences"
+        },
+        {
+          "source_id": "s011",
+          "locator": "§1.4 alignment fields"
+        },
+        {
+          "source_id": "s015",
+          "locator": "view DESCRIPTION and -h/-T"
+        }
+      ]
+    },
+    {
+      "from": "k-containers",
+      "to": "k-cram",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected CRAM evidence task distinguishes versioned container recognition, full restoration with necessary resources and indexability.",
+      "source_refs": [
+        {
+          "source_id": "s012",
+          "locator": "§6 File definition; §8.4 Preservation map; §11 Reference sequences; §12 Indexing"
+        }
+      ]
+    },
+    {
+      "from": "k-alleles",
+      "to": "k-vcf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected VCF checks interpret REF/ALT and genotype indexes, including missing versus reference calls and reference agreement.",
+      "source_refs": [
+        {
+          "source_id": "s013",
+          "locator": "§1.6 REF, ALT and genotype fields"
+        },
+        {
+          "source_id": "s017",
+          "locator": "Overview: REF validation"
+        }
+      ]
+    },
+    {
+      "from": "k-coordinates",
+      "to": "k-vcf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected VCF checks locate ordinary variants on a named reference and separate positional violations from unavailable reference context.",
+      "source_refs": [
+        {
+          "source_id": "s013",
+          "locator": "§1.6 CHROM and POS"
+        },
+        {
+          "source_id": "s017",
+          "locator": "Usage examples"
+        }
+      ]
+    },
+    {
+      "from": "k-quality",
+      "to": "k-vcf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected VCF judgment distinguishes variant/genotype confidence from base or alignment quality and avoids classifying a low-confidence record as malformed.",
+      "source_refs": [
+        {
+          "source_id": "s013",
+          "locator": "§1.6 QUAL, FILTER and genotype fields"
+        }
+      ]
+    },
+    {
+      "from": "k-alleles",
+      "to": "k-gvcf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected gVCF checks interpret reference/alternate and missing genotype indexes while introducing the producer-specific possible-alternative placeholder.",
+      "source_refs": [
+        {
+          "source_id": "s014",
+          "locator": "Example header/records; nonvariant-block explanation"
+        },
+        {
+          "source_id": "s013",
+          "locator": "§1.6 REF, ALT and genotype fields"
+        }
+      ]
+    },
+    {
+      "from": "k-coordinates",
+      "to": "k-gvcf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected GATK-style block checks use inclusive POS/END territory and require supplied reference/interval context to interpret coverage gaps.",
+      "source_refs": [
+        {
+          "source_id": "s014",
+          "locator": "Example records; nonvariant-block explanation"
+        },
+        {
+          "source_id": "s017",
+          "locator": "--validate-GVCF"
+        }
+      ]
+    },
+    {
+      "from": "k-quality",
+      "to": "k-gvcf",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected reference-confidence judgment interprets confidence-bearing evidence rather than treating a nonvariant block as an absolute statement of biological certainty.",
+      "source_refs": [
+        {
+          "source_id": "s014",
+          "locator": "What is a GVCF?; example header/records"
+        },
+        {
+          "source_id": "s013",
+          "locator": "§1.6 genotype fields"
+        }
+      ]
+    },
+    {
+      "from": "k-sequence-graphs",
+      "to": "k-gfa",
+      "kind": "required",
+      "basis": "pedagogical-inference",
+      "rationale": "The selected GFA checks resolve declared segments, oriented links and paths in a complete tiny graph before assessing references and overlap counts.",
+      "source_refs": [
+        {
+          "source_id": "s019",
+          "locator": "Segment and path names; S, L and P lines"
+        }
+      ]
+    },
+    {
+      "from": "k-quality",
+      "to": "k-bam",
+      "kind": "helpful",
+      "basis": "pedagogical-inference",
+      "rationale": "Understanding base versus mapping confidence helps interpret decoded BAM fields but is not needed for the selected length/container checks.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§1.4 MAPQ and QUAL; §4.2 The BAM format"
+        }
+      ]
+    },
+    {
+      "from": "k-quality",
+      "to": "k-cram",
+      "kind": "helpful",
+      "basis": "pedagogical-inference",
+      "rationale": "Understanding base versus mapping confidence helps interpret restored CRAM records but is not needed for the selected restoration/container checks.",
+      "source_refs": [
+        {
+          "source_id": "s011",
+          "locator": "§1.4 MAPQ and QUAL"
+        },
+        {
+          "source_id": "s015",
+          "locator": "view DESCRIPTION"
+        }
+      ]
+    }
+  ],
+  "research_gaps": [
+    {
+      "id": "rg-biological-foundations",
+      "item_ids": [
+        "k-sequence-notation",
+        "k-sequence-roles",
+        "k-features",
+        "k-alleles"
+      ],
+      "question": "Which elementary biological definitions must be taught before a novice can interpret sequences, references, annotation features and genotype indexes?",
+      "why_needed": "Backward mapping exposed unexplained DNA/protein, read/reference, exon/CDS and allele/genotype terms. Resolved through the added NHGRI Definition entries, Ensembl transcript/CDS tutorial and NCBI protein FASTA example; their passages are anchored on the affected items.",
+      "depth": "Only terminology and short sequence/feature examples needed by the target checks; no complete genetics or sequencing course.",
+      "existing_source_ids": [
+        "s022",
+        "s023",
+        "s024",
+        "s004",
+        "s010",
+        "s011",
+        "s013"
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "rg-coordinate-boundaries",
+      "item_ids": [
+        "k-coordinates",
+        "k-bed",
+        "k-bedpe",
+        "k-wig",
+        "k-gtf",
+        "k-gff3",
+        "k-vcf"
+      ],
+      "question": "Which coordinate conventions, unknown sentinels and exceptional cases would make a single generic interval rule unsafe?",
+      "why_needed": "The formats mix half-open and inclusive coordinates, BED insertion sites, BEDPE unknown sentinels and circular/telomeric exceptions. The inspected definitions resolve which ordinary checks can be taught and which need a declared exception/profile rather than automatic rejection.",
+      "depth": "Ordinary interval location/length/conversion, reference bounds and recognition of documented exception cases.",
+      "existing_source_ids": [
+        "s005",
+        "s006",
+        "s007",
+        "s008",
+        "s010",
+        "s013",
+        "s021"
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "rg-binary-evidence",
+      "item_ids": [
+        "k-containers",
+        "k-evidence",
+        "k-bam",
+        "k-cram"
+      ],
+      "question": "What evidence distinguishes binary-format recognition, scoped integrity checks, full restoration and contextual or semantic validity?",
+      "why_needed": "A binary preview, index or quickcheck cannot support the whole objective. SAM/BAM and CRAM definitions plus samtools/Picard guidance distinguish signatures, skipped middle records, full decoding, stricter policy and required versus embedded/reference-free resources.",
+      "depth": "Read and interpret supplied versioned check reports; no compression internals or unexecuted production-validation claims.",
+      "existing_source_ids": [
+        "s011",
+        "s012",
+        "s015",
+        "s016"
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "rg-version-producer-profiles",
+      "item_ids": [
+        "k-fastq",
+        "k-bed",
+        "k-bedpe",
+        "k-gtf",
+        "k-gvcf",
+        "k-gfa"
+      ],
+      "question": "Which producer/version differences must be explicit to avoid classifying unsupported or alternative legal files as intrinsically invalid?",
+      "why_needed": "Primary specifications and producer manuals resolve FASTQ encoding/wrapping, BED parser policy, GTF feature-dependent attributes, GATK versus current-VCF gVCF conventions and GFA additions. The chosen profiles preserve every requested format while keeping each validity decision bounded.",
+      "depth": "Teach the common stated profiles and identify when documentation or producer metadata is required; do not claim one universal parser or silently apply the latest grammar to older declarations.",
+      "existing_source_ids": [
+        "s003",
+        "s004",
+        "s005",
+        "s006",
+        "s008",
+        "s009",
+        "s013",
+        "s014",
+        "s019",
+        "s020"
+      ],
+      "status": "resolved"
+    }
+  ],
+  "alternative_routes": [
+    "Documentation remains available for field, encoding, FLAG/CIGAR, phase and validator keys. A competent learner may use the originals while applying the checks; required edges concern understanding the component operations rather than recalling tables from memory (s003 Table 1; s011 §1.4; s010 Column 8; s015 quickcheck/view descriptions).",
+    "GATK's BP_RESOLUTION gVCF is a valid producer route without multi-base END blocks; current VCF4.5 REF-only block syntax is another explicitly versioned representation. Neither route is an additional prerequisite to the common GATK VCF4.2 branch (s014 Types of GVCFs and example records; s013 §5.5).",
+    "FASTA and FASTQ, SAM/BAM/CRAM, and VCF/gVCF share foundations but remain parallel target capabilities. Their specifications expose common components; they do not establish an obligatory sequence of format courses (s001 FASTA/FASTQ Files; s011 §§1.4 and 4; s012 §11; s013 §§1.6 and 5.5; s014 introductory sections)."
+  ]
+}

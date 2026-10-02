@@ -1,0 +1,21 @@
+{
+  "name": "tlearn",
+  "version": "0.1.0",
+  "description": "Skills and principles for efficient AI-assisted learning: research, map prerequisites, author practice, design, and build portable HTML tools.",
+  "author": {
+    "name": "tlearn contributors",
+    "url": "https://github.com/trevorpfiz/tlearn"
+  },
+  "homepage": "https://github.com/trevorpfiz/tlearn",
+  "repository": "https://github.com/trevorpfiz/tlearn",
+  "license": "MIT",
+  "keywords": ["learning", "research", "education", "html"],
+  "skills": [
+    "./skills/workflow/",
+    "./skills/research/",
+    "./skills/knowledge/",
+    "./skills/learning/",
+    "./skills/design/",
+    "./skills/engineering/"
+  ]
+}

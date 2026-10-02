@@ -1,0 +1,12 @@
+{
+  "name": "tlearn",
+  "metadata": {"description": "Skills and principles for efficient AI-assisted learning"},
+  "owner": {"name": "tlearn contributors"},
+  "plugins": [
+    {
+      "name": "tlearn",
+      "source": "./",
+      "description": "Skills and principles for efficient AI-assisted learning"
+    }
+  ]
+}
