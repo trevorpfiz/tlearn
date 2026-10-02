@@ -8,11 +8,13 @@ Design the learner's actions before the interface. Produce a sourced, checked `l
 
 ## Ground the lesson
 
-Read the objective and coverage in `sources.md`, the relevant source notes it links, and the required route in `knowledge.json`. Reuse inspected content; reopen original passages for new details, uncertainty, or version checks. Apply [source integrity](../../research/principle-source-integrity/SKILL.md) when resolving content or citation concerns. If artifacts are missing, form a small capability/prerequisite outline from supplied materials and identify evidence gaps. Resolve gaps before finalizing dependent content; continue supported sections.
+Read the objective and coverage in `sources.md`, the relevant source notes it links, and the required route in `knowledge.json`. Reuse inspected content; reopen original passages for new details, uncertainty, or version checks. Apply [source integrity](../../research/principle-source-integrity/SKILL.md) when resolving content or citation concerns.
+
+Route missing evidence to [research-topic](../../research/research-topic/SKILL.md) and a missing or changed prerequisite route to [map-knowledge](../../knowledge/map-knowledge/SKILL.md). Save the graph before authoring dependent content. A completed lesson requires a `ready` graph; supported sections can be drafted while gaps remain explicit. Record its `revision` as `knowledge_revision` in the lesson.
 
 Express the outcome as something the learner can explain, predict, interpret, or do. Decide what a fresh demonstration would require. Assume everyday language and basic arithmetic unless the user specifies otherwise. Teach necessary domain foundations in ordinary opening sections. Do not require a knowledge inventory or diagnostic exam.
 
-Use graph items as capability types and exercises as instances. Preserve item and source IDs. Order required prerequisites before their uses; retain parallel branches and distinguish helpful context from requirements. Flag questionable dependencies instead of treating an inferred graph as a measured learner state. Split an oversized objective before adding an entire prerequisite curriculum.
+Use graph items as capability types and exercises as instances. Preserve item and source IDs. Order required prerequisites before their uses along the selected route; retain parallel branches and distinguish helpful context from requirements. Flag questionable dependencies instead of treating an inferred graph as a measured learner state. Split an oversized objective before adding an entire prerequisite curriculum.
 
 ## Shape the learning path
 
@@ -39,6 +41,6 @@ Finish with fresh tasks that exercise the target outcome under stated resource c
 
 ## Deliver and verify
 
-Write `lesson.json` in the learner's project. Confirm every target has instruction, practice, and a fresh application; required foundations precede use; all item/source/task links resolve; answer checks and remediation match their prompts. Report any remaining content gaps and the next build stage concisely.
+Write canonical `lesson.json` in the learner's project before interface design or HTML construction. Confirm `knowledge_revision` matches the ready graph; every target has instruction, practice, and a fresh application; required foundations precede use; all item/source/task links resolve; answer checks and remediation match their prompts. Keep authored content independent of rendering. Later stages implement it or return gaps to this stage. Report remaining content gaps and the next build stage concisely.
 
 For biological data, methods, or code, consult [computational biology patterns](references/computational-biology.md). For rationale, source passages, or evidence limits, consult only the relevant section of [learning evidence](references/learning-evidence.md).

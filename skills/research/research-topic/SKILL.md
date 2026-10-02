@@ -12,6 +12,8 @@ Start from the topic, question, paper, or prerequisite gap. State the bounded ou
 
 Read an existing `sources.md` first, then only the relevant source notes. Reuse inspected passages when they cover the question and version. Search again for uncovered concepts, unresolved claims, stale methods, or changed source status. Keep prerequisite suggestions separate from the source's own statements.
 
+For a mapping request, retain the item IDs or provisional capability, question, required depth, why it supports the objective, and existing source IDs. Research that gap within the current packet; return inspected supporting passages or an explicit remaining gap. The mapper decides whether the dependency is justified and the graph is ready.
+
 ## Discover and select
 
 Choose sources by their job. Expert textbooks, maintained courses, and reference works can teach stable foundations. Reviews help orient a field and locate studies. Inspect original research for specific empirical or novel claims, and official versioned documentation for software behavior. A user-supplied paper anchors the objective but still needs appraisal and supporting foundations.
@@ -34,4 +36,4 @@ Inspect critical tables, diagrams, and equations in their original presentation 
 
 Connect each research question or known prerequisite to inspected supporting passages, or mark a partial answer or gap. Choose the smallest set that covers the current outcome with credible support and usable teaching material. Stop when remaining candidates add no needed coverage, a scope boundary is reached, or an access problem requires a different route. Do not claim exhaustive coverage.
 
-Verify source IDs and paths, passage fidelity, selection reasons, and unresolved disagreements. Hand off `sources.md` and the gaps for knowledge mapping. When mapping discovers more required prerequisites, extend this packet rather than repeat the whole search.
+Verify source IDs and paths, passage fidelity, selection reasons, and unresolved disagreements. Hand off `sources.md` and the gaps to [knowledge mapping](../../knowledge/map-knowledge/SKILL.md). When mapping discovers more required prerequisites, extend this packet rather than repeat the whole search. Preserve the packet independently of the graph, lesson, and HTML; downstream stages consume its relevant evidence.

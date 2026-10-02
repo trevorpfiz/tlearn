@@ -29,6 +29,8 @@ learning-project/
 
 Create only files used by the project. An HTML original may replace the PDF; a browser-reader transcript belongs in `extracted.md`, with its limitations, rather than being labeled an original. Keep raw acquisition, derived extraction, and agent notes distinguishable. Figure assets are conditional and retain their source and reuse terms.
 
+The source packet, graph, and lesson are canonical inputs authored before HTML construction. A self-contained HTML file may embed derived graph and lesson copies; retained research originals need not be bundled with it.
+
 Assign stable project-local IDs such as `s001`; do not renumber when selection changes. Record DOI, PMID, accession, edition, release, or another persistent identifier when available. Deduplicate the same work/version even if found through several URLs. Link a source to several questions or graph items instead of copying it into topic folders. A review and its cited study are separate sources; multiple reports of the same study need an explicit relationship.
 
 Source IDs are local to this packet, not globally unique. Cross-project reuse uses the persistent identifier and inspected version to establish identity, then maps IDs deliberately.

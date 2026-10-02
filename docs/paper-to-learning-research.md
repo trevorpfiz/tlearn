@@ -38,7 +38,7 @@ For a theoretical paper, reconstruction might mean rebuilding a proof and recogn
 
 One paper can be the only new user input. Assume general basics and teach the necessary domain foundations in the opening sections, which learners can mark complete in one click. A learner profile or preliminary diagnostic is unnecessary. Generation can be quick even when the necessary learning spans many sessions.
 
-**Represent three connected layers in one reusable artifact**
+**Represent three connected layers with linked artifacts**
 
 | Layer | Contents | Question it answers |
 | --- | --- | --- |
@@ -46,11 +46,11 @@ One paper can be the only new user input. Assume general basics and teach the ne
 | Learning prerequisites | Observable capabilities and the dependencies needed to acquire them | What must this learner be able to do next? |
 | Reconstruction tasks | Inputs, procedures, outputs, checks, resources, and dependencies for rebuilding selected results | What work demonstrates the capability? |
 
-This is a proposed tlearn representation. A relationship such as “method evaluated on dataset” differs from “learner needs skill A before skill B.” Scientific information extraction research such as SciREX addresses document-level entities and relations; pedagogical dependency inference is a separate research problem. [SciREX](https://aclanthology.org/2020.acl-main.670/), [prerequisite relation learning](https://aclanthology.org/P17-1133/).
+The current core path preserves source evidence in `sources.md` and its packet, capabilities and dependencies in `knowledge.json`, and authored tasks in `lesson.json`. These are created before the HTML app, which may embed derived copies. A relationship such as “method evaluated on dataset” differs from “learner needs skill A before skill B.” Scientific information extraction research such as SciREX addresses document-level entities and relations; pedagogical dependency inference is a separate research problem. [SciREX](https://aclanthology.org/2020.acl-main.670/), [prerequisite relation learning](https://aclanthology.org/P17-1133/).
 
 Make instructional nodes assessable. Replace a node labeled “normalization” with a capability such as “explain how this normalization changes the interpretation of a comparison, and apply it to a small dataset.” The appropriate granularity is the smallest meaningful capability that can be practiced and checked, while still connecting to the paper's work.
 
-For each instructional node, preserve a stable ID, capability statement, source anchors, prerequisite groups, a practice check, likely misconceptions, and links to reconstruction tasks. Preserve typed edges, their rationale, and whether they are explicit in a source or inferred for teaching. Separate “required” from “helpful,” and allow alternative prerequisite routes when appropriate. Review cycles in required prerequisites; broader scientific relationships can legitimately be cyclic.
+For each instructional node, preserve a stable ID, capability statement, and source anchors. Preserve typed dependency edges, their rationale, and whether they are explicit in a source or inferred for teaching. Separate “required” from “helpful,” and document alternatives to the selected route when appropriate. Review cycles in required prerequisites; broader scientific relationships can legitimately be cyclic and belong outside instructional dependencies. Author practice checks, feedback, and reconstruction tasks in `lesson.json`, linked to graph item IDs.
 
 For each claim, distinguish author-reported findings from background, teaching analogies, design inferences, and unresolved questions. A citation should identify a supporting passage, equation, table, or figure. Record paper versions and source locations so later corrections can be traced. An LLM's confidence alone should not determine whether an edge or claim is accepted.
 
@@ -60,9 +60,9 @@ Knowledge Space Theory concerns feasible knowledge states and their assessment, 
 
 1. **Read and inspect the paper.** Preserve sections, notation, equations, tables, figure captions, references, and supplements. Verify critical extracted material against the original. Record available code and data, missing information, and the source version. Output: a source record and structured paper brief.
 2. **Choose demonstration tasks.** Identify the central contributions and define how the learner would demonstrate understanding. Select an initial reconstruction target and inventory its practical requirements. Output: a scope and reconstruction plan with acceptance criteria.
-3. **Work backward to prerequisites.** Decompose the target tasks into capabilities. Research missing foundations using authoritative textbooks, documentation, reviews, and original research where relevant. Expand only dependencies that matter to the declared route. Stop at the learner's starting level, group excessive detail into modules, and split an oversized journey into sessions. Output: a sourced graph and an explicit list of unresolved gaps.
+3. **Work backward to prerequisites.** Decompose the target tasks into capabilities. Research missing foundations using authoritative textbooks, documentation, reviews, and original research where relevant. Expand only dependencies that matter to the declared route. Stop at general basics or an explicit user-supplied alternative, group excessive detail into modules, and split an oversized journey into linked tools. Output: a sourced graph and an explicit list of unresolved gaps.
 4. **Design the learning route.** Begin with foundational sections learners can mark complete in one click. Introduce the whole problem early, then alternate focused foundation work with manageable versions of the target task. Output: a lesson specification linking every activity to a capability and paper anchor.
-5. **Create and check practice.** Write worked examples, partial solutions, retrieval prompts, prediction tasks, code or derivation exercises, feedback, and independent transfer checks. Solve and validate the tasks before publishing them. Output: a practice bank with checked answers and rubrics.
+5. **Create and check practice.** Write worked examples, partial solutions, retrieval prompts, prediction tasks, code or derivation exercises, feedback, and independent transfer checks. Solve and validate the tasks before publishing them. Output: checked answers and rubrics within `lesson.json`; learning design owns steps 4 and 5.
 6. **Build the HTML tool.** Render the specification with a reusable shell and the small number of interactions this paper needs. Keep the source artifacts available for revision. Output: the learning tool and its companion resources.
 7. **Verify and evaluate.** Check source fidelity, prerequisite coverage, answer validity, simulation behavior, interaction state, and accessibility. Evaluate whether learners improve on fresh tasks and can complete the selected reconstruction. Output: a quality report and learning evidence.
 
@@ -99,6 +99,8 @@ Preserve original source files where practical, compact source notes, graph data
 
 **Extend the existing skill stack with clear contracts**
 
+The following table records the earlier exploration of specialized helpers, rather than the current implementation plan. The [repository structure](repository-structure.md) owns the streamlined six-skill core path: paper reading belongs to `research-topic`, practice and reconstruction tasks to `design-learning`, and verification to each stage. Extra playbooks and a separate evaluation suite remain deferred.
+
 | Skill | Responsibility | Observable completion check |
 | --- | --- | --- |
 | `upskill` with a paper playbook | Coordinate stages, select scope, manage artifacts and research bounds | Every selected target has a route, resources, and assessment criteria |
@@ -116,7 +118,7 @@ Use templates and schemas to enforce these contracts. Keep principle guidance sh
 
 Begin with one computational or theoretical paper with clear methods and accessible resources, the default basic starting assumption, and one central reconstruction target. The tool should still orient the learner to the paper's overall argument and mark which contributions its learning route covers.
 
-First define the source, graph, reconstruction, lesson, and practice formats. Run the workflow with direct inspection before automating every stage. Build one complete example, learn where the representations break down, and then codify the successful steps into skills. This keeps the skill library grounded in actual use.
+Use the source, graph, and lesson contracts, with reconstruction and practice represented as lesson tasks. Run the workflow with direct inspection before automating every stage. Build one complete example, learn where the representations break down, and then refine the skills from use.
 
 Evaluate three dimensions separately:
 

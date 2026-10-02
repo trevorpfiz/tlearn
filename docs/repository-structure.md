@@ -4,7 +4,7 @@
 
 This outline implements the vision in the [README](../README.md): a topic, question, or paper becomes a focused HTML learning tool through sourced research, prerequisite mapping, learning design, interface design, and construction.
 
-Status: learning and research groups authored, October 2, 2026. Nine skills and their references exist under these two groups. Other groups, manifests, and repository support files below remain planned; host discovery has not been tested.
+Status: research, knowledge, and learning groups authored, October 2, 2026. Eleven skills and their resources exist under these three groups. Other groups, manifests, and repository support files below remain planned; host discovery has not been tested.
 
 ## Organization and compatibility
 
@@ -61,8 +61,11 @@ tlearn/
 │   ├── knowledge/
 │   │   ├── map-knowledge/
 │   │   │   ├── SKILL.md
+│   │   │   ├── scripts/
+│   │   │   │   └── validate_graph.py
 │   │   │   └── references/
-│   │   │       └── knowledge-format.md
+│   │   │       ├── knowledge-format.md
+│   │   │       └── mapping-rationale.md
 │   │   └── principle-objective-and-foundations/
 │   ├── learning/
 │   │   ├── design-learning/
@@ -104,9 +107,9 @@ The README owns the vision and eventual installation instructions. AGENTS.md hol
 | --- | --- | --- |
 | workflow / **upskill** | Scope the request, assume general basics, coordinate the core path, manage research bounds, and reuse artifacts. Load guidance when its stage needs it. | The requested learning tool and its supporting artifacts |
 | research / **research-topic** | Find authoritative materials; inspect relevant sections; extract definitions, mechanisms, examples, uncertainties, and source anchors. For papers, capture the question, method, evidence, and limitations. | A compact source record |
-| knowledge / **map-knowledge** | Define observable target capabilities; extract atomic items; discover required prerequisites and helpful background. Request more research for gaps until the route reaches general basics. | A sourced prerequisite graph |
-| learning / **design-learning** | Sequence foundations and target capabilities. Write explanations, worked examples, practice, checked answers, hints, feedback, mixed review, and application tasks. | A lesson specification |
-| design / **design-interface** | Shape the lesson into a focused, accessible interface with clear hierarchy, purposeful visuals, and section completion in one click. | Interface decisions within the lesson specification |
+| knowledge / **map-knowledge** | Define observable target capabilities and a selected route; distinguish required prerequisites from helpful background. Research missing foundations recursively and preserve scope and gaps. | Canonical `knowledge.json` |
+| learning / **design-learning** | Sequence foundations and target capabilities. Write explanations, worked examples, practice, checked answers, hints, feedback, mixed review, and application tasks. | Canonical `lesson.json`, bound to a graph revision |
+| design / **design-interface** | Shape the authored lesson into a focused, accessible interface with clear hierarchy, purposeful visuals, and section completion in one click. | Interface decisions for construction |
 | engineering / **build-learning-tool** | Adapt the starter, implement the lesson and interactions, and verify content, answer handling, accessibility, and browser behavior. | A lightweight HTML tool |
 
 Practice creation belongs in design-learning initially. Paper reading belongs in research-topic, with its conditional reference. Interface design remains separate from construction because it governs the learner's experience.
@@ -121,7 +124,7 @@ upskill
   → build-learning-tool
 ```
 
-The research/mapping loop fills required gaps, reuses existing sources, and stops at the general-basic assumption. If the resulting objective is too large, split it into linked tools with clear boundaries. Source quality and dependency uncertainty remain explicit.
+The research/mapping loop fills required gaps, reuses existing sources, and stops at the general-basic assumption. Each research request identifies a missing capability or question, its required depth, why it serves the objective, and existing sources. If the resulting objective is too large, split it into linked tools with clear boundaries. An unmet required foundation remains a gap until covered; source quality and dependency uncertainty stay explicit.
 
 Verification belongs in every stage: inspect sources, check graph coverage and dependency rationale, verify practice answers, and exercise the finished interactions. A separate review skill or evaluation suite is unnecessary for the first path.
 
@@ -146,24 +149,26 @@ The six learning principles and [design-learning](../skills/learning/design-lear
 
 [Source-integrity](../skills/research/principle-source-integrity/SKILL.md) and [research-topic](../skills/research/research-topic/SKILL.md) are also authored. Source selection uses role-specific screening and separate judgments for fit, authority, support, currency, and clarity, with recorded reasons rather than a total score.
 
+[Objective-and-foundations](../skills/knowledge/principle-objective-and-foundations/SKILL.md) and [map-knowledge](../skills/knowledge/map-knowledge/SKILL.md) are authored. The [mapping rationale](../skills/knowledge/map-knowledge/references/mapping-rationale.md) distinguishes Math Academy's prerequisite steps, KST capability types, conceptual relationships, and domain-specific competency guidance. The graph records an instructional route; it does not infer learner mastery.
+
 Learners can mark familiar foundational sections complete and reopen them. Completion supports navigation and does not trigger a claim of mastery. Ordinary exercises check understanding; no preliminary adaptive assessment or separate refresher feature is required.
 
 ## Minimal artifact contract
 
 Generated tools live in the learner's working project, outside the installed plugin. The core path preserves four artifacts:
 
-| Artifact | Contents |
-| --- | --- |
-| `sources.md` | Objective, basic starting assumption, source registry, coverage, search record, links to per-source notes, and unresolved questions |
-| `knowledge.json` | Atomic capabilities, source references, required dependencies, helpful background, marked pedagogical inferences, and target capabilities |
-| `lesson.json` | Ordered sections, graph item IDs, explanations, examples, exercises, answers, feedback, application tasks, and interface decisions |
-| `index.html` | The portable learning tool, with foundations in its opening sections and completion controls that allow reopening |
+| Artifact | Owner | Contents |
+| --- | --- | --- |
+| `sources.md` | research-topic | Objective, baseline, source registry, coverage, search record, links to notes, and unresolved questions |
+| `knowledge.json` | map-knowledge | Revision, observable capabilities, sourced required/helpful dependencies, inferred rationale, targets, scope, and research gaps |
+| `lesson.json` | design-learning | Graph revision and item IDs, ordered sections, explanations, examples, exercises, checked answers, hints, feedback, and application tasks |
+| `index.html` | build-learning-tool | Designed interface, lesson presentation, optional graph view, and completion controls that allow reopening |
 
-The initial [lesson format](../skills/learning/design-learning/references/lesson-format.md) defines learning blocks, task answers or self-check rubrics, provenance, feedback, help, and navigation. The [source format](../skills/research/research-topic/references/source-format.md) defines the registry and supporting packet. The graph format remains to be settled by its owning stage.
+The [source format](../skills/research/research-topic/references/source-format.md), [knowledge format](../skills/knowledge/map-knowledge/references/knowledge-format.md), and [lesson format](../skills/learning/design-learning/references/lesson-format.md) define their stage contracts. Save a ready graph before completing its dependent lesson; author and verify content before interface construction. Later stages return missing or changed content to its owner. Graph revision changes require review of the affected lesson before regenerating HTML.
 
 Supporting source files live under `sources/<source-id>/` in the generated project: inspected notes, optional originals, and optional extraction with original locators. Use notes as working context and inspect original passages for new details, uncertainty, or freshness checks. Preserve source identity and inspected versions; substantive updates get a new linked ID. See [research decisions](source-research.md) for grounding and limits. The graph supplies the instructional structure without claiming a validated Knowledge Space Theory assessment model.
 
-Start with a self-contained HTML output. A companion notebook or script can support an objective that needs substantial computation. That is conditional on the learning task.
+Start with a self-contained HTML output that may embed derived graph and lesson copies. Separate canonical files preserve independent authoring and revision without requiring runtime fetches or a local server. Source originals need not travel inside the app. A companion notebook or script can support an objective that needs substantial computation; it is conditional on the learning task.
 
 ## Skill format and implementation order
 
@@ -174,7 +179,7 @@ Keep bodies short. Read source excerpts, format references, and related principl
 Continue in this order:
 
 1. Learning principles and design-learning are authored, with the initial lesson format. Refine them through the first complete tool.
-2. Source-integrity and research-topic are authored, with the source packet format. Next: objective-and-foundations and map-knowledge; settle the graph format using the packet from a narrow computational biology topic.
+2. Source-integrity/research-topic and objective-and-foundations/map-knowledge are authored, with source and graph contracts. Refine the recursive mapping loop using one narrow computational biology objective.
 3. Attention-first and design-interface; simple-html, the starter, and build-learning-tool.
 4. Connect the working stages through a concise upskill; add both manifests and verify discovery and invocation.
 5. Produce one complete learning tool and improve the core path from using it.

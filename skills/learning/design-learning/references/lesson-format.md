@@ -2,6 +2,8 @@
 
 Read when creating or revising `lesson.json`. This is the initial handoff contract for learning content; interface styling and HTML implementation belong to later stages.
 
+Save this canonical artifact before building the app. It owns explanations, quizzes, answer keys, hints, feedback, and meaningful visual requirements. The HTML builder implements these and returns missing content to the owning stage. A portable HTML file may embed derived copies of the lesson and graph without replacing their source files.
+
 ## Required contents
 
 Use UTF-8 JSON with these top-level fields:
@@ -9,6 +11,7 @@ Use UTF-8 JSON with these top-level fields:
 | Field | Meaning |
 | --- | --- |
 | `version` | `1` for this initial contract |
+| `knowledge_revision` | The positive integer `revision` of the ready `knowledge.json` used to author this lesson |
 | `objective` | The bounded, observable outcome |
 | `baseline` | General basics, or an explicit user-supplied alternative |
 | `target_item_ids` | Target capabilities from the knowledge graph |
@@ -87,4 +90,6 @@ This valid JSON is a section fragment, not a complete lesson. Assume `k-fraction
 
 ## Handoff checks
 
-Confirm JSON parses; IDs are unique; graph, source, section, visual-task, and retry references resolve; required sections precede uses; each target has instruction, practice, and a fresh application. Solve all tasks and inspect rubrics against both acceptable and flawed responses. Ensure visual prompts do not reveal their own answers. Keep completion and performance separate in the eventual interface. Record remaining gaps instead of claiming a completed lesson when dependent content is missing.
+Confirm JSON parses; the graph is `ready` and its `revision` matches `knowledge_revision`; IDs are unique; graph, source, section, visual-task, and retry references resolve; required sections precede uses; each target has instruction, practice, and a fresh application. Solve all tasks and inspect rubrics against both acceptable and flawed responses. Ensure visual prompts do not reveal their own answers. Keep completion and performance separate in the eventual interface. Record remaining gaps instead of claiming a completed lesson when dependent content is missing.
+
+When the graph revision changes, inspect affected item meanings, dependencies, and source references before updating `knowledge_revision`. Recheck affected content and section order, then regenerate the HTML. A visual restyle alone need not change either canonical artifact.
