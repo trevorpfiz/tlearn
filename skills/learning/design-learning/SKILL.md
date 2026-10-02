@@ -41,6 +41,6 @@ Finish with fresh tasks that exercise the target outcome under stated resource c
 
 ## Deliver and verify
 
-Write canonical `lesson.json` in the learner's project before interface design or HTML construction. Confirm `knowledge_revision` matches the ready graph; every target has instruction, practice, and a fresh application; required foundations precede use; all item/source/task links resolve; answer checks and remediation match their prompts. Keep authored content independent of rendering. Later stages implement it or return gaps to this stage. Report remaining content gaps and the next build stage concisely.
+Write canonical `lesson.json` in the learner's project before interface design or HTML construction. Use [verify-learning-tool](../../workflow/verify-learning-tool/SKILL.md) for reusable consistency checks, independent answer review, and saved verification evidence. Confirm `knowledge_revision` matches the ready graph; every target has instruction, practice, and a fresh application; required foundations precede use. Keep authored content independent of rendering. Later stages implement it or return gaps to this stage. Report remaining content gaps and the next build stage concisely.
 
 For biological data, methods, or code, consult [computational biology patterns](references/computational-biology.md). For rationale, source passages, or evidence limits, consult only the relevant section of [learning evidence](references/learning-evidence.md).

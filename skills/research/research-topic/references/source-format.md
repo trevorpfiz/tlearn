@@ -33,6 +33,8 @@ The source packet, graph, and lesson are canonical inputs authored before HTML c
 
 Assign stable project-local IDs such as `s001`; do not renumber when selection changes. Record DOI, PMID, accession, edition, release, or another persistent identifier when available. Deduplicate the same work/version even if found through several URLs. Link a source to several questions or graph items instead of copying it into topic folders. A review and its cited study are separate sources; multiple reports of the same study need an explicit relationship.
 
+Source IDs are portable directory names: begin with a letter or digit, followed by letters, digits, dots, underscores, or hyphens. They contain no path separators. The artifact checker verifies conventional note-file presence; it does not infer registry membership or inspected status from a directory.
+
 Source IDs are local to this packet, not globally unique. Cross-project reuse uses the persistent identifier and inspected version to establish identity, then maps IDs deliberately.
 
 ## `sources.md`: the entry point

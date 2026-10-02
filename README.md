@@ -6,7 +6,7 @@ AI agents amplify what we can do. Our knowledge and judgment guide that work.
 
 tlearn equips **Codex and Claude Code** to turn a focused learning objective into a lightweight, one-off HTML tool. Computational biology will be an early proving ground.
 
-**Status:** research, knowledge mapping, and learning skills authored. Interface design, HTML construction, and packaging are next.
+**Status:** research, knowledge mapping, learning, and verification guidance authored. Interface design, HTML construction, and packaging are next.
 
 ## Getting started
 
@@ -60,12 +60,15 @@ The learner's project preserves separate canonical artifacts:
 
 Create the graph and content **before** the HTML app. Revise them independently and return gaps to their owning stage. A self-contained HTML file may embed derived copies for portable delivery; its canonical inputs remain separate.
 
+[Verification](skills/workflow/verify-learning-tool/SKILL.md) spans these stages: preserve tool-specific checks in `verification.md`, inspect source support, independently solve answers, and exercise delivered behavior. Scripts handle mechanical consistency; reviewers assess scientific and instructional adequacy. Authoring checks cannot establish learner mastery or retention. See [deterministic operations](skills/workflow/principle-deterministic-operations/SKILL.md).
+
 ## Roadmap
 
 - [ ] Complete principle skills for interface design and HTML engineering.
 - [x] **Research:** source-integrity and research-topic, with repeatable selection, provenance, reusable notes, and selective original caching.
 - [x] **Knowledge mapping:** objective-and-foundations and map-knowledge, with recursive source discovery, bounded routes, and a versioned graph contract.
 - [x] **Learning design:** six principle skills, `design-learning`, and a lesson format covering practice, feedback, scientific reasoning, and fresh applications.
+- [x] **Verification foundation:** shared verification skill, repeatable artifact checks, and principles for evidence and deterministic work; browser recipes follow the real HTML builder.
 - [ ] **Interface design:** clear hierarchy, minimal cognitive load, accessible controls, one-click section completion, and a clean, playful feel.
 - [ ] **HTML engineering:** reusable starter, semantic HTML, responsive layout, minimal dependencies, and proportionate validation.
 - [ ] **upskill and packaging:** easy onboarding, artifact reuse, selective guidance loading, and verified Codex/Claude support.

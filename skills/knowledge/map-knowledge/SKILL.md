@@ -44,4 +44,6 @@ Read [knowledge format](references/knowledge-format.md) when writing the graph. 
 
 Run `python3 <skill-dir>/scripts/validate_graph.py <project>/knowledge.json` for structural checks, then review source fidelity and pedagogical judgments yourself. The script cannot verify scientific correctness or prerequisite necessity.
 
+For source-note linkage and saved handoff evidence, use [verify-learning-tool](../../workflow/verify-learning-tool/SKILL.md), whose helper reuses this validator. Run the applicable helper rather than repeating both commands for the same graph.
+
 Hand off the saved graph revision, source index, and any remaining gaps to [design-learning](../../learning/design-learning/SKILL.md). Later stages consume these artifacts; proposed structural changes return here instead of becoming an undocumented graph inside the HTML.

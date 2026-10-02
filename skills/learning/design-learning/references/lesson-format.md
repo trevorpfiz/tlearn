@@ -13,11 +13,11 @@ Use UTF-8 JSON with these top-level fields:
 | `version` | `1` for this initial contract |
 | `knowledge_revision` | The positive integer `revision` of the ready `knowledge.json` used to author this lesson |
 | `objective` | The bounded, observable outcome |
-| `baseline` | General basics, or an explicit user-supplied alternative |
+| `baseline` | Array matching the graph's assumed basics, or its explicit user-supplied alternative |
 | `target_item_ids` | Target capabilities from the knowledge graph |
 | `sections` | Ordered sections, including necessary foundations, practice, and fresh applications |
 | `navigation` | `{ "completion": "manual", "reopen": true, "gating": "none" }` |
-| `verification_notes` | What was checked, deliberate simplifications, and any unresolved gaps |
+| `verification_notes` | Nonempty string or array of strings: checks, simplifications, and unresolved gaps |
 
 Each section has a unique `id`, `title`, `item_ids`, `required_section_ids`, and ordered `blocks`. Required section IDs express teaching order, not locked navigation. A preview of the goal may precede foundations if it does not demand untaught skills.
 
@@ -34,8 +34,8 @@ Source references use `{ "source_id": "s1", "locator": "Figure 2 legend" }` and 
 
 Each task has a unique `id`, `role` (`practice`, `mixed-review`, or `application`), `item_ids`, `prompt`, `response`, `check`, `hints`, `feedback`, `source_refs`, and `origin`. `origin` identifies an adapted source example or an invented teaching example, including whether its data are synthetic.
 
-- **Response:** declare `kind` as `number`, `choice`, `short-text`, or `code`. Supply units for numbers and unique option IDs with text for choices. State allowed resources in the prompt or an optional `resources` field.
-- **Check:** for `number`, supply `expected`, `absolute_tolerance`, and required units; choose precision deliberately. For `choice`, supply the correct option ID. For `rubric`, supply required criteria, acceptable alternatives, and a sample answer, with `judgment: "self-check"`. A rubric checks content and reasoning; it is not exact-string matching or verified automatic grading.
+- **Response:** declare `kind` as `number`, `choice`, `short-text`, or `code`. Supply `units` for numbers; choices use `options: [{ "id": "...", "text": "..." }]` with unique option IDs. State allowed resources in the prompt or an optional `resources` field.
+- **Check:** use matching `kind: "number"` with finite `expected`, finite nonnegative `absolute_tolerance`, and `units` matching the response; choose precision deliberately. For `kind: "choice"`, supply `correct_option_id` resolving to one response option. Short-text and code responses initially use `kind: "rubric"`, nonempty string-array `criteria`, string-array `acceptable_alternatives`, `sample_answer`, and `judgment: "self-check"`. A rubric checks content and reasoning; it is not exact-string matching or verified automatic grading. Domain-specific executable checks can be added when a real task requires them.
 - **Help and feedback:** supply ordered optional hints. Include `correct` feedback explaining why, `otherwise` feedback giving a useful next action, and optional `patterns` describing specific likely errors with feedback. A pattern is an authoring instruction for the builder, not executable grader code. Optional `revisit_section_ids` point to ordinary instructional sections.
 - **Retry:** use `retry_task_id` for an authored fresh instance, or provide a fresh task later in the path. A repeated answer after reveal supplies assisted practice, not new independent evidence. Do not create dangling retry links or procedural loops.
 
@@ -91,5 +91,7 @@ This valid JSON is a section fragment, not a complete lesson. Assume `k-fraction
 ## Handoff checks
 
 Confirm JSON parses; the graph is `ready` and its `revision` matches `knowledge_revision`; IDs are unique; graph, source, section, visual-task, and retry references resolve; required sections precede uses; each target has instruction, practice, and a fresh application. Solve all tasks and inspect rubrics against both acceptable and flawed responses. Ensure visual prompts do not reveal their own answers. Keep completion and performance separate in the eventual interface. Record remaining gaps instead of claiming a completed lesson when dependent content is missing.
+
+Use [verify-learning-tool](../../../workflow/verify-learning-tool/SKILL.md) and its reusable artifact checker for mechanical consistency and declared coverage. Section item tags can include a goal preview, so they do not prove when a capability was taught. Review actual foundation order and task adequacy separately. A finite, structurally valid expected number can still be wrong; solve it independently.
 
 When the graph revision changes, inspect affected item meanings, dependencies, and source references before updating `knowledge_revision`. Recheck affected content and section order, then regenerate the HTML. A visual restyle alone need not change either canonical artifact.

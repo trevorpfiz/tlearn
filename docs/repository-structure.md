@@ -4,7 +4,7 @@
 
 This outline implements the vision in the [README](../README.md): a topic, question, or paper becomes a focused HTML learning tool through sourced research, prerequisite mapping, learning design, interface design, and construction.
 
-Status: research, knowledge, and learning groups authored, October 2, 2026. Eleven skills and their resources exist under these three groups. Other groups, manifests, and repository support files below remain planned; host discovery has not been tested.
+Status: research, knowledge, learning, and cross-cutting workflow guidance authored, October 2, 2026. Fourteen skills and their resources exist under these four groups. upskill, design/engineering groups, manifests, and support files below remain planned; host discovery has not been tested.
 
 ## Organization and compatibility
 
@@ -48,8 +48,17 @@ tlearn/
 │   └── plugin.json
 ├── skills/
 │   ├── workflow/
-│   │   └── upskill/
-│   │       └── SKILL.md
+│   │   ├── upskill/
+│   │   │   └── SKILL.md
+│   │   ├── verify-learning-tool/
+│   │   │   ├── SKILL.md
+│   │   │   ├── scripts/
+│   │   │   │   └── verify_artifacts.py
+│   │   │   └── references/
+│   │   │       ├── verification-record.md
+│   │   │       └── verification-rationale.md
+│   │   ├── principle-verifiable-outcomes/
+│   │   └── principle-deterministic-operations/
 │   ├── research/
 │   │   ├── research-topic/
 │   │   │   ├── SKILL.md
@@ -126,12 +135,16 @@ upskill
 
 The research/mapping loop fills required gaps, reuses existing sources, and stops at the general-basic assumption. Each research request identifies a missing capability or question, its required depth, why it serves the objective, and existing sources. If the resulting objective is too large, split it into linked tools with clear boundaries. An unmet required foundation remains a gap until covered; source quality and dependency uncertainty stay explicit.
 
-Verification belongs in every stage: inspect sources, check graph coverage and dependency rationale, verify practice answers, and exercise the finished interactions. A separate review skill or evaluation suite is unnecessary for the first path.
+Verification belongs in every stage. [verify-learning-tool](../skills/workflow/verify-learning-tool/SKILL.md) defines and executes appropriate checks and preserves their tool-specific recipes and observations. Its read-only helper reuses graph validation and checks cross-artifact consistency and lesson declarations. Source fidelity, prerequisite judgments, task adequacy, and independent solutions still need review; actual browser behavior needs a delivered app. A separate evaluation suite is unnecessary for the first path.
 
-## Ten necessary principles
+This cross-cutting skill sits under workflow beside the future upskill, preserving grouped discovery. A compact project-local `verification.md` provides the topic-specific details; a new generated Agent Skill per one-off tool would usually duplicate the shared procedure. Create one only when unusual computation or interactions justify reusable project-specific instructions. See [pstack adaptation](../skills/workflow/verify-learning-tool/references/verification-rationale.md).
+
+## Core and cross-cutting principles
 
 | Group / principle | Rule that changes agent behavior |
 | --- | --- |
+| workflow / **verifiable-outcomes** | Define acceptable evidence and verify the actual artifact or response; distinguish structural, scientific, instructional, interface, and learner claims. |
+| workflow / **deterministic-operations** | Reuse scripts for mechanical rules with explicit inputs and outputs; keep source and pedagogical judgments visible. |
 | research / **source-integrity** | Ground content in inspected sources, preserve passage locations, and distinguish evidence from inference or uncertainty. |
 | knowledge / **objective-and-foundations** | Tie every item to the objective. Assume general basics, teach necessary foundations, and avoid learner knowledge inventories. |
 | learning / **active-practice** | Center learner attempts. Brief instruction enables retrieval, explanation, prediction, or execution; visuals require a meaningful task. |
@@ -166,6 +179,8 @@ Generated tools live in the learner's working project, outside the installed plu
 
 The [source format](../skills/research/research-topic/references/source-format.md), [knowledge format](../skills/knowledge/map-knowledge/references/knowledge-format.md), and [lesson format](../skills/learning/design-learning/references/lesson-format.md) define their stage contracts. Save a ready graph before completing its dependent lesson; author and verify content before interface construction. Later stages return missing or changed content to its owner. Graph revision changes require review of the affected lesson before regenerating HTML.
 
+Supporting `verification.md` records the checked artifact identities, independent expectations, reusable commands or reviewer steps, observed results, and pending checks. It supplies evidence for the four canonical artifacts without duplicating their content. A pass from the artifact checker means mechanical consistency only; it does not certify source support, answers, or learning effectiveness.
+
 Supporting source files live under `sources/<source-id>/` in the generated project: inspected notes, optional originals, and optional extraction with original locators. Use notes as working context and inspect original passages for new details, uncertainty, or freshness checks. Preserve source identity and inspected versions; substantive updates get a new linked ID. See [research decisions](source-research.md) for grounding and limits. The graph supplies the instructional structure without claiming a validated Knowledge Space Theory assessment model.
 
 Start with a self-contained HTML output that may embed derived graph and lesson copies. Separate canonical files preserve independent authoring and revision without requiring runtime fetches or a local server. Source originals need not travel inside the app. A companion notebook or script can support an objective that needs substantial computation; it is conditional on the learning task.
@@ -180,6 +195,7 @@ Continue in this order:
 
 1. Learning principles and design-learning are authored, with the initial lesson format. Refine them through the first complete tool.
 2. Source-integrity/research-topic and objective-and-foundations/map-knowledge are authored, with source and graph contracts. Refine the recursive mapping loop using one narrow computational biology objective.
+   Shared verification and deterministic-operation principles are authored, with a reusable graph/lesson checker. Add actual delivery checks when the builder exists.
 3. Attention-first and design-interface; simple-html, the starter, and build-learning-tool.
 4. Connect the working stages through a concise upskill; add both manifests and verify discovery and invocation.
 5. Produce one complete learning tool and improve the core path from using it.
